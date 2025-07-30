@@ -1,8 +1,7 @@
-// You can add JS for animation, interactivity, or dynamic content here
 document.addEventListener("DOMContentLoaded", () => {
   console.log("NoteDesk site loaded.");
 
-  // --- Scroll Animation Logic ---
+  // Function for scroll-triggered animations (for .js-scroll elements)
   const scrollElements = document.querySelectorAll(".js-scroll");
 
   const elementInView = (el, dividend = 1) => {
@@ -23,20 +22,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const handleScrollAnimation = () => {
     scrollElements.forEach((el) => {
-      if (elementInView(el, 1.25)) { // Adjust dividend for earlier/later trigger
+      if (elementInView(el, 1.25)) {
         displayScrollElement(el);
       } else {
-        // Optional: remove scrolled class if you want elements to animate every time they scroll into view
+        // Optional: Uncomment to make elements animate out when scrolled past
         // hideScrollElement(el);
       }
     });
   };
 
-  // Initial check on load
-  handleScrollAnimation();
-
-  // Listen for scroll events
   window.addEventListener("scroll", () => {
     handleScrollAnimation();
   });
+
+  // Initial check on load
+  handleScrollAnimation();
+
+  // --- New JavaScript for About Page Hero Shrink ---
+  const aboutHero = document.querySelector(".hero.about-hero");
+  const aboutPageContainer = document.querySelector(".about-page-container");
+
+  if (aboutHero && aboutPageContainer) {
+    const observerOptions = {
+      root: null, // relative to the viewport
+      rootMargin: "0px",
+      threshold: 0.1 // Trigger when 10% of the target is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // If about content is intersecting, add class to body
+          document.body.classList.add("scrolled-about");
+        } else {
+          // If about content is no longer intersecting, remove class
+          // This means when you scroll back up and the container is out of view
+          document.body.classList.remove("scrolled-about");
+        }
+      });
+    }, observerOptions);
+
+    observer.observe(aboutPageContainer);
+  }
 });
