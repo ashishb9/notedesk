@@ -1,0 +1,409 @@
+/* General Body & Typography */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Modern, system-font stack */
+  background-color: #000000; /* Pure black background */
+  color: #ffffff; /* Pure white text for high contrast */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Background Image Integration */
+  background-image: url('img/tech-pattern.jpg'); /* THIS IS WHERE IT REFERENCES YOUR IMAGE */
+  background-size: cover; /* Cover the entire area */
+  background-attachment: fixed; /* Keep it fixed while scrolling */
+  background-position: center center;
+  /* Dark overlay on background image for better text readability */
+  position: relative; /* Needed for pseudo-element overlay */
+}
+
+/* Pseudo-element for dark overlay on background image */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Adjust opacity for desired darkness */
+  z-index: -1; /* Place behind content */
+}
+
+/* Hero Section */
+.hero {
+  /* Subtle radial gradient, almost solid black with a tiny hint of light */
+  background: radial-gradient(circle at top left, rgba(20, 20, 20, 0.3) 0%, rgba(0, 0, 0, 0.9) 70%);
+  padding: 100px 20px 80px; /* More vertical padding */
+  text-align: center;
+  color: white;
+  animation: fadeIn 1.5s ease-in; /* Keeps initial fade-in */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+  position: relative; /* For z-index if needed */
+  z-index: 1; /* Ensure hero content is above background overlay */
+}
+
+.hero-content h1 {
+  font-size: 3.5em; /* Larger, bolder heading */
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em; /* Tighter letter spacing for modern feel */
+}
+
+.hero-content p {
+  font-size: 1.3em;
+  color: #cccccc; /* Slightly muted description text */
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px; /* More padding for nav */
+  max-width: 1300px; /* Wider nav area */
+  margin: 0 auto;
+  position: relative; /* For z-index if needed */
+  z-index: 10; /* Ensure nav is always on top */
+}
+
+nav .logo {
+  font-size: 28px; /* Larger logo */
+  font-weight: 800; /* Bolder logo */
+  color: white;
+  letter-spacing: -0.03em;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px; /* More space between nav items */
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #cccccc; /* Muted link color */
+  font-weight: 500;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: white; /* Brighter on hover */
+}
+
+/* Section Styling (Applied to why, explore, featured, news-ticker) */
+.why, .explore, .featured, .news-ticker {
+  padding: 100px 40px; /* Consistent generous padding */
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black over background image */
+  color: #ffffff; /* Pure white text */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle section dividers */
+  position: relative; /* Ensure content is above background */
+  z-index: 1;
+}
+
+h2 {
+  font-size: 2.8em; /* Larger section headings */
+  font-weight: 700;
+  margin-bottom: 60px; /* More space below headings */
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+/* Why NoteDesk? Cards */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Increased gap */
+  flex-wrap: wrap;
+  max-width: 1200px; /* Wider content area */
+  margin: 0 auto;
+}
+
+.card {
+  background-color: rgba(26, 26, 26, 0.8); /* Slightly lighter dark for cards, semi-transparent */
+  padding: 35px; /* More padding */
+  width: 300px; /* Wider cards */
+  border-radius: 12px; /* More rounded corners */
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease; /* Longer transition */
+  color: #ffffff;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+  perspective: 1000px; /* For 3D transform */
+  transform-style: preserve-3d; /* For 3D transform */
+}
+
+.card:hover {
+  transform: translateY(-10px) rotateX(2deg); /* Lift and subtle rotate on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+  background-color: rgba(36, 36, 36, 0.9); /* Slightly darker on hover for more distinction */
+}
+
+.card h3 {
+  font-size: 1.8em; /* Larger card headings */
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #8899ee; /* Keeping the Linear-style accent color for specific elements */
+}
+
+.card p {
+  font-size: 1em;
+  color: #cccccc; /* Muted paragraph text */
+}
+
+/* Explore Topics Buttons */
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.topics button {
+  padding: 12px 25px; /* Generous button padding */
+  background-color: rgba(26, 26, 26, 0.8); /* Dark button background, semi-transparent */
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.topics button:hover {
+  background-color: rgba(36, 36, 36, 0.9); /* Lighter dark on hover */
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Featured Notes */
+.featured-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.note {
+  background-color: rgba(26, 26, 26, 0.8); /* Same as cards for consistency, semi-transparent */
+  padding: 25px;
+  width: 300px; /* Wider notes */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: box-shadow 0.4s ease, transform 0.4s ease, background-color 0.4s ease; /* Longer transition */
+  color: #ffffff;
+  text-align: left;
+  font-size: 1.1em;
+  perspective: 1000px; /* For 3D transform */
+  transform-style: preserve-3d; /* For 3D transform */
+}
+
+.note:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  transform: translateY(-8px) rotateX(1deg); /* Lift and subtle rotate on hover */
+  background-color: rgba(36, 36, 36, 0.9);
+}
+
+/* News Ticker */
+.news-ticker .ticker {
+  display: flex;
+  gap: 50px; /* More space between news items */
+  white-space: nowrap;
+  padding: 15px 0;
+  animation: tickerMove 30s linear infinite;
+  justify-content: center;
+  font-size: 1.1em;
+  color: #cccccc; /* Muted ticker text */
+}
+
+.news-ticker .ticker span {
+  padding: 0; /* Remove padding */
+  border-bottom: none; /* Remove border */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Add a subtle dot separator for ticker items, Linear style */
+.news-ticker .ticker span:not(:last-child)::after {
+  content: "•";
+  color: #444444; /* Darker dot for subtlety */
+  margin-left: 20px;
+}
+
+/* Footer */
+footer {
+  background-color: #000000; /* Match body background */
+  color: #cccccc; /* Muted text */
+  padding: 60px 40px; /* More padding */
+  font-size: 0.95em;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Subtle top border */
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px; /* Increased gap */
+  max-width: 1300px; /* Match main content width */
+  margin: 0 auto;
+  text-align: left;
+}
+
+.footer-content h3 {
+  margin-top: 0;
+  color: white; /* Brighter headings */
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-content li {
+  margin-bottom: 10px;
+}
+
+.footer-content a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+  color: white;
+}
+
+.footer-content .socials a {
+  margin-right: 18px; /* More space */
+  font-size: 1.5em; /* Larger icons */
+  color: #cccccc;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.footer-content .socials a:hover {
+  transform: translateY(-3px);
+  color: white;
+}
+
+/* --- Scroll Animation CSS --- */
+.js-scroll {
+  opacity: 0;
+  transform: translateY(50px); /* Start hidden below its final position */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition */
+}
+
+.js-scroll.scrolled {
+  opacity: 1;
+  transform: translateY(0); /* Move to final position */
+}
+
+
+/* Keyframes - Ticker adjustment for potentially fewer items */
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); } /* Ensure it moves fully to allow new items to appear */
+}
+
+/* General Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 2.8em;
+  }
+  .hero-content p {
+    font-size: 1.1em;
+  }
+  h2 {
+    font-size: 2.2em;
+  }
+  nav {
+    flex-direction: column;
+    padding: 20px 20px;
+  }
+  nav ul {
+    margin-top: 25px;
+    gap: 25px;
+  }
+  .why, .explore, .featured, .news-ticker {
+    padding: 80px 20px;
+  }
+  .cards, .featured-notes {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .card, .note {
+    width: 90%;
+    max-width: 400px;
+    transform: none !important; /* Disable 3D transforms on small screens */
+    box-shadow: none !important; /* Disable shadow on small screens */
+  }
+  .card:hover, .note:hover {
+    transform: translateY(-5px) !important; /* Only simple lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+  .footer-content > div {
+    width: 100%;
+  }
+  .news-ticker .ticker {
+    gap: 30px;
+  }
+  .news-ticker .ticker span:not(:last-child)::after {
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content h1 {
+    font-size: 2.2em;
+  }
+  .hero-content p {
+    font-size: 1em;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  nav .logo {
+    font-size: 24px;
+  }
+  nav ul {
+    gap: 15px;
+  }
+  .why, .explore, .featured, .news-ticker {
+    padding: 60px 15px;
+  }
+  .card, .note {
+    padding: 25px 20px;
+  }
+  .topics button {
+    padding: 10px 18px;
+    font-size: 0.9em;
+  }
+  .footer-content {
+    padding: 40px 15px;
+  }
+}
