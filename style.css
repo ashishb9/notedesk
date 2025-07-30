@@ -42,6 +42,11 @@ body::before {
   z-index: 1; /* Ensure hero content is above background overlay */
 }
 
+/* Specific padding for about page hero to reduce space */
+.hero.about-hero {
+    padding: 60px 20px 40px; /* Even less top/bottom padding for About page */
+}
+
 .hero-content h1 {
   font-size: 3.5em; /* Larger, bolder heading */
   font-weight: 700;
@@ -203,6 +208,8 @@ h2 {
   font-weight: 600;
   margin-bottom: 15px;
   color: #8899ee; /* Keeping the Linear-style accent color for specific elements */
+  /* NEW: Adjusting the blue/violet accent to be more subtle and darker for "Why NoteDesk?" cards */
+  color: #7A89CC; /* A slightly darker, more muted blue */
 }
 
 .card p {
