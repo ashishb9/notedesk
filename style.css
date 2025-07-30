@@ -33,11 +33,11 @@ body::before {
 .hero {
   /* Subtle radial gradient, almost solid black with a tiny hint of light */
   background: radial-gradient(circle at top left, rgba(20, 20, 20, 0.3) 0%, rgba(0, 0, 0, 0.9) 70%);
-  padding: 100px 20px 80px; /* More vertical padding */
+  padding: 80px 20px 60px; /* Reduced top/bottom padding for less empty space */
   text-align: center;
   color: white;
   animation: fadeIn 1.5s ease-in; /* Keeps initial fade-in */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* More visible border */
   position: relative; /* For z-index if needed */
   z-index: 1; /* Ensure hero content is above background overlay */
 }
@@ -53,8 +53,62 @@ body::before {
   font-size: 1.3em;
   color: #cccccc; /* Slightly muted description text */
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 40px auto; /* Added margin-bottom for spacing with new buttons */
 }
+
+/* Hero Action Buttons */
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.hero-button {
+  padding: 15px 30px;
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* More rounded */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero-link {
+  color: #cccccc; /* Muted text color for link */
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between text and arrow */
+  transition: color 0.3s ease;
+}
+
+.hero-link:hover {
+  color: #ffffff; /* Brighter on hover */
+}
+
+.hero-link::after {
+  content: '→'; /* Right arrow character */
+  font-size: 1.2em;
+  transition: transform 0.2s ease;
+}
+
+.hero-link:hover::after {
+  transform: translateX(5px); /* Slide arrow on hover */
+}
+
 
 /* Navigation */
 nav {
@@ -335,7 +389,7 @@ footer {
   gap: 50px; /* Space between columns */
   justify-content: center; /* Center content horizontally */
   max-width: 1200px;
-  margin: 80px auto; /* More margin top/bottom */
+  margin: 60px auto; /* Slightly reduced margin for less empty space around the container */
   padding: 40px;
   background-color: rgba(20, 20, 20, 0.9); /* Slightly different background for the container */
   border-radius: 12px;
@@ -360,8 +414,8 @@ footer {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 25px; /* More space below pic */
-  border: 4px solid #8899ee; /* Accent color border */
-  box-shadow: 0 0 0 8px rgba(136, 153, 238, 0.2); /* Halo effect */
+  border: 4px solid rgba(136, 153, 238, 0.5); /* Softer accent color border for a subtle look */
+  box-shadow: 0 0 0 8px rgba(136, 153, 238, 0.1); /* Softer halo effect */
 }
 
 .profile-card h2 {
@@ -377,7 +431,7 @@ footer {
 }
 
 .profile-card .socials a {
-  color: #8899ee; /* Accent color for social icons */
+  color: rgba(136, 153, 238, 0.7); /* Softer accent color for social icons */
   font-size: 1.8em; /* Larger icons */
   margin: 0 12px;
   transition: color 0.3s ease, transform 0.2s ease;
@@ -392,7 +446,7 @@ footer {
   flex: 1; /* Takes remaining space */
   padding: 10px 0; /* Add some padding if needed */
   color: #e0e0e0;
-  line-height: 1.7; /* Slightly more readable line height */
+  line-height: 1.8; /* Increased line height for better readability */
   font-size: 1.05em; /* Slightly larger text */
 }
 
@@ -412,10 +466,15 @@ footer {
   letter-spacing: -0.01em;
 }
 
+.about-main-content p {
+    margin-bottom: 20px; /* More space between paragraphs */
+}
+
 .about-main-content ul {
   list-style: none; /* Remove default bullet points */
   padding: 0;
   margin-top: 20px;
+  margin-bottom: 20px; /* Add margin-bottom for lists */
 }
 
 .about-main-content li {
@@ -427,7 +486,7 @@ footer {
 
 .about-main-content li::before {
   content: "•"; /* Custom bullet point */
-  color: #8899ee; /* Accent color for bullets */
+  color: rgba(136, 153, 238, 0.6); /* Softer accent color for bullets */
   position: absolute;
   left: 0;
   font-size: 1.5em; /* Larger bullet */
@@ -443,6 +502,10 @@ footer {
   }
   .hero-content p {
     font-size: 1.1em;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 15px;
   }
   h2 {
     font-size: 2.2em;
@@ -517,6 +580,13 @@ footer {
   }
   .hero-content p {
     font-size: 1em;
+  }
+  .hero-button {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+  .hero-link {
+    font-size: 0.95em;
   }
   h2 {
     font-size: 1.8em;
