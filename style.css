@@ -1,286 +1,360 @@
+/* General Body & Typography */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f5f7fb; /* Light background for the overall page */
-  color: #333; /* Darker default text for readability */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Modern, system-font stack */
+  background-color: #1a1a1a; /* Very dark background, like Linear */
+  color: #f0f0f0; /* Off-white text for high contrast */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hero Section */
 .hero {
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Keep the professional dark gradient */
-  color: white; /* White text on dark hero */
-  padding: 60px 20px;
+  background: radial-gradient(circle at top left, #2c5364 0%, #1a1a1a 70%); /* Subtle radial gradient */
+  padding: 100px 20px 80px; /* More vertical padding */
   text-align: center;
+  color: white;
   animation: fadeIn 1.5s ease-in;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
 }
 
+.hero-content h1 {
+  font-size: 3.5em; /* Larger, bolder heading */
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em; /* Tighter letter spacing for modern feel */
+}
+
+.hero-content p {
+  font-size: 1.3em;
+  color: #b0b0b0; /* Slightly muted description text */
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Navigation */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
-  padding: 0 20px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 25px 40px; /* More padding for nav */
+  max-width: 1300px; /* Wider nav area */
+  margin: 0 auto;
+}
+
+nav .logo {
+  font-size: 28px; /* Larger logo */
+  font-weight: 800; /* Bolder logo */
+  color: white;
+  letter-spacing: -0.03em;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 35px; /* More space between nav items */
+  margin: 0;
+  padding: 0;
 }
 
 nav a {
   text-decoration: none;
-  color: white;
-  font-weight: bold;
+  color: #b0b0b0; /* Muted link color */
+  font-weight: 500;
+  font-size: 1.1em;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #a4d8ff;
+  color: white; /* Brighter on hover */
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* Revert "Why NoteDesk?" and "Featured Notes" to lighter backgrounds for better text visibility */
-.why,
-.featured {
-  padding: 60px 20px;
+/* Section Styling (Applied to why, explore, featured, news-ticker) */
+.why, .explore, .featured, .news-ticker {
+  padding: 100px 40px; /* Consistent generous padding */
   text-align: center;
-  background: #ffffff; /* White background for these sections */
-  color: #333; /* Dark text on white background */
-  border-bottom: 1px solid #eee; /* Subtle separator */
+  background-color: #1a1a1a; /* Maintain dark background */
+  color: #f0f0f0; /* Off-white text */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle section dividers */
 }
 
-/* "Explore Topics" and "News Ticker" can remain with a slightly darker background to break visual monotony */
-.explore,
-.news-ticker {
-  padding: 60px 20px;
-  text-align: center;
-  background: #f0f3f7; /* Slightly off-white/light gray for these sections */
-  color: #333; /* Dark text on light background */
-  border-bottom: 1px solid #eee; /* Subtle separator */
+h2 {
+  font-size: 2.8em; /* Larger section headings */
+  font-weight: 700;
+  margin-bottom: 60px; /* More space below headings */
+  color: white;
+  letter-spacing: -0.02em;
 }
 
-
+/* Why NoteDesk? Cards */
 .cards {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 40px; /* Increased gap */
   flex-wrap: wrap;
-  margin-top: 40px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1200px; /* Wider content area */
+  margin: 0 auto;
 }
 
 .card {
-  background: white; /* White cards */
-  border: 1px solid #ddd; /* Lighter border */
-  padding: 25px;
-  width: 250px;
-  border-radius: 8px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  color: #333; /* Dark text for cards */
+  background-color: #242424; /* Slightly lighter dark for cards */
+  padding: 35px; /* More padding */
+  width: 300px; /* Wider cards */
+  border-radius: 12px; /* More rounded corners */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  color: #f0f0f0;
   text-align: left;
-}
-
-.card h3 {
-  color: #2c5364; /* A prominent dark blue for headings */
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: #555; /* Slightly lighter dark for paragraphs */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Lighter shadow on hover */
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+  background-color: #2c2c2c; /* Slightly darker on hover */
 }
 
+.card h3 {
+  font-size: 1.8em; /* Larger card headings */
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #8899ee; /* Linear-style accent color */
+}
+
+.card p {
+  font-size: 1em;
+  color: #b0b0b0; /* Muted paragraph text */
+}
+
+/* Explore Topics Buttons */
 .topics {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
-  margin-top: 40px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .topics button {
-  padding: 12px 22px;
-  background: #2c5364; /* Stronger blue for buttons */
-  color: white; /* White text on blue buttons */
-  border: none;
-  border-radius: 6px;
+  padding: 12px 25px; /* Generous button padding */
+  background-color: #333333; /* Dark button background */
+  color: #f0f0f0;
+  border: 1px solid #444444; /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 .topics button:hover {
-  background: #203a43; /* Darker blue on hover */
+  background-color: #444444; /* Lighter dark on hover */
+  border-color: #555555;
   transform: translateY(-2px);
 }
 
+/* Featured Notes */
 .featured-notes {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 30px;
   justify-content: center;
-  margin-top: 40px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .note {
-  background: white; /* White notes */
-  padding: 20px;
-  width: 280px;
-  border: 1px solid #ddd; /* Lighter border */
-  border-radius: 6px;
-  transition: box-shadow 0.3s, transform 0.3s;
-  color: #333; /* Dark text for notes */
+  background-color: #242424; /* Same as cards for consistency */
+  padding: 25px;
+  width: 300px; /* Wider notes */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  color: #f0f0f0;
   text-align: left;
-  font-size: 17px;
+  font-size: 1.1em;
 }
 
 .note:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Lighter shadow */
-  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  background-color: #2c2c2c;
 }
 
-.news-ticker {
-  /* Inherits background and color from .explore, defined above */
-  padding: 40px 20px;
-  overflow: hidden;
-}
-
-.news-ticker h2 {
-    margin-bottom: 30px;
-}
-
+/* News Ticker */
 .news-ticker .ticker {
   display: flex;
-  gap: 40px;
+  gap: 50px; /* More space between news items */
   white-space: nowrap;
-  padding: 10px 0;
+  padding: 15px 0;
   animation: tickerMove 30s linear infinite;
   justify-content: center;
-  color: #333; /* Ensure ticker text is dark */
+  font-size: 1.1em;
+  color: #b0b0b0; /* Muted ticker text */
 }
 
 .news-ticker .ticker span {
-  font-size: 17px;
-  padding: 5px 0;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.2); /* Darker dashed line for visibility */
+  padding: 0; /* Remove padding */
+  border-bottom: none; /* Remove border */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
+/* Add a subtle dot separator for ticker items, Linear style */
+.news-ticker .ticker span:not(:last-child)::after {
+  content: "•";
+  color: #555;
+  margin-left: 20px;
+}
+
+
+/* Footer */
 footer {
-  background: #222; /* Keep a solid dark footer */
-  color: white;
-  padding: 50px 20px;
-  font-size: 15px;
-  border-top: 1px solid #333; /* Subtle line to separate from content */
+  background-color: #1a1a1a; /* Match body background */
+  color: #b0b0b0; /* Muted text */
+  padding: 60px 40px; /* More padding */
+  font-size: 0.95em;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Subtle top border */
 }
 
 .footer-content {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 40px;
-  max-width: 1200px;
+  gap: 50px; /* Increased gap */
+  max-width: 1300px; /* Match main content width */
   margin: 0 auto;
   text-align: left;
 }
 
 .footer-content h3 {
   margin-top: 0;
-  color: #a4d8ff; /* Lighter blue for footer headings */
-  font-size: 18px;
-  margin-bottom: 15px;
+  color: white; /* Brighter headings */
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .footer-content ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .footer-content li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .footer-content a {
-  color: #c0d9e8;
+  color: #b0b0b0;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-content a:hover {
-  color: #a4d8ff;
+  color: white;
 }
 
 .footer-content .socials a {
-  margin-right: 15px;
-  font-size: 22px;
-  color: white;
-  transition: transform 0.2s;
+  margin-right: 18px; /* More space */
+  font-size: 1.5em; /* Larger icons */
+  color: #b0b0b0;
+  transition: transform 0.2s ease, color 0.3s ease;
 }
 
 .footer-content .socials a:hover {
-  transform: translateY(-2px);
-  color: #a4d8ff;
+  transform: translateY(-3px);
+  color: white;
 }
 
+/* Keyframes - Ticker adjustment for potentially fewer items */
 @keyframes tickerMove {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-100%); } /* Ensure it moves fully to allow new items to appear */
 }
 
+/* General Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 2.8em;
+  }
+  .hero-content p {
+    font-size: 1.1em;
+  }
+  h2 {
+    font-size: 2.2em;
+  }
   nav {
     flex-direction: column;
-    text-align: center;
-    margin-bottom: 20px;
+    padding: 20px 20px;
   }
-
   nav ul {
-    margin-top: 20px;
+    margin-top: 25px;
+    gap: 25px;
   }
-
+  .why, .explore, .featured, .news-ticker {
+    padding: 80px 20px;
+  }
+  .cards, .featured-notes {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  .card, .note {
+    width: 90%;
+    max-width: 400px;
+  }
   .footer-content {
     flex-direction: column;
     text-align: center;
+    gap: 30px;
   }
-
   .footer-content > div {
     width: 100%;
-    margin-bottom: 20px;
   }
-
-  .cards, .topics, .featured-notes {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  .news-ticker .ticker {
+    gap: 30px;
   }
+  .news-ticker .ticker span:not(:last-child)::after {
+    margin-left: 15px;
+  }
+}
 
+@media (max-width: 576px) {
+  .hero-content h1 {
+    font-size: 2.2em;
+  }
+  .hero-content p {
+    font-size: 1em;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  nav .logo {
+    font-size: 24px;
+  }
+  nav ul {
+    gap: 15px;
+  }
+  .why, .explore, .featured, .news-ticker {
+    padding: 60px 15px;
+  }
   .card, .note {
-    width: 90%;
-    max-width: 350px;
+    padding: 25px 20px;
+  }
+  .topics button {
+    padding: 10px 18px;
+    font-size: 0.9em;
+  }
+  .footer-content {
+    padding: 40px 15px;
   }
 }
