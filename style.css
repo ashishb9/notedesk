@@ -1,201 +1,133 @@
-/* Global Styles */
+/* style.css */
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #f8f9fb;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f5f5;
   color: #222;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Hero Section */
-.hero {
-  background: linear-gradient(135deg, #0a2a43, #103f5f);
+header.hero {
+  background: linear-gradient(135deg, #1e1e2f, #2c3e50);
   color: #fff;
-  padding: 4rem 2rem 6rem;
+  padding: 60px 20px;
   text-align: center;
+  animation: fadeInDown 1s ease-out;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding: 0 2rem;
+  margin-bottom: 30px;
 }
 
-.logo {
+nav .logo {
+  font-size: 28px;
   font-weight: bold;
-  font-size: 1.5rem;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 20px;
 }
 
-nav ul li a {
+nav a {
   color: #fff;
-  font-weight: 500;
+  text-decoration: none;
 }
 
 .hero-content h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
 
-.hero-content p {
-  opacity: 0.85;
-}
-
-/* Section Base */
-section {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-}
-
-/* Why NoteDesk */
-.cards {
+.cards, .topics, .featured-notes {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
-  max-width: 900px;
-  margin: auto;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
 }
 
-.card {
+.card, .note, .topics button {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 1.5rem;
+  padding: 20px;
   width: 250px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1s ease forwards;
 }
 
-.card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+.card:hover, .note:hover, .topics button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.card p {
-  font-size: 0.95rem;
-  opacity: 0.8;
+section {
+  padding: 50px 20px;
 }
 
-/* Explore Topics */
-.explore {
-  background: url('https://images.unsplash.com/photo-1527694224012-b0d3e27881e1?fit=crop&w=1600&q=80') center/cover no-repeat;
-  padding: 4rem 2rem;
-  position: relative;
-  color: #fff;
-}
-
-.explore::before {
-  content: '';
-  background: rgba(0, 0, 0, 0.6);
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 0;
-}
-
-.explore h2 {
-  position: relative;
-  z-index: 1;
-  color: #fff;
-}
-
-.topics {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  max-width: 900px;
-  margin: auto;
+.explore h2, .featured h2, .why h2, .news-ticker h2 {
+  text-align: center;
+  font-size: 2rem;
 }
 
 .topics button {
-  background: #0d4569;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.topics button:hover {
-  background: #1685c2;
-}
-
-/* Featured Notes */
-.featured-notes {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.note {
-  background: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  font-weight: 500;
-  width: 250px;
-}
-
-/* News Ticker */
-.news-ticker {
-  background: #202d3b;
-  color: #fff;
-  padding: 2rem 1rem;
+  border: none;
+  font-weight: bold;
+  color: #333;
+  background: #eee;
 }
 
 .ticker {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  font-size: 0.95rem;
+  overflow-x: auto;
+  gap: 30px;
+  white-space: nowrap;
+  padding: 15px;
+  background: #222;
+  color: #fff;
+  animation: ticker 30s linear infinite;
 }
 
-/* Footer */
 footer {
-  background: #0f1a22;
-  color: #ccc;
-  padding: 3rem 2rem;
-  font-size: 0.9rem;
+  background: #333;
+  color: #fff;
+  padding: 50px 20px;
 }
 
 .footer-content {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 1000px;
-  margin: auto;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
-footer h3 {
-  color: #fff;
-  margin-bottom: 1rem;
+footer a {
+  color: #ccc;
+  text-decoration: none;
 }
 
 .socials a {
-  margin-right: 0.75rem;
-  font-size: 1.2rem;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
