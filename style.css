@@ -67,7 +67,7 @@ body.scrolled-about .hero.about-hero {
   margin: 0 auto 40px auto; /* Added margin-bottom for spacing with new buttons */
 }
 
-/* Hero Action Buttons */
+/* Hero Action Buttons - RE-INTRODUCED FOR FUTURE USE IF YOU WANT TO ADD BUTTONS TO HOME PAGE */
 .hero-actions {
   display: flex;
   justify-content: center;
@@ -575,14 +575,25 @@ footer {
     width: 100%;
     max-width: 300px;
   }
-  .about-main-content {
-    padding: 0;
-    text-align: center; /* Center content on smaller screens */
+  .profile-pic {
+    width: 120px;
+    height: 120px;
   }
-  .about-main-content ul {
-    text-align: left; /* Keep bullet points left-aligned */
-    max-width: 400px; /* Constrain list width */
-    margin: 20px auto;
+  .profile-card h2 {
+    font-size: 1.6em;
+  }
+  .profile-card .socials a {
+    font-size: 1.6em;
+    margin: 0 8px;
+  }
+  .about-main-content .intro-text {
+    font-size: 1.1em;
+  }
+  .about-main-content h3 {
+    font-size: 1.4em;
+  }
+  .about-main-content p, .about-main-content li {
+    font-size: 0.95em;
   }
 }
 
