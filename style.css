@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f7fb;
+  color: #222;
+}
+
+.hero {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  animation: fadeIn 1.5s ease-in;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.why, .explore, .featured, .news-ticker {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 220px;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.topics button {
+  padding: 10px 18px;
+  background: #203a43;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.topics button:hover {
+  background: #2c5364;
+}
+
+.featured-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.note {
+  background: white;
+  padding: 16px;
+  width: 260px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: box-shadow 0.3s;
+}
+
+.note:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.news-ticker .ticker {
+  display: flex;
+  overflow-x: auto;
+  gap: 30px;
+  white-space: nowrap;
+  padding: 10px 0;
+  animation: tickerMove 30s linear infinite;
+}
+
+footer {
+  background: #222;
+  color: white;
+  padding: 30px 20px;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-content h3 {
+  margin-top: 0;
+}
+
+.footer-content a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-content .socials a {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
