@@ -67,7 +67,7 @@ body.scrolled-about .hero.about-hero {
   margin: 0 auto 40px auto; /* Added margin-bottom for spacing with new buttons */
 }
 
-/* Hero Action Buttons - RE-INTRODUCED FOR FUTURE USE IF YOU WANT TO ADD BUTTONS TO HOME PAGE */
+/* Hero Action Buttons - RE-INTRODUCED */
 .hero-actions {
   display: flex;
   justify-content: center;
@@ -214,7 +214,7 @@ h2 {
   font-weight: 600;
   margin-bottom: 15px;
   /* Adjusted the blue/violet accent to be more subtle and darker */
-  color: #7A89CC; /* A slightly darker, more muted blue */
+  color: #7A89CC; /* THIS IS THE BLUE/VIOLET COLOR. IT IS NOW CONFIRMED AND SET */
 }
 
 .card p {
