@@ -1,29 +1,28 @@
-/* style.css */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f5f5;
+  background: #f5f7fb; /* This will be the light background if sections don't fill */
   color: #222;
 }
 
-header.hero {
-  background: linear-gradient(135deg, #1e1e2f, #2c3e50);
-  color: #fff;
+.hero {
+  /* Keep the existing gradient, it's good. You can adjust if you want a deeper blue. */
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
   padding: 60px 20px;
   text-align: center;
-  animation: fadeInDown 1s ease-out;
+  animation: fadeIn 1.5s ease-in;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-}
-
-nav .logo {
-  font-size: 28px;
-  font-weight: bold;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  max-width: 1200px; /* Limit nav width for better control */
+  margin-left: auto; /* Center the nav */
+  margin-right: auto; /* Center the nav */
 }
 
 nav ul {
@@ -33,101 +32,249 @@ nav ul {
 }
 
 nav a {
-  color: #fff;
   text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease; /* Smooth hover effect */
 }
 
-.hero-content h1 {
-  font-size: 2.5rem;
+nav a:hover {
+  color: #a4d8ff; /* Lighter blue on hover */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Apply dark background to relevant sections for cohesion */
+.why,
+.explore,
+.featured,
+.news-ticker {
+  padding: 60px 20px; /* Increased padding for more space */
+  text-align: center;
+  background: #1a2a33; /* Darker background for these sections */
+  color: white; /* Ensure text is white on dark background */
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Increased gap between cards */
+  flex-wrap: wrap;
+  margin-top: 40px; /* More space above cards */
+  max-width: 1000px; /* Limit width of cards container */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  background: #2a3d46; /* Slightly lighter dark background for cards */
+  border: 1px solid #3c5460; /* Subtle border */
+  padding: 25px; /* Increased padding */
+  width: 250px; /* Slightly wider cards */
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Add box-shadow transition */
+  color: white; /* Ensure card text is white */
+  text-align: left; /* Align card text left */
+}
+
+.card h3 {
+  color: #8bbcdc; /* A lighter blue for the heading numbers */
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
-.cards, .topics, .featured-notes {
+.card p {
+  color: #c0d9e8; /* A slightly subdued white for card paragraphs */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift card on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* More prominent shadow */
+}
+
+.topics {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px; /* Increased gap for topic buttons */
   justify-content: center;
-  margin-top: 30px;
-}
-
-.card, .note, .topics button {
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  width: 250px;
-  border-radius: 10px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInUp 1s ease forwards;
-}
-
-.card:hover, .note:hover, .topics button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-section {
-  padding: 50px 20px;
-}
-
-.explore h2, .featured h2, .why h2, .news-ticker h2 {
-  text-align: center;
-  font-size: 2rem;
+  margin-top: 40px; /* More space above topics */
+  max-width: 900px; /* Limit width of topic buttons container */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .topics button {
-  cursor: pointer;
+  padding: 12px 22px; /* Increased padding for buttons */
+  background: #3a4e5a; /* A darker shade for buttons */
+  color: white;
   border: none;
-  font-weight: bold;
-  color: #333;
-  background: #eee;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s; /* Add transform transition */
+  font-weight: 500;
+  font-size: 16px;
 }
 
-.ticker {
+.topics button:hover {
+  background: #4a606d; /* Lighter shade on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.featured-notes {
   display: flex;
-  overflow-x: auto;
-  gap: 30px;
+  flex-wrap: wrap;
+  gap: 25px; /* Increased gap for featured notes */
+  justify-content: center;
+  margin-top: 40px; /* More space above notes */
+  max-width: 900px; /* Limit width of featured notes container */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.note {
+  background: #2a3d46; /* Same as card background for consistency */
+  padding: 20px; /* Increased padding */
+  width: 280px; /* Slightly wider notes */
+  border: 1px solid #3c5460; /* Subtle border */
+  border-radius: 6px;
+  transition: box-shadow 0.3s, transform 0.3s; /* Add transform transition */
+  color: #e0e9ed; /* Lighter text color for notes */
+  text-align: left; /* Align note text left */
+  font-size: 17px;
+}
+
+.note:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+  transform: translateY(-3px); /* Lift note on hover */
+}
+
+.news-ticker {
+  background: #1a2a33; /* Ensure ticker section has dark background */
+  color: white;
+  padding: 40px 20px; /* Adjusted padding */
+  overflow: hidden; /* Ensure ticker content stays within bounds */
+}
+
+.news-ticker h2 {
+    margin-bottom: 30px; /* Space below heading */
+}
+
+.news-ticker .ticker {
+  display: flex;
+  /* Removed overflow-x: auto; to make animation smooth and not scrollable by user */
+  gap: 40px; /* Increased gap in ticker */
   white-space: nowrap;
-  padding: 15px;
-  background: #222;
-  color: #fff;
-  animation: ticker 30s linear infinite;
+  padding: 10px 0;
+  animation: tickerMove 30s linear infinite;
+  justify-content: center; /* Center content when not moving */
+}
+
+.news-ticker .ticker span {
+  font-size: 17px;
+  padding: 5px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3); /* Subtle separator */
 }
 
 footer {
-  background: #333;
-  color: #fff;
-  padding: 50px 20px;
+  background: #1a2a33; /* Match with section background for continuity */
+  color: white;
+  padding: 50px 20px; /* Increased padding */
+  font-size: 15px; /* Slightly larger font */
+  border-top: 1px solid #2c5364; /* Subtle line to separate from content */
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 40px; /* Increased gap */
+  max-width: 1200px; /* Limit footer content width */
+  margin: 0 auto; /* Center footer content */
+  text-align: left; /* Align footer text left */
 }
 
-footer a {
-  color: #ccc;
+.footer-content h3 {
+  margin-top: 0;
+  color: #8bbcdc; /* Lighter blue for footer headings */
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.footer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-content li {
+  margin-bottom: 8px;
+}
+
+.footer-content a {
+  color: #c0d9e8; /* Lighter color for links */
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.socials a {
-  font-size: 24px;
-  margin-right: 10px;
+.footer-content a:hover {
+  color: #a4d8ff; /* Lighter blue on hover */
 }
 
-@keyframes ticker {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+.footer-content .socials a {
+  margin-right: 15px; /* Increased margin */
+  font-size: 22px; /* Larger social icons */
+  color: white; /* Ensure social icons are white */
+  transition: transform 0.2s;
 }
 
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
+.footer-content .socials a:hover {
+  transform: translateY(-2px);
+  color: #a4d8ff; /* Lighter blue on hover */
+}
+
+/* Animations - keep as is */
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Adjusted to ensure continuous loop with more items */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Basic responsiveness for smaller screens */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  nav ul {
+    margin-top: 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-content > div {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .cards, .topics, .featured-notes {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .card, .note {
+    width: 90%; /* Make them take more width on small screens */
+    max-width: 350px; /* Max width to prevent them from becoming too wide */
+  }
 }
