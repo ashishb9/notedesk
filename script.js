@@ -207,3 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
   handleContactForm();
   initNotesPage();
 });
+
+// Close modal with ESC key
+document.addEventListener('keydown', function(event) {
+  const modal = document.getElementById('noteModal');
+  if (event.key === 'Escape' && modal.style.display === 'flex') {
+    modal.style.display = 'none';
+  }
+});
