@@ -929,3 +929,11 @@ footer {
     font-size: 0.9em;
   }
 }
+/* Sticky Navigation */
+header nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #000000; /* Use a background color so content below it doesn't show through */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Optional: Adds a subtle shadow */
+}
