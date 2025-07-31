@@ -7,72 +7,68 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" href="img/favicon.png" type="image/png">
-  <!-- ADDED SEO TAG -->
   <meta name="description" content="Browse categorized tech notes and solutions">
 </head>
 <body>
-  <!-- ADDED LOADER (NEW) -->
   <div class="page-loader">
     <div class="loader-logo">
-      <i class="fa-solid fa-laptop"></i> NoteDesk
+      <i class="fa-solid fa-laptop" aria-label="Laptop icon"></i> NoteDesk
     </div>
   </div>
 
   <header class="hero">
-    <nav>
-      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
+    <nav class="sticky-nav">
+      <a href="index.html" class="logo" aria-label="NoteDesk home page"><i class="fa-solid fa-laptop" aria-hidden="true"></i> NoteDesk</a>
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html" class="active">Notes</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="notes.html">Notes</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li class="dark-mode-toggle-li">
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
       </ul>
     </nav>
     <div class="hero-content">
-      <h1>Tech Notes Collection</h1>
-      <p>Instant access to categorized solutions</p>
+      <h1>Tech Notes & Guides</h1>
+      <p class="subtitle">A collection of useful tips, tricks, and fixes.</p>
     </div>
   </header>
 
-  <!-- NEW NOTES PAGE CONTENT -->
-  <section class="notes-container js-scroll">
-    <div class="notes-controls">
-      <input type="text" id="notes-search" placeholder="🔍 Search notes..." class="search-bar">
-      <div class="category-filters">
-        <button class="active" data-category="all">All</button>
-        <button data-category="windows">Windows</button>
-        <button data-category="linux">Linux</button>
-        <button data-category="web">Web</button>
+  <main>
+    <section class="notes-section">
+      <div class="notes-controls js-scroll fade-in-bottom">
+        <div class="search-bar">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input type="text" id="searchInput" placeholder="Search notes...">
+        </div>
+        <div class="categories">
+          <button class="category-btn active" data-category="all" aria-label="Show all notes">All</button>
+          <button class="category-btn" data-category="windows" aria-label="Show Windows notes">Windows</button>
+          <button class="category-btn" data-category="linux" aria-label="Show Linux notes">Linux</button>
+          <button class="category-btn" data-category="web" aria-label="Show web development notes">Web</button>
+          <button class="category-btn" data-category="programming" aria-label="Show programming notes">Programming</button>
+        </div>
       </div>
-    </div>
+      <div class="notes-grid js-scroll fade-in-bottom">
+        </div>
+    </section>
 
-    <div class="notes-grid">
-      <!-- NOTE CARD 1 -->
-      <div class="note-card" data-categories="windows" data-index="1">
-        <h3>📋 Fix Clipboard Sync in Windows</h3>
-        <p>Resolve cloud clipboard synchronization issues</p>
-        <span class="note-date">Last updated: July 2025</span>
-      </div>
-      
-      <!-- NOTE CARD 2 -->
-      <div class="note-card" data-categories="linux web" data-index="2">
-        <h3>🌐 Nginx Reverse Proxy Setup</h3>
-        <p>Configure Nginx as a reverse proxy for Node.js apps</p>
-        <span class="note-date">Last updated: June 2025</span>
-      </div>
-      
-      <!-- ADD MORE NOTES USING SAME STRUCTURE -->
-    </div>
-
-    <!-- NOTE MODAL (NEW) -->
-    <div class="note-modal" id="noteModal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3 id="modalTitle"></h3>
-        <div id="modalContent"></div>
+    <div class="note-modal-overlay" id="noteModalOverlay">
+      <div class="note-modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+          <button class="close-modal" aria-label="Close modal">&times;</button>
+          <h3 id="modalTitle"></h3>
+          <div id="modalContent"></div>
+        </div>
       </div>
     </div>
-  </section>
+  </main>
 
   <footer>
     <div class="footer-content">
@@ -92,6 +88,8 @@
       <div>
         <h3>Contact</h3>
         <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+        <div class="socials">
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
