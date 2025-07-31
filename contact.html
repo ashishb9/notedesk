@@ -1,85 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact - NoteDesk</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="img/favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - NoteDesk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="img/favicon.png" type="image/png">
 </head>
 <body>
-    <header class="hero contact-hero">
-        <nav>
-            <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="notes.html">Notes</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="hero-content js-scroll">
-            <h1>Contact Us</h1>
-            <p>We'd love to hear from you. Have a question, a suggestion, or a note to share? Get in touch!</p>
+  <header class="hero contact-hero">
+    <nav>
+      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="hero-content js-scroll">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you. Have a question, a suggestion, or a note to share? Get in touch!</p>
+    </div>
+  </header>
+
+  <main class="contact-main-content">
+    <section class="contact-form-section js-scroll">
+      <h2>Send Us a Message</h2>
+      <form action="#" method="POST" class="contact-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit" class="submit-button">Send Message</button>
+      </form>
+    </section>
+
+    <section class="contact-info-section js-scroll">
+      <h2>Other Ways to Connect</h2>
+      <div class="contact-info">
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <p>b9.ashish@gmail.com</p>
         </div>
-    </header>
+      </div>
+      </section>
+  </main>
 
-    <main class="contact-main-content">
-        <section class="contact-form-section js-scroll">
-            <h2>Send Us a Message</h2>
-            <form action="#" method="POST" class="contact-form">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required />
-                
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3>About NoteDesk</h3>
+        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
+        No fluff. Just useful, real-world notes.</p>
+      </div>
+      <div>
+        <h3>Useful Pages</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+        <div class="socials">
+          </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 NoteDesk. All rights reserved.
+    </div>
+  </footer>
 
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="6" required></textarea>
-
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-        </section>
-
-        <section class="contact-info-section js-scroll">
-            <h2>Other Ways to Connect</h2>
-            <div class="contact-info">
-                <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <p>b9.ashish@gmail.com</p>
-                </div>
-            </div>
-            </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div>
-                <h3>About NoteDesk</h3>
-                <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
-                No fluff. Just useful, real-world notes.</p>
-            </div>
-            <div>
-                <h3>Useful Pages</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="notes.html">Notes</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3>Contact</h3>
-                <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
-                <div class="socials">
-                    </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 NoteDesk. All rights reserved.
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
