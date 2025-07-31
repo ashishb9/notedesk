@@ -937,3 +937,10 @@ header nav {
   background-color: #000000; /* Use a background color so content below it doesn't show through */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Optional: Adds a subtle shadow */
 }
+
+/* Active Navigation Link */
+.active-link {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  font-weight: bold;
+}
