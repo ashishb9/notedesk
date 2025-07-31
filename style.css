@@ -685,74 +685,75 @@ footer {
   color: #008080;
 }
 
-/* ===== LOADING ANIMATION ===== */
-.page-loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease;
-}
-
-.loader-logo {
-  font-size: 2em;
-  color: #008080;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.3; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 0.3; transform: scale(0.95); }
-}
-
-/* ===== NOTES PAGE STYLES ===== */
-.notes-page-header {
-  padding: 60px 20px;
+/* ===== NOTES PAGE STYLES (NEW) ===== */
+.notes-header {
+  padding: 60px 40px 30px;
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
 }
 
-.notes-page-header h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
+.notes-header h1 {
+  font-size: 3em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
 }
 
-.notes-search-container {
+.notes-header p {
+  font-size: 1.2em;
+  color: #E0E0E0;
+  margin-bottom: 40px;
+}
+
+.notes-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   max-width: 600px;
   margin: 0 auto;
 }
 
 #searchInput {
   width: 100%;
-  padding: 12px 20px;
-  font-size: 1rem;
-  border: 1px solid #333;
-  background-color: #222;
-  color: #fff;
+  padding: 14px 20px;
   border-radius: 8px;
+  border: 1px solid #008080;
+  background: rgba(30, 30, 30, 0.8);
+  color: white;
+  font-size: 1.1em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 #searchInput:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 128, 128, 0.5);
 }
 
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+.category-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.category-filters button {
+  padding: 8px 16px;
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid #008080;
+  color: #E0E0E0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-filters button.active {
+  background: #008080;
+  color: white;
 }
 
 .note-card {
