@@ -1,3 +1,45 @@
+// ===== NEW CODE - ADD AT TOP =====
+// Sticky Nav
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('nav ul');
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
+
+// Active Page Highlight
+const currentPage = location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('nav a').forEach(link => {
+  if (link.getAttribute('href') === currentPage) {
+    link.classList.add('active');
+  }
+});
+
+// Modal ESC Close
+const modal = document.getElementById('noteModal');
+if (modal) {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') modal.style.display = 'none';
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+}
+
+// Dark Mode Toggle
+const darkModeToggle = document.createElement('button');
+darkModeToggle.className = 'dark-mode-toggle';
+darkModeToggle.innerHTML = '🌙';
+document.body.appendChild(darkModeToggle);
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  darkModeToggle.innerHTML = document.body.classList.contains('light-mode') ? '🌞' : '🌙';
+});
+
+// ===== YOUR EXISTING CODE BELOW =====
+// Keep all your original code (pageLoader, scrollAnimations etc.) 
+// exactly as is after this point
 document.addEventListener("DOMContentLoaded", () => {
   // ===== 1. PAGE LOADER =====
   const pageLoader = () => {
