@@ -163,10 +163,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Modal close button
-    document.querySelector('.close-modal')?.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+// Close the modal when the close button is clicked or when clicking outside the modal
+document.querySelector('.close-modal')?.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
 
     // Search functionality
     searchInput?.addEventListener('input', (e) => {
@@ -208,10 +214,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initNotesPage();
 });
 
-// Close modal with ESC key
-document.addEventListener('keydown', function(event) {
-  const modal = document.getElementById('noteModal');
-  if (event.key === 'Escape' && modal.style.display === 'flex') {
+// Close the modal when the close button is clicked or when clicking outside the modal
+document.querySelector('.close-modal')?.addEventListener('click', () => {
     modal.style.display = 'none';
-  }
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
 });
