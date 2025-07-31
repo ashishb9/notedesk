@@ -18,37 +18,31 @@
     </div>
   </div>
 
-  <header class="hero">
-    <nav>
-      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="notes.html" class="active-link">Notes</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <div class="hero-content">
-      <h1>Tech Notes Collection</h1>
-      <p>Instant access to categorized solutions</p>
-    </div>
-  </header>
-
-  <!-- NEW NOTES PAGE CONTENT -->
-  <section class="notes-container js-scroll">
-    <div class="notes-page-header">
-  <h1>All Notes</h1>
-  <div class="notes-search-container">
+  <header>
+  <nav>
+    <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="notes.html" class="active-link">Notes</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="notes-header js-scroll">
+  <h1>Tech Notes Collection</h1>
+  <p>Instant access to categorized solutions</p>
+  <div class="notes-controls">
     <label for="searchInput" class="visually-hidden">Search for notes</label>
     <input type="text" id="searchInput" placeholder="Search notes...">
+    <div class="category-filters">
+      <button class="active" data-category="all">All</button>
+      <button data-category="windows">Windows</button>
+      <button data-category="linux">Linux</button>
+      <button data-category="web">Web</button>
+    </div>
   </div>
-  <div class="category-filters">
-    <button class="active" data-category="all">All</button>
-    <button data-category="windows">Windows</button>
-    <button data-category="linux">Linux</button>
-    <button data-category="web">Web</button>
-  </div>
-</div>
+</section>
 
     <div class="notes-grid">
       <!-- NOTE CARD 1 -->
