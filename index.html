@@ -7,98 +7,103 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" href="img/favicon.png" type="image/png">
-  <!-- ADDED SEO TAG -->
-  <meta name="description" content="Tech fixes, guides, and insights all in one place">
+  <meta name="description" content="Tech fixes, guides, and insights all in one place. Practical, concise, and reliable notes.">
 </head>
 <body>
-  <!-- ADDED LOADER (NEW) -->
   <div class="page-loader">
     <div class="loader-logo">
-      <i class="fa-solid fa-laptop"></i> NoteDesk
+      <i class="fa-solid fa-laptop" aria-label="Laptop icon"></i> NoteDesk
     </div>
   </div>
 
   <header class="hero">
-    <nav>
-      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <!-- CHANGED # TO notes.html -->
+    <nav class="sticky-nav">
+      <a href="index.html" class="logo" aria-label="NoteDesk home page"><i class="fa-solid fa-laptop" aria-hidden="true"></i> NoteDesk</a>
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="notes.html">Notes</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li class="dark-mode-toggle-li">
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
       </ul>
     </nav>
-    <div class="hero-content js-scroll">
-      <h1>Your Tech Reference, One Note at a Time</h1>
-      <p>Fixes, guides, and insights – all in one place.</p>
-      <div class="hero-actions">
-        <a href="#explore" class="hero-button">Start Exploring</a>
-        <a href="about.html" class="hero-link">Learn More &rarr;</a>
-      </div>
+    <div class="hero-content">
+      <h1 class="js-scroll fade-in-bottom">Hands-on Tech Notes, Fixes & Tools</h1>
+      <p class="subtitle js-scroll fade-in-bottom delay-1">Practical, concise, and reliable insights from real-world experience.</p>
     </div>
   </header>
 
-  <!-- EVERYTHING BELOW IS ORIGINAL CONTENT (NO CHANGES) -->
-  <section class="why js-scroll">
-    <h2>Why NoteDesk?</h2>
-    <div class="cards">
-      <div class="card">
-        <h3><span class="card-number">01</span><br />Quick Fixes</h3>
-        <p>Real solutions for real-world tech issues</p>
+  <main>
+    <section class="home-intro js-scroll fade-in-bottom delay-2">
+      <div class="intro-content">
+        <h2>About NoteDesk</h2>
+        <p>
+          NoteDesk is a personal space for sharing hands-on tech learnings, fixes, and tools. The philosophy is simple: share practical, concise, and reliable knowledge without the unnecessary jargon.
+        </p>
+        <a href="about.html" class="cta-button">Learn More</a>
       </div>
-      <div class="card">
-        <h3><span class="card-number">02</span><br />Learning Notes</h3>
-        <p>Curated notes from personal experience and research</p>
-      </div>
-      <div class="card">
-        <h3><span class="card-number">03</span><br />Tech Insights</h3>
-        <p>Simplified explanations, tools, and tips you'll actually use</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="explore js-scroll" id="explore">
-    <h2>Explore Topics</h2>
-    <div class="topics">
-      <button><i class="fa-solid fa-desktop"></i> Windows & System Tools</button>
-      <button><i class="fa-solid fa-terminal"></i> Dev Environment Setup</button>
-      <button><i class="fa-brands fa-linux"></i> Linux & Commands</button>
-      <button><i class="fa-solid fa-globe"></i> Browser & Extensions</button>
-      <button><i class="fa-solid fa-cloud"></i> Cloud & Hosting Tools</button>
-      <button><i class="fa-solid fa-mobile-alt"></i> Mobile Tools</button>
-      <button><i class="fa-solid fa-lightbulb"></i> Everyday Productivity Hacks</button>
-      <button><i class="fa-solid fa-robot"></i> ChatGPT & AI Prompts</button>
-      <button><i class="fa-solid fa-code"></i> Code Snippets & Fixes</button>
-    </div>
-  </section>
+    <section class="featured-notes js-scroll fade-in-bottom">
+      <div class="section-header">
+        <h2>Featured Notes</h2>
+        <p>A few popular notes to get you started.</p>
+      </div>
+      <div class="notes-grid">
+        <div class="note-card" data-index="1">
+          <h3>🖥️ Customizing Windows Terminal</h3>
+          <p>A quick guide to changing themes and settings in the new Windows Terminal.</p>
+          <span class="note-date">Last updated: July 2025</span>
+        </div>
+        <div class="note-card" data-index="2">
+          <h3>🌐 Nginx Reverse Proxy Setup</h3>
+          <p>Configure Nginx as a reverse proxy for Node.js apps.</p>
+          <span class="note-date">Last updated: June 2025</span>
+        </div>
+        <div class="note-card" data-index="5">
+          <h3>🐧 Zsh Customization with Oh My Zsh</h3>
+          <p>Level up your Linux command line experience with Zsh plugins and themes.</p>
+          <span class="note-date">Last updated: June 2025</span>
+        </div>
+      </div>
+      <div class="view-all-notes">
+        <a href="notes.html" class="cta-button">View All Notes</a>
+      </div>
+    </section>
 
-  <section class="featured js-scroll">
-    <h2>Featured Notes</h2>
-    <div class="featured-notes">
-      <div class="note">📋 Clipboard Not Syncing? Fix it on Windows</div>
-      <div class="note">🌐 Free Web Hosting That Just Works</div>
-      <div class="note">🧩 Must-Have VS Code Extensions in 2025</div>
-    </div>
-  </section>
-
-  <section class="news-ticker js-scroll">
-    <h2>What's New This Week</h2>
-    <div class="ticker-wrap">
-      <div class="ticker">
-        <span>🛑 Microsoft to End Support for Windows 10 in 2025</span>
-        <span>🤖 GitHub Launches AI-Powered Code Scanning</span>
-        <span>📱 Android 15 Public Beta Rolling Out</span>
-        <span>🖥️ Windows Terminal Adds AI Command Suggestions</span>
-        <span>💻 Apple Previews macOS Sequoia with Advanced AI Features</span>
-        <span>🔒 Google Chrome Rolls Out Enhanced Privacy Protections</span>
-        <span>☁️ AWS Announces Major Expansion of Serverless Offerings</span>
-        <span>🎮 PlayStation 5 Pro Leaks Hint at Significant Performance Boost</span>
-        <span>🔋 Breakthrough in Solid-State Battery Tech Promises Longer EV Range</span>
-        <span>📡 SpaceX Starlink Lowers Subscription Prices in Select Regions</span>
+    <div class="note-modal-overlay" id="noteModalOverlay">
+      <div class="note-modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+          <button class="close-modal" aria-label="Close modal">&times;</button>
+          <h3 id="modalTitle"></h3>
+          <div id="modalContent"></div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <section class="whats-new-section js-scroll fade-in-bottom">
+      <h2>What's New This Week</h2>
+      <div class="news-ticker-container">
+        <div class="news-ticker">
+          <span>🚀 New Note on Git Commands Rolling Out</span>
+          <span>🖥️ Windows Terminal Adds AI Command Suggestions</span>
+          <span>💻 Apple Previews macOS Sequoia with Advanced AI Features</span>
+          <span>🔒 Google Chrome Rolls Out Enhanced Privacy Protections</span>
+          <span>☁️ AWS Announces Major Expansion of Serverless Offerings</span>
+          <span>🎮 PlayStation 5 Pro Leaks Hint at Significant Performance Boost</span>
+          <span>🔋 Breakthrough in Solid-State Battery Tech Promises Longer EV Range</span>
+          <span>📡 SpaceX Starlink Lowers Subscription Prices in Select Regions</span>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-content">
@@ -111,7 +116,6 @@
         <h3>Useful Pages</h3>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <!-- CHANGED # TO notes.html -->
           <li><a href="notes.html">Notes</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -120,7 +124,7 @@
         <h3>Contact</h3>
         <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
         <div class="socials">
-          </div>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
