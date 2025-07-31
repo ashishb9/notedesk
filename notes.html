@@ -7,9 +7,15 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" href="img/favicon.png" type="image/png">
-  <meta name="description" content="Browse categorized tech notes and solutions">
+  <meta name="description" content="Browse tech notes and solutions">
 </head>
 <body>
+  <div class="page-loader">
+    <div class="loader-logo">
+      <i class="fa-solid fa-laptop"></i> NoteDesk
+    </div>
+  </div>
+
   <header class="hero">
     <nav>
       <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
@@ -38,47 +44,29 @@
     </div>
 
     <div class="notes-grid">
-      <!-- Example Note 1 -->
       <div class="note-card" data-categories="windows" data-index="1">
         <h3>📋 Fix Clipboard Sync in Windows</h3>
         <p>Resolve cloud clipboard synchronization issues</p>
         <span class="note-date">Last updated: July 2025</span>
       </div>
-
-      <!-- Example Note 2 -->
       <div class="note-card" data-categories="linux web" data-index="2">
         <h3>🌐 Nginx Reverse Proxy Setup</h3>
         <p>Configure Nginx as a reverse proxy for Node.js apps</p>
         <span class="note-date">Last updated: June 2025</span>
       </div>
+    </div>
 
-      <!-- Add more notes below following the same format -->
+    <div class="note-modal" id="noteModal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 id="modalTitle"></h3>
+        <div id="modalContent"></div>
+      </div>
     </div>
   </section>
 
   <footer>
-    <div class="footer-content">
-      <div>
-        <h3>About NoteDesk</h3>
-        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
-        No fluff. Just useful, real-world notes.</p>
-      </div>
-      <div>
-        <h3>Useful Pages</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="notes.html">Notes</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 NoteDesk. All rights reserved.
-    </div>
+    <!-- Same footer as other pages -->
   </footer>
 
   <script src="script.js"></script>
