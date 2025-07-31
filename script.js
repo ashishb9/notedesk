@@ -175,12 +175,13 @@ window.addEventListener('click', (event) => {
 });
 
     // Search functionality
+    const searchInput = document.getElementById('searchInput');
     searchInput?.addEventListener('input', (e) => {
-      const searchTerm = e.target.value.toLowerCase();
-      noteCards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(searchTerm) ? 'block' : 'none';
-      });
+        const searchTerm = e.target.value.toLowerCase();
+        noteCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+        });
     });
 
     // Category filtering
