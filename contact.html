@@ -7,67 +7,71 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" href="img/favicon.png" type="image/png">
-  <!-- ADDED SEO TAG -->
   <meta name="description" content="Contact NoteDesk for collaborations and questions">
 </head>
 <body>
-  <!-- ADDED LOADER (NEW) -->
   <div class="page-loader">
     <div class="loader-logo">
-      <i class="fa-solid fa-laptop"></i> NoteDesk
+      <i class="fa-solid fa-laptop" aria-label="Laptop icon"></i> NoteDesk
     </div>
   </div>
 
   <header class="hero about-hero">
-    <nav>
-      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
+    <nav class="sticky-nav">
+      <a href="index.html" class="logo" aria-label="NoteDesk home page"><i class="fa-solid fa-laptop" aria-hidden="true"></i> NoteDesk</a>
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <!-- CHANGED # TO notes.html -->
         <li><a href="notes.html">Notes</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li class="dark-mode-toggle-li">
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+          </button>
+        </li>
       </ul>
     </nav>
     <div class="hero-content">
-      <h1>Get in Touch</h1>
-      <p>Reach out for collaborations, questions, or just to say hello!</p>
+      <h1>Contact</h1>
+      <p class="subtitle">Got a question? Found an error? Let's connect.</p>
     </div>
   </header>
 
-  <div class="about-page-container">
-    <!-- REPLACED STATIC CONTENT WITH FORM (NEW) -->
-    <main class="about-main-content">
-      <div class="contact-form-container">
-        <form id="contactForm" class="contact-form" action="mailto:b9.ashish@gmail.com" method="post" enctype="text/plain">
+  <div class="page-content">
+    <main class="contact-main-content">
+      <div class="contact-form-container js-scroll fade-in-bottom">
+        <div class="contact-info">
+          <h3>Drop a Message</h3>
+          <p>I am always open to feedback, collaboration ideas, or just a chat about tech. Fill out the form or use one of the links below.</p>
+        </div>
+        <form id="contactForm" action="#" method="POST">
           <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" aria-label="Enter your name" required />
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" aria-label="Enter your email" required />
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea id="message" name="message" rows="5" aria-label="Enter your message" required></textarea>
           </div>
-          <button type="submit" class="form-submit-btn">Send Message</button>
+          <button type="submit" class="cta-button">Send Message</button>
         </form>
-        <div id="formSuccess" class="form-success-message" style="display:none;">
-          <i class="fas fa-check-circle"></i>
-          <p>Message sent! I'll get back to you soon.</p>
-        </div>
+        <div id="form-status" class="form-status" aria-live="polite"></div>
       </div>
-
-      <!-- KEPT ORIGINAL CONTACT OPTIONS AS FALLBACK -->
-      <div class="contact-alt-options">
+      
+      <div class="contact-alt-options js-scroll fade-in-bottom">
         <h3>Or reach me directly:</h3>
         <p class="contact-option">
-          <a href="mailto:b9.ashish@gmail.com" target="_blank" class="contact-link"><i class="fas fa-envelope"></i> b9.ashish@gmail.com</a>
+          <a href="mailto:b9.ashish@gmail.com" target="_blank" class="contact-link" aria-label="Send an email to b9.ashish@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> b9.ashish@gmail.com</a>
         </p>
         <p class="contact-option">
-          <a href="https://www.linkedin.com/in/ashishb9" target="_blank" class="contact-link"><i class="fab fa-linkedin-in"></i> Ashish B on LinkedIn</a>
+          <a href="https://www.linkedin.com/in/ashishb9" target="_blank" class="contact-link" aria-label="Connect with Ashish B on LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i> Ashish B on LinkedIn</a>
         </p>
       </div>
     </main>
@@ -84,7 +88,6 @@
         <h3>Useful Pages</h3>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <!-- CHANGED # TO notes.html -->
           <li><a href="notes.html">Notes</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -93,7 +96,7 @@
         <h3>Contact</h3>
         <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
         <div class="socials">
-          </div>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
