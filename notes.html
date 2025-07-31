@@ -2,101 +2,252 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notes | NoteDesk</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notes – NoteDesk</title>
+  <meta name="description" content="Browse all technical notes with filter and search for quick solutions." />
+  <link rel="icon" href="img/tech-pattern.jpg" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="icon" href="img/favicon.png" type="image/png">
-  <meta name="description" content="Browse categorized tech notes and solutions">
 </head>
 <body>
-  <div class="page-loader">
-    <div class="loader-logo">
-      <i class="fa-solid fa-laptop" aria-label="Laptop icon"></i> NoteDesk
+  <nav>
+    <a href="index.html" class="logo" aria-label="NoteDesk Home"><span>🗒️</span>NoteDesk</a>
+    <div class="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="notes.html" class="active" aria-current="page">Notes</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-  <header class="hero">
-    <nav class="sticky-nav">
-      <a href="index.html" class="logo" aria-label="NoteDesk home page"><i class="fa-solid fa-laptop" aria-hidden="true"></i> NoteDesk</a>
-      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="notes.html" class="active">Notes</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="dark-mode-toggle-li">
-          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-            <i class="fas fa-moon"></i>
-          </button>
-        </li>
-      </ul>
-    </nav>
-    <div class="hero-content">
-      <h1>Tech Notes & Guides</h1>
-      <p class="subtitle">A collection of useful tips, tricks, and fixes.</p>
-    </div>
-  </header>
-
-  <main>
-    <section class="notes-section">
-      <div class="notes-controls js-scroll fade-in-bottom">
-        <div class="search-bar">
-          <i class="fas fa-search" aria-hidden="true"></i>
-          <input type="text" id="searchInput" placeholder="Search notes...">
-        </div>
-        <div class="categories">
-          <button class="category-btn active" data-category="all" aria-label="Show all notes">All</button>
-          <button class="category-btn" data-category="windows" aria-label="Show Windows notes">Windows</button>
-          <button class="category-btn" data-category="linux" aria-label="Show Linux notes">Linux</button>
-          <button class="category-btn" data-category="web" aria-label="Show web development notes">Web</button>
-          <button class="category-btn" data-category="programming" aria-label="Show programming notes">Programming</button>
-        </div>
+  <main role="main" class="notes-container" aria-label="Notes collection">
+    <section class="notes-controls" aria-label="Search and filter notes">
+      <input
+        aria-label="Search notes"
+        type="search"
+        placeholder="Search notes..."
+        class="search-bar"
+        id="searchBar"
+        autocomplete="off"
+      />
+      <div class="category-filters" role="group" aria-label="Filter notes by category" id="categoryFilters">
+        <button type="button" data-category="all" class="active" aria-pressed="true">All</button>
+        <button type="button" data-category="windows" aria-pressed="false">🪟 Windows</button>
+        <button type="button" data-category="linux" aria-pressed="false">🐧 Linux</button>
+        <button type="button" data-category="web" aria-pressed="false">🌐 Web</button>
+        <button type="button" data-category="devops" aria-pressed="false">⚙️ DevOps</button>
+        <button type="button" data-category="productivity" aria-pressed="false">📈 Productivity</button>
       </div>
-      <div class="notes-grid js-scroll fade-in-bottom">
-        </div>
     </section>
 
-    <div class="note-modal-overlay" id="noteModalOverlay">
-      <div class="note-modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-content">
-          <button class="close-modal" aria-label="Close modal">&times;</button>
-          <h3 id="modalTitle"></h3>
-          <div id="modalContent"></div>
+    <section class="notes-grid" id="notesGrid" role="list" aria-label="List of notes">
+      <!-- 20 Note cards below -->
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="windows">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🪟</span>
+          <h3 class="note-title">Fix Clipboard Sync in Windows</h3>
         </div>
-      </div>
-    </div>
+        <p class="note-summary">Quick steps to resolve Windows clipboard sync issues across devices.</p>
+        <p class="note-date" aria-label="Last updated July 2025">Last updated: July 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="web">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🌐</span>
+          <h3 class="note-title">Nginx Reverse Proxy Setup</h3>
+        </div>
+        <p class="note-summary">Setup Nginx to reverse proxy your Node.js applications securely.</p>
+        <p class="note-date" aria-label="Last updated June 2025">Last updated: June 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="linux">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🐧</span>
+          <h3 class="note-title">Linux SSH Best Practices</h3>
+        </div>
+        <p class="note-summary">Keep your Linux servers secure with SSH configuration tips.</p>
+        <p class="note-date" aria-label="Last updated May 2025">Last updated: May 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="devops">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">⚙️</span>
+          <h3 class="note-title">Docker Compose Quickstart</h3>
+        </div>
+        <p class="note-summary">Launch multi-container apps easily with Docker Compose.</p>
+        <p class="note-date" aria-label="Last updated July 2025">Last updated: July 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="productivity">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">📈</span>
+          <h3 class="note-title">Best Keyboard Shortcuts</h3>
+        </div>
+        <p class="note-summary">Boost productivity with top keyboard shortcuts across platforms.</p>
+        <p class="note-date" aria-label="Last updated April 2025">Last updated: April 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="linux">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🐧</span>
+          <h3 class="note-title">Bash Scripting Tips</h3>
+        </div>
+        <p class="note-summary">Write efficient bash scripts with these handy tips and tricks.</p>
+        <p class="note-date" aria-label="Last updated March 2025">Last updated: March 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="web">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🌐</span>
+          <h3 class="note-title">React State Management</h3>
+        </div>
+        <p class="note-summary">Introduction to hooks and state management in React.</p>
+        <p class="note-date" aria-label="Last updated May 2025">Last updated: May 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="windows">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🪟</span>
+          <h3 class="note-title">PowerShell Scripting Basics</h3>
+        </div>
+        <p class="note-summary">Automate Windows tasks with introductory PowerShell scripts.</p>
+        <p class="note-date" aria-label="Last updated June 2025">Last updated: June 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="devops">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">⚙️</span>
+          <h3 class="note-title">CI/CD Pipeline Setup</h3>
+        </div>
+        <p class="note-summary">Implement Continuous Integration and Deployment with ease.</p>
+        <p class="note-date" aria-label="Last updated April 2025">Last updated: April 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="web">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🌐</span>
+          <h3 class="note-title">JavaScript Event Listeners</h3>
+        </div>
+        <p class="note-summary">Master event handling to build interactive web apps.</p>
+        <p class="note-date" aria-label="Last updated May 2025">Last updated: May 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="linux">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🐧</span>
+          <h3 class="note-title">System Monitoring Tools</h3>
+        </div>
+        <p class="note-summary">Monitor Linux server performance efficiently.</p>
+        <p class="note-date" aria-label="Last updated March 2025">Last updated: March 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="productivity">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">📈</span>
+          <h3 class="note-title">Pomodoro Technique Setup</h3>
+        </div>
+        <p class="note-summary">Use Pomodoro timers to improve your workflow focus.</p>
+        <p class="note-date" aria-label="Last updated June 2025">Last updated: June 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="windows">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🪟</span>
+          <h3 class="note-title">Windows Terminal Tips</h3>
+        </div>
+        <p class="note-summary">Customize and use Windows Terminal like a pro.</p>
+        <p class="note-date" aria-label="Last updated July 2025">Last updated: July 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="devops">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">⚙️</span>
+          <h3 class="note-title">Kubernetes Basics</h3>
+        </div>
+        <p class="note-summary">An introduction to managing containers with Kubernetes.</p>
+        <p class="note-date" aria-label="Last updated May 2025">Last updated: May 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="web">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🌐</span>
+          <h3 class="note-title">CSS Flexbox Guide</h3>
+        </div>
+        <p class="note-summary">Lay out your web pages easily with CSS Flexbox.</p>
+        <p class="note-date" aria-label="Last updated March 2025">Last updated: March 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="linux">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🐧</span>
+          <h3 class="note-title">Cron Job Scheduling</h3>
+        </div>
+        <p class="note-summary">Automate regular tasks on Linux servers with cron.</p>
+        <p class="note-date" aria-label="Last updated July 2025">Last updated: July 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="productivity">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">📈</span>
+          <h3 class="note-title">Using Markdown Efficiently</h3>
+        </div>
+        <p class="note-summary">Write clear notes and docs quickly using Markdown syntax.</p>
+        <p class="note-date" aria-label="Last updated April 2025">Last updated: April 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="windows">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">🪟</span>
+          <h3 class="note-title">Task Scheduler Usage</h3>
+        </div>
+        <p class="note-summary">Schedule and automate tasks in Windows with ease.</p>
+        <p class="note-date" aria-label="Last updated February 2025">Last updated: February 2025</p>
+      </article>
+
+      <article class="note-card" tabindex="0" role="listitem" data-category="devops">
+        <div class="note-header">
+          <span class="note-cat-icon" aria-hidden="true">⚙️</span>
+          <h3 class="note-title">Terraform Quickstart</h3>
+        </div>
+        <p class="note-summary">Manage infrastructure as code simply with Terraform.</p>
+        <p class="note-date" aria-label="Last updated June 2025">Last updated: June 2025</p>
+      </article>
+    </section>
   </main>
+
+  <!-- Modal Skeleton for note detail (JS will show/hide and fill contents) -->
+  <div class="note-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close note modal" title="Close modal">&times;</button>
+      <h2 id="modalTitle" class="modal-title">Note Title</h2>
+      <section class="modal-body" id="modalBody">
+        <!-- Filled dynamically by JS -->
+        <p>Loading content...</p>
+      </section>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-content">
       <div>
-        <h3>About NoteDesk</h3>
-        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
-        No fluff. Just useful, real-world notes.</p>
+        &copy; 2025 NoteDesk — curated tech notes & fixes
       </div>
-      <div>
-        <h3>Useful Pages</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="notes.html">Notes</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
-        <div class="socials">
-        </div>
+      <div class="socials" aria-label="Social media links">
+        <a href="https://github.com/ashishb9/notedesk" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <!-- Add more social links if needed -->
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2025 NoteDesk. All rights reserved.
+      Made with ♥ by Ashish
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
