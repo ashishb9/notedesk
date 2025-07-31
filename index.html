@@ -2,136 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NoteDesk</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NoteDesk – Real solutions for real-world tech issues</title>
+  <meta name="description" content="Curated notes, fixes, and practical guides for modern tech users and developers. Reliable solutions for Windows, Linux, web, and more." />
+  <link rel="icon" href="img/tech-pattern.jpg" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="icon" href="img/favicon.png" type="image/png">
-  <meta name="description" content="Tech fixes, guides, and insights all in one place. Practical, concise, and reliable notes.">
 </head>
 <body>
-  <div class="page-loader">
-    <div class="loader-logo">
-      <i class="fa-solid fa-laptop" aria-label="Laptop icon"></i> NoteDesk
+  <nav>
+    <a href="index.html" class="logo" aria-label="NoteDesk Home"><span>🗒️</span>NoteDesk</a>
+    <div class="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </div>
+    <ul>
+      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+      <li><a href="notes.html">Notes</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-  <header class="hero">
-    <nav class="sticky-nav">
-      <a href="index.html" class="logo" aria-label="NoteDesk home page"><i class="fa-solid fa-laptop" aria-hidden="true"></i> NoteDesk</a>
-      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="dark-mode-toggle-li">
-          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-            <i class="fas fa-moon"></i>
-          </button>
-        </li>
-      </ul>
-    </nav>
-    <div class="hero-content">
-      <h1 class="js-scroll fade-in-bottom">Hands-on Tech Notes, Fixes & Tools</h1>
-      <p class="subtitle js-scroll fade-in-bottom delay-1">Practical, concise, and reliable insights from real-world experience.</p>
+  <header class="hero" role="banner">
+    <h1 class="hero-title">NoteDesk</h1>
+    <p class="hero-minititle">Your digital notebook for tech fixes and tips</p>
+    <p class="hero-description">
+      Quickly browse curated notes for Windows, Linux, web dev, and more—helpful tips ready when you need them.
+    </p>
+
+    <div class="hero-notes-preview" role="list" aria-label="Example notes preview">
+      <article class="preview-note" tabindex="0" role="listitem" aria-label="Fix Clipboard Sync in Windows note preview">
+        <h4>Fix Clipboard Sync in Windows</h4>
+        <p>Resolve Windows clipboard sync across devices with simple steps.</p>
+        <div class="note-cat" aria-hidden="true">🪟 Windows</div>
+      </article>
+      <article class="preview-note" tabindex="0" role="listitem" aria-label="Nginx Reverse Proxy Setup note preview">
+        <h4>Nginx Reverse Proxy Setup</h4>
+        <p>Configure Nginx as a secure reverse proxy for your Node.js app.</p>
+        <div class="note-cat" aria-hidden="true">🌐 Web</div>
+      </article>
+      <article class="preview-note" tabindex="0" role="listitem" aria-label="Linux SSH Best Practices note preview">
+        <h4>Linux SSH Best Practices</h4>
+        <p>Keep your Linux servers secure with these SSH configuration tips.</p>
+        <div class="note-cat" aria-hidden="true">🐧 Linux</div>
+      </article>
     </div>
   </header>
 
-  <main>
-    <section class="home-intro js-scroll fade-in-bottom delay-2">
-      <div class="intro-content">
-        <h2>About NoteDesk</h2>
-        <p>
-          NoteDesk is a personal space for sharing hands-on tech learnings, fixes, and tools. The philosophy is simple: share practical, concise, and reliable knowledge without the unnecessary jargon.
-        </p>
-        <a href="about.html" class="cta-button">Learn More</a>
-      </div>
-    </section>
-
-    <section class="featured-notes js-scroll fade-in-bottom">
-      <div class="section-header">
-        <h2>Featured Notes</h2>
-        <p>A few popular notes to get you started.</p>
-      </div>
-      <div class="notes-grid">
-        <div class="note-card" data-index="1">
-          <h3>🖥️ Customizing Windows Terminal</h3>
-          <p>A quick guide to changing themes and settings in the new Windows Terminal.</p>
-          <span class="note-date">Last updated: July 2025</span>
-        </div>
-        <div class="note-card" data-index="2">
-          <h3>🌐 Nginx Reverse Proxy Setup</h3>
-          <p>Configure Nginx as a reverse proxy for Node.js apps.</p>
-          <span class="note-date">Last updated: June 2025</span>
-        </div>
-        <div class="note-card" data-index="5">
-          <h3>🐧 Zsh Customization with Oh My Zsh</h3>
-          <p>Level up your Linux command line experience with Zsh plugins and themes.</p>
-          <span class="note-date">Last updated: June 2025</span>
-        </div>
-      </div>
-      <div class="view-all-notes">
-        <a href="notes.html" class="cta-button">View All Notes</a>
-      </div>
-    </section>
-
-    <div class="note-modal-overlay" id="noteModalOverlay">
-      <div class="note-modal" id="noteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-content">
-          <button class="close-modal" aria-label="Close modal">&times;</button>
-          <h3 id="modalTitle"></h3>
-          <div id="modalContent"></div>
-        </div>
+  <section class="news-ticker" aria-label="Latest updates ticker" role="region">
+    <div class="ticker-wrap">
+      <div class="ticker" aria-live="polite">
+        <span>New dark mode coming soon.</span>
+        <span>20+ new notes added to the collection.</span>
+        <span>Improved accessibility across the site.</span>
+        <span>Optimized search bar for easier filtering.</span>
       </div>
     </div>
+  </section>
 
-    <section class="whats-new-section js-scroll fade-in-bottom">
-      <h2>What's New This Week</h2>
-      <div class="news-ticker-container">
-        <div class="news-ticker">
-          <span>🚀 New Note on Git Commands Rolling Out</span>
-          <span>🖥️ Windows Terminal Adds AI Command Suggestions</span>
-          <span>💻 Apple Previews macOS Sequoia with Advanced AI Features</span>
-          <span>🔒 Google Chrome Rolls Out Enhanced Privacy Protections</span>
-          <span>☁️ AWS Announces Major Expansion of Serverless Offerings</span>
-          <span>🎮 PlayStation 5 Pro Leaks Hint at Significant Performance Boost</span>
-          <span>🔋 Breakthrough in Solid-State Battery Tech Promises Longer EV Range</span>
-          <span>📡 SpaceX Starlink Lowers Subscription Prices in Select Regions</span>
-        </div>
-      </div>
-    </section>
+  <main role="main">
+    <!-- You may add more homepage content here -->
   </main>
 
   <footer>
     <div class="footer-content">
       <div>
-        <h3>About NoteDesk</h3>
-        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
-        No fluff. Just useful, real-world notes.</p>
+        &copy; 2025 NoteDesk — curated tech notes & fixes
       </div>
-      <div>
-        <h3>Useful Pages</h3>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="notes.html">Notes</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
-        <div class="socials">
-        </div>
+      <div class="socials" aria-label="Social media links">
+        <a href="https://github.com/ashishb9/notedesk" aria-label="GitHub repository" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <!-- Add other social icons / links here -->
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2025 NoteDesk. All rights reserved.
+      Made with ♥ by Ashish
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
