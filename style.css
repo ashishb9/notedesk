@@ -1025,3 +1025,12 @@ nav {
   cursor: pointer;
   z-index: 1000;
 }
+
+/* Lock Navbar */
+nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+}
