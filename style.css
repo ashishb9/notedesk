@@ -1333,3 +1333,31 @@ footer {
   box-shadow: none;
   transform: translateX(4px);
 }
+/* === Typography Hierarchy Fix === */
+h1 {
+  font-size: 2.5rem;           /* Large for main titles */
+  font-weight: 700;            /* Bold */
+  color: var(--text-primary);  /* Uses your existing color theme */
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.8rem;           /* Slightly smaller */
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4em;
+}
+
+p {
+  font-size: 1rem;             /* Regular size for normal paragraphs */
+  font-weight: 400;
+  line-height: 1.6;            /* Good line spacing */
+  color: var(--text-secondary); /* Slightly softer color if available */
+  margin-bottom: 1em;
+}
+
+.subtext {
+  font-size: 0.9rem;           /* Smaller size */
+  color: var(--text-muted);    /* Dimmed color (define if not existing) */
+  opacity: 0.8;                /* Slight fade */
+}
