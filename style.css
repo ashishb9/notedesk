@@ -243,7 +243,6 @@ nav {
   transition: background-color 0.3s ease;
 }
 
-
 nav .logo {
   font-size: 28px;
   font-weight: 800;
@@ -270,15 +269,6 @@ nav .logo i {
 nav .logo:hover i {
   color: var(--text-primary);
 }
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 35px;
-  margin: 0;
-  padding: 0;
-}
-
 nav a {
   text-decoration: none;
   color: var(--text-secondary);
@@ -1151,10 +1141,6 @@ footer {
     flex-direction: column;
     padding: 20px 20px;
   }
-  nav ul {
-    margin-top: 25px;
-    gap: 25px;
-  }
   .why, .explore, .featured, .news-ticker {
     padding: 80px 20px;
   }
@@ -1275,9 +1261,6 @@ footer {
   }
   nav .logo {
     font-size: 24px;
-  }
-  nav ul {
-    gap: 15px;
   }
   .why, .explore, .featured, .news-ticker {
     padding: 60px 15px;
@@ -1423,4 +1406,13 @@ body::-webkit-scrollbar {
 .contact-hero .hero-content h1 {
   font-size: 2.2rem; /* adjust as needed */
   line-height: 1.3;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  margin-left: auto; /* pushes to the right */
 }
