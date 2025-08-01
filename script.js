@@ -306,13 +306,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (hero) {
         hero.style.backgroundPositionY = `-${scrollPosition * parallaxSpeed}px`;
       }
-      
-      // Add subtle rotation to hero content
-      const heroContent = document.querySelector('.hero-content');
-      if (heroContent) {
-        const rotation = scrollPosition * 0.01;
-        heroContent.style.transform = `translateZ(0) rotate(${rotation}deg)`;
-      }
     });
   };
 
