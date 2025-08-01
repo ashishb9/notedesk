@@ -1405,17 +1405,13 @@ body.modal-open {
 body.modal-open {
   overflow: hidden;
 }
-/* === Full Diagnostic Scrollbar Hide Test === */
-html, body,
-.notes-container,
-.notes-grid {
-  scrollbar-width: none !important;         /* Firefox */
-  -ms-overflow-style: none !important;      /* IE 10+ */
+/* === Clean Scrollbar Hide === */
+html, body {
+  scrollbar-width: none;         /* Firefox */
+  -ms-overflow-style: none;      /* IE 10+ */
 }
 
 html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-.notes-container::-webkit-scrollbar,
-.notes-grid::-webkit-scrollbar {
-  display: none !important;                 /* Chrome, Safari, Edge */
+body::-webkit-scrollbar {
+  display: none;                 /* Chrome, Safari, Edge */
 }
