@@ -43,56 +43,46 @@
     </nav>
 
     <div class="hero-content">
-      <h1>Let’s Connect</h1>
-      <p>I’m always open to freelance projects, questions, or just a friendly tech chat.</p>
+      <h1>Get in Touch</h1>
+      <p>Reach out for collaborations, questions, or just to say hello!</p>
     </div>
   </header>
 
   <div class="about-page-container">
-    <!-- Left Contact Card -->
     <aside class="profile-card">
-      <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" loading="lazy" />
-      <h2>Ashish B</h2>
-      <p>Support Engineer & Tech Enthusiast</p>
-      <p><i class="fas fa-map-marker-alt"></i> Pune, India</p>
-      <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+      <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" loading="lazy"
+           onerror="this.src='img/placeholder.jpg'" />
+      <h2>Hi! I’m Ashish 👋</h2>
+      <p>Let’s connect.</p>
+      <p class="contact-option">
+        <a href="mailto:b9.ashish@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> b9.ashish@gmail.com</a>
+      </p>
       <div class="socials">
-        <a href="https://www.linkedin.com/in/ashishb9" target="_blank" title="LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
+        <a href="https://www.linkedin.com/in/ashishb9" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </aside>
 
-    <!-- Right Main Content -->
     <main class="about-main-content">
       <div class="contact-form-container">
-        <form action="https://formsubmit.co/b9.ashish@gmail.com" method="POST" class="contact-form">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="box">
+        <form id="contactForm" class="contact-form" action="mailto:b9.ashish@gmail.com" method="post" enctype="text/plain">
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Your full name" required>
+            <input type="text" id="name" name="name" required>
           </div>
           <div class="form-group">
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
           </div>
           <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="What would you like to say?" required></textarea>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
           </div>
-          <button type="submit" class="form-submit-btn">📩 Send Message</button>
+          <button type="submit" class="form-submit-btn">Send Message</button>
         </form>
-      </div>
-
-      <div class="contact-alt-options">
-        <h3>Or reach me directly:</h3>
-        <p class="contact-option">
-          <a href="mailto:b9.ashish@gmail.com" target="_blank" class="contact-link"><i class="fas fa-envelope"></i> b9.ashish@gmail.com</a>
-        </p>
-        <p class="contact-option">
-          <a href="https://www.linkedin.com/in/ashishb9" target="_blank" class="contact-link"><i class="fab fa-linkedin-in"></i> Ashish B on LinkedIn</a>
-        </p>
+        <div id="formSuccess" class="form-success-message" style="display:none;">
+          <i class="fas fa-check-circle"></i>
+          <p>Message sent! I'll get back to you soon.</p>
+        </div>
       </div>
     </main>
   </div>
@@ -101,7 +91,8 @@
     <div class="footer-content">
       <div>
         <h3>About NoteDesk</h3>
-        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />No fluff. Just useful, real-world notes.</p>
+        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
+        No fluff. Just useful, real-world notes.</p>
       </div>
       <div>
         <h3>Useful Pages</h3>
@@ -114,7 +105,6 @@
       <div>
         <h3>Contact</h3>
         <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
-        <div class="socials"></div>
       </div>
     </div>
     <div class="footer-bottom">
