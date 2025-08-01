@@ -920,7 +920,31 @@ footer {
 .close-modal:hover {
   color: var(--accent-color);
 }
+/* New styles for the modal buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 10px;
+}
 
+.read-more-btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px 20px;
+  background-color: var(--accent-color);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background-color: #00a0a0;
+}
 /* Loading Animation */
 .page-loader {
   position: fixed;
