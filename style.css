@@ -890,10 +890,10 @@ footer {
 
 /* Note Modal Styles */
 .note-modal {
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: 100px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   background: var(--card-bg);
   padding: 30px;
   border-radius: 12px;
@@ -1367,4 +1367,29 @@ p {
   font-size: 0.9rem;           /* Smaller size */
   color: var(--text-muted);    /* Dimmed color (define if not existing) */
   opacity: 0.8;                /* Slight fade */
+}
+/* === Modal Visibility Control === */
+.note-modal.active {
+  display: block;
+}
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Clickable backdrop overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: none;
+}
+
+.modal-overlay.active {
+  display: block;
 }
