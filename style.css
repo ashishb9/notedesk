@@ -1414,5 +1414,6 @@ nav ul {
   gap: 30px;
   margin: 0;
   padding: 0;
-  margin-left: auto; /* pushes to the right */
+  margin-left: auto;      /* pushes nav items to right */
+  margin-right: 80px;     /* ✅ ADD this line to avoid overlap */
 }
