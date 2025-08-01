@@ -201,22 +201,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Render notes to grid
-    const renderNotes = (notes) => {
-      notesGrid.innerHTML = '';
-      Object.values(notes).forEach(note => {
-        const noteCard = document.createElement('div');
-        noteCard.className = 'note-card';
-        noteCard.dataset.index = note.id;
-        noteCard.innerHTML = `
-          <h3>${note.title}</h3>
-          <p>${note.content.substring(0, 100)}...</p>
-          <span class="note-date">Last updated: ${note.date}</span>
-          <i class="bookmark-icon ${note.bookmarked ? 'fas fa-bookmark active' : 'far fa-bookmark'}" 
-             data-id="${note.id}"></i>
-        `;
-        notesGrid.appendChild(noteCard);
-      });
-    };
+   const renderNotes = (notes) => {
+  notesGrid.innerHTML = '';
+  Object.values(notes).forEach(note => {
+    const noteCard = document.createElement('div');
+    noteCard.className = `note-card js-scroll ${note.category}`;
+    noteCard.dataset.id = note.id; // Add a data-id for identification
+    noteCard.innerHTML = `
+      <h3>${note.title}</h3>
+      <p>${note.snippet}</p>
+      <div class="note-card-overlay"></div>
+    `;
+    notesGrid.appendChild(noteCard);
+  });
+
+  // Add event listener to each newly created note card
+  document.querySelectorAll('.note-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const noteId = card.dataset.id;
+      const note = allNotes[noteId]; // Retrieve note details from our new object
+
+      modalTitle.textContent = note.title;
+      modalContent.textContent = note.snippet;
+      readMoreBtn.href = note.link; // Set the link for the full page
+      
+      noteModal.style.display = 'flex';
+      document.body.classList.add('modal-open');
+    });
+  });
+};
 
     // Initial render
     renderNotes(notesDatabase);
