@@ -12,10 +12,7 @@
   <meta name="description" content="Contact NoteDesk for collaborations and questions">
 </head>
 <body>
-  <!-- Scroll Progress Bar -->
   <div class="progress-bar" id="progressBar"></div>
-
-  <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
 
   <div class="page-loader">
@@ -41,7 +38,6 @@
         </div>
       </div>
     </nav>
-
     <div class="hero-content">
       <h1>Get in Touch</h1>
       <p>Reach out for collaborations, questions, or just to say hello!</p>
@@ -53,29 +49,37 @@
       <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" loading="lazy" onerror="this.src='img/placeholder.jpg'" />
       <h2>Ashish B</h2>
       <p>Support Engineer & Tech Enthusiast</p>
+      <div class="profile-meta">
+        <p>Pune, India</p>
+        <p>Open to freelance collabs</p>
+      </div>
       <div class="socials">
-        <a href="https://www.linkedin.com/in/ashishb9" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.linkedin.com/in/ashishb9" target="_blank" class="contact-link">
+          <i class="fab fa-linkedin-in"></i> Ashish B on LinkedIn
+        </a>
+        <a href="mailto:b9.ashish@gmail.com" target="_blank" class="contact-link">
+          <i class="fas fa-envelope"></i> b9.ashish@gmail.com
+        </a>
       </div>
     </aside>
 
     <main class="about-main-content">
       <div class="contact-form-container">
-        <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); showSuccessMessage();">
+        <form id="contactForm" class="contact-form" action="mailto:b9.ashish@gmail.com" method="post" enctype="text/plain">
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required placeholder="Your full name">
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="email@example.com">
+            <input type="email" id="email" name="email" placeholder="email@example.com" required>
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
+            <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
           </div>
           <button type="submit" class="form-submit-btn">Send Message</button>
         </form>
-
         <div id="formSuccess" class="form-success-message" style="display:none;">
           <i class="fas fa-check-circle"></i>
           <p>Message sent! I'll get back to you soon.</p>
@@ -88,8 +92,7 @@
     <div class="footer-content">
       <div>
         <h3>About NoteDesk</h3>
-        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
-        No fluff. Just useful, real-world notes.</p>
+        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />No fluff. Just useful, real-world notes.</p>
       </div>
       <div>
         <h3>Useful Pages</h3>
@@ -110,11 +113,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    function showSuccessMessage() {
-      document.getElementById('contactForm').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    }
-  </script>
 </body>
 </html>
