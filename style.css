@@ -1417,3 +1417,10 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;                 /* Chrome, Safari, Edge */
 }
+/* Smaller page headings for About, Notes, Contact */
+.about-hero .hero-content h1,
+.notes-hero .hero-content h1,
+.contact-hero .hero-content h1 {
+  font-size: 2.2rem; /* adjust as needed */
+  line-height: 1.3;
+}
