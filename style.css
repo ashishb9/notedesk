@@ -532,10 +532,10 @@ h2 {
   background-color: rgba(245, 245, 245, 0.95);
 }
 
-/* === Unified Background News Ticker === */
+/* === Fixed Background & Ticker Behavior === */
 .news-ticker {
   overflow: hidden;
-  background-color: var(--bg-primary); /* Match other sections */
+  background-color: rgba(0, 0, 0, 0.8); /* Matches featured/explore sections */
   color: var(--text-primary);
   padding: 40px 20px;
   border-top: none;
@@ -543,8 +543,9 @@ h2 {
 }
 
 [data-theme="light"] .news-ticker {
-  background-color: var(--bg-primary); /* Also match in light mode */
+  background-color: rgba(255, 255, 255, 0.9); /* For light mode */
 }
+
 .ticker-wrap {
   max-width: 1200px;
   margin: 0 auto;
@@ -556,7 +557,7 @@ h2 {
 .ticker {
   display: flex;
   white-space: nowrap;
-  animation: ticker-scroll 20s linear infinite; /* Faster speed */
+  animation: ticker-scroll 20s linear infinite; /* Controlled speed */
   gap: 60px;
   font-weight: 500;
   font-size: 1em;
