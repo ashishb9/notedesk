@@ -1031,6 +1031,11 @@ footer {
   overflow: hidden;
   transform-style: preserve-3d;
   perspective: 1000px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px; /* 🔹 Uniform height */
 }
 
 .note-card:hover {
@@ -1041,21 +1046,21 @@ footer {
 
 .note-card h3 {
   margin-top: 0;
-  font-size: 1.2em;
+  font-size: 1.2em; /* 🔹 Title size */
+  font-weight: 700;
   color: var(--text-primary);
+  margin-bottom: 10px;
 }
 
 .note-card p {
   color: var(--text-secondary);
-  font-size: 0.95em;
-  margin-bottom: 10px;
+  font-size: 0.9em;  /* 🔹 Slightly smaller for content */
+  flex-grow: 1;
+  margin-bottom: 15px;
 }
 
 .note-date {
-  display: block;
-  font-size: 0.8em;
-  color: var(--accent-color);
-  margin-top: 10px;
+  display: none;
 }
 
 .bookmark-icon {
