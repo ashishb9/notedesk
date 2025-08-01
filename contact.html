@@ -50,13 +50,9 @@
 
   <div class="about-page-container">
     <aside class="profile-card">
-      <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" loading="lazy"
-           onerror="this.src='img/placeholder.jpg'" />
-      <h2>Hi! I’m Ashish 👋</h2>
-      <p>Let’s connect.</p>
-      <p class="contact-option">
-        <a href="mailto:b9.ashish@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> b9.ashish@gmail.com</a>
-      </p>
+      <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" loading="lazy" onerror="this.src='img/placeholder.jpg'" />
+      <h2>Ashish B</h2>
+      <p>Support Engineer & Tech Enthusiast</p>
       <div class="socials">
         <a href="https://www.linkedin.com/in/ashishb9" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       </div>
@@ -64,21 +60,22 @@
 
     <main class="about-main-content">
       <div class="contact-form-container">
-        <form id="contactForm" class="contact-form" action="mailto:b9.ashish@gmail.com" method="post" enctype="text/plain">
+        <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); showSuccessMessage();">
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required placeholder="Your full name">
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required placeholder="email@example.com">
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
           </div>
           <button type="submit" class="form-submit-btn">Send Message</button>
         </form>
+
         <div id="formSuccess" class="form-success-message" style="display:none;">
           <i class="fas fa-check-circle"></i>
           <p>Message sent! I'll get back to you soon.</p>
@@ -113,5 +110,11 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    function showSuccessMessage() {
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
