@@ -890,16 +890,18 @@ footer {
 
 /* Note Modal Styles */
 .note-modal {
-  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  max-width: 600px;
+  width: 90%;
+  z-index: 9999;
+  display: none;
 }
 
 [data-theme="light"] .note-modal {
