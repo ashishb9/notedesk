@@ -532,10 +532,10 @@ h2 {
   background-color: rgba(245, 245, 245, 0.95);
 }
 
-/* === Smooth News Ticker === */
+/* === Clean & Transparent News Ticker === */
 .news-ticker {
   overflow: hidden;
-  background-color: var(--bg-secondary);
+  background-color: transparent; /* No grey or overlay */
   color: var(--text-primary);
   padding: 30px 0;
   border-top: 1px solid var(--border-color);
@@ -543,7 +543,7 @@ h2 {
 }
 
 [data-theme="light"] .news-ticker {
-  background-color: var(--bg-secondary);
+  background-color: transparent;
 }
 
 .ticker-wrap {
@@ -557,8 +557,8 @@ h2 {
 .ticker {
   display: flex;
   white-space: nowrap;
-  animation: ticker-scroll 30s linear infinite;
-  gap: 80px;
+  animation: ticker-scroll 20s linear infinite; /* Faster speed */
+  gap: 60px;
   font-weight: 500;
   font-size: 1em;
 }
@@ -569,18 +569,16 @@ h2 {
 
 .ticker span {
   display: inline-block;
-  padding-right: 50px;
+  padding-right: 40px;
   color: var(--text-primary);
 }
 
-/* Optional: separator dot between headlines */
 .ticker span:not(:last-child)::after {
   content: "•";
   color: var(--accent-color);
   margin-left: 20px;
 }
 
-/* Clean loop animation */
 @keyframes ticker-scroll {
   0% {
     transform: translateX(100%);
