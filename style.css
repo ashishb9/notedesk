@@ -176,23 +176,25 @@ body.scrolled-about .hero.about-hero {
   margin-top: 40px;
 }
 
-.hero-button {
-  padding: 15px 30px;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  text-decoration: none;
+.hero-button,
+.hero-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 1em;
   font-weight: 600;
-  font-size: 1.1em;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow);
+  text-decoration: none;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  border: none;
 }
 
-.hero-button:hover {
+.hero-button:hover,
+.hero-link:hover {
   background-color: var(--accent-color);
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .hero-link {
