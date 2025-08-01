@@ -1,3 +1,28 @@
+const allNotes = {
+  'fix-clipboard-sync': {
+    id: 'fix-clipboard-sync',
+    title: "Fix 'Clipboard Sync' in Windows",
+    snippet: "Steps to resolve clipboard sync issues between devices on Windows 10 & 11.",
+    category: "windows",
+    link: "notes/windows/fix-clipboard-sync.html"
+  },
+  'speed-up-windows-11': {
+    id: 'speed-up-windows-11',
+    title: "Speed up Windows 11",
+    snippet: "Performance tweaks and registry changes to make your system feel snappier.",
+    category: "windows",
+    link: "notes/windows/speed-up-windows-11.html"
+  },
+  'memory-leak-detection': {
+    id: 'memory-leak-detection',
+    title: "Memory Leak Detection",
+    snippet: "Simple steps to find and fix memory leaks using Windows Task Manager and Resource Monitor.",
+    category: "windows",
+    link: "notes/windows/memory-leak-detection.html"
+  },
+  // ... and so on for all 50 notes
+  // 'lamp-stack-ubuntu': { ... },
+};
 document.addEventListener("DOMContentLoaded", () => {
   // Theme Switching
   const themeSwitch = document.getElementById('theme-switch');
