@@ -254,10 +254,12 @@ document.body.classList.add('modal-open');
     });
 
     // Modal close button
-    document.querySelector('.close-modal')?.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
+   document.querySelector('.close-modal')?.addEventListener('click', closeModal);
 
+function closeModal() {
+  modal.style.display = 'none';
+  document.body.classList.remove('modal-open');
+}
     // Fuzzy search function
     const fuzzySearch = (term) => {
       term = term.toLowerCase();
