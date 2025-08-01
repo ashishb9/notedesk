@@ -1318,5 +1318,7 @@ footer {
 
 .hero-link:hover {
   color: var(--accent-color);
+  background: none;
+  box-shadow: none;
   transform: translateX(4px);
 }
