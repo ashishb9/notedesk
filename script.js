@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalContent = document.getElementById('modalContent');
     const searchInput = document.getElementById('notes-search');
     const categoryButtons = document.querySelectorAll('.category-filters button');
+    const readMoreBtn = document.getElementById('readMoreBtn');
     const bookmarkBtn = document.getElementById('bookmarkBtn');
     
     // Enhanced note database with 20 real-world tech issues
