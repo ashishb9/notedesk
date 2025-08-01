@@ -226,9 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
       modalContent.innerHTML = note.content;
       bookmarkBtn.dataset.id = noteId;
       bookmarkBtn.innerHTML = `<i class="${note.bookmarked ? 'fas' : 'far'} fa-bookmark"></i> ${note.bookmarked ? 'Remove Bookmark' : 'Bookmark Note'}`;
-      modal.style.display = 'block';
-modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
-document.body.style.overflow = 'hidden';
+      modal.style.display = 'flex';
+document.body.classList.add('modal-open');
     });
 
     // Bookmark button in modal
