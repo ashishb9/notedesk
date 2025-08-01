@@ -1303,4 +1303,20 @@ footer {
   transform: translateX(4px);
   color: var(--text-primary);
 }
+/* Hero Link Styling */
+.hero-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 1.05em;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
 
+.hero-link:hover {
+  color: var(--accent-color);
+  transform: translateX(4px);
+}
