@@ -326,21 +326,17 @@ function closeModal() {
 
     // Category filtering
     categoryButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        categoryButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        const category = button.dataset.category;
-        const filteredNotes = Object.values(notesDatabase).filter(note => {
-          return category === 'all' || note.category.includes(category);
-        });
-        
-        const filteredObj = {};
-        filteredNotes.forEach(note => filteredObj[note.id] = note);
-        renderNotes(filteredObj);
-      });
-    });
-  };
+  button.addEventListener('click', () => {
+    const category = button.dataset.category;
+    const allNoteValues = Object.values(allNotes);
+    if (category === 'all') {
+      renderNotes(allNoteValues);
+    } else {
+      const filteredNotes = allNoteValues.filter(note => note.category === category);
+      renderNotes(filteredNotes);
+    }
+  });
+});
 
   // ===== 7. PARALLAX EFFECT =====
   const initParallax = () => {
