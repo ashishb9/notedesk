@@ -255,6 +255,12 @@ document.body.classList.add('modal-open');
 
     // Modal close button
    document.querySelector('.close-modal')?.addEventListener('click', closeModal);
+    // Close modal on ESC key
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && modal.style.display === 'flex') {
+    closeModal();
+  }
+});
 
 function closeModal() {
   modal.style.display = 'none';
