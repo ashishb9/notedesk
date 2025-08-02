@@ -1519,3 +1519,17 @@ nav ul {
 .read-more-link:hover {
     color: #00cccc; /* Slightly different color on hover */
 }
+
+/* Style for the Read More link */
+.read-more-link {
+    display: block;
+    margin-top: 20px;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.read-more-link:hover {
+    color: var(--text-primary);
+}
