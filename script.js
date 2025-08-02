@@ -288,10 +288,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
-                // Fix: Force a click on the 'All' button to display all notes on initial load.
-                const allButton = document.querySelector('.category-filters button[data-category="all"]');
-                if (allButton) {
-                    allButton.click();
+                // Check for a category in the URL and apply filter, otherwise default to 'All'
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlCategory = urlParams.get('category');
+
+                if (urlCategory) {
+                    const categoryButton = document.querySelector(`.category-filters button[data-category="${urlCategory}"]`);
+                    if (categoryButton) {
+                        categoryButton.click();
+                    } else {
+                        // Fallback to 'All' if the category in the URL doesn't exist
+                        document.querySelector('.category-filters button[data-category="all"]').click();
+                    }
+                } else {
+                    // Default to 'All' if no category is specified in the URL
+                    const allButton = document.querySelector('.category-filters button[data-category="all"]');
+                    if (allButton) {
+                        allButton.click();
+                    }
                 }
             });
     };
@@ -324,3 +338,4 @@ document.addEventListener("DOMContentLoaded", () => {
     initBackToTopBtn();
     initHamburger(); // Added the hamburger menu function call
 });
+
