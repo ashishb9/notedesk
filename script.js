@@ -255,6 +255,9 @@ document.addEventListener("DOMContentLoaded", () => {
             generateNoteCards(filteredNotes);
           });
         });
+        
+        // Fix: Force a click on the 'All' button to display all notes on initial load.
+        document.querySelector('.category-filters button[data-category="all"]').click();
       });
   };
 
