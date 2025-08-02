@@ -1492,3 +1492,13 @@ nav ul {
 body.menu-open {
     overflow-y: hidden;
 }
+/* Final fix for body background showing through menu */
+body.menu-open .why,
+body.menu-open .explore,
+body.menu-open .featured,
+body.menu-open .news-ticker,
+body.menu-open footer {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0s 0.4s;
+}
