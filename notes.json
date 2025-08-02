@@ -225,7 +225,6 @@
       }
     ]
   },
-  [
   {
     "id": 11,
     "category": "windows",
@@ -239,6 +238,28 @@
           "Select 'Windows Update' and click 'Run the troubleshooter'. This will automatically detect and fix common issues."
         ]
       },
+      {
+        "title": "Method 2: Manually Reset Windows Update Components",
+        "steps": [
+          "Open Command Prompt as an administrator.",
+          "Type the following commands one by one, pressing Enter after each:",
+          "<code>net stop wuauserv</code>",
+          "<code>net stop cryptSvc</code>",
+          "<code>net stop bits</code>",
+          "<code>net stop msiserver</code>",
+          "Then, rename the SoftwareDistribution and Catroot2 folders:",
+          "<code>ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old</code>",
+          "<code>ren C:\\Windows\\System32\\catroot2 Catroot2.old</code>",
+          "Finally, restart the services:",
+          "<code>net start wuauserv</code>",
+          "<code>net start cryptSvc</code>",
+          "<code>net start bits</code>",
+          "<code>net start msiserver</code>",
+          "Restart your computer and try Windows Update again."
+        ]
+      }
+    ]
+  },
       {
         "title": "Method 2: Manually Reset Windows Update Components",
         "steps": [
