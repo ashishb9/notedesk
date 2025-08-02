@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Notes Page: Modal, Search & Filter Behavior (manual HTML-based)
+  // Notes Page: Modal, Search & Filter Behavior
   const initNotesPage = () => {
     const notesGrid = document.getElementById('notesGrid');
     if (!notesGrid) return;
@@ -121,6 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById('notes-search');
     const categoryButtons = document.querySelectorAll('.category-filters button');
 
+    // Function to close modal
+    const closeModal = () => {
+      modalOverlay.classList.remove('active');
+    };
+
+    // Open modal when a note card is clicked
     notesGrid.addEventListener('click', e => {
       const noteCard = e.target.closest('.note-card');
       if (!noteCard) return;
@@ -138,13 +144,20 @@ document.addEventListener("DOMContentLoaded", () => {
       modalOverlay.classList.add('active');
     });
 
-    closeModalBtn.addEventListener('click', () => {
-      modalOverlay.classList.remove('active');
-    });
+    // Close modal via button
+    closeModalBtn.addEventListener('click', closeModal);
 
+    // Close modal by clicking outside
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) {
-        modalOverlay.classList.remove('active');
+        closeModal();
+      }
+    });
+
+    // Close modal with Esc key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
       }
     });
 
@@ -157,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // Category Filter: filter visible note-cards
     categoryButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         categoryButtons.forEach(b => b.classList.remove('active'));
