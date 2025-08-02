@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===================================
-  // 1. THEME SWITCHING
-  // ===================================
-  const themeSwitch = document.getElementById('theme-switch');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  if (savedTheme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    themeSwitch.checked = true;
-  }
-  themeSwitch.addEventListener('change', function() {
-    if (this.checked) {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    }
-  });
+  // 1. THEME SWITCHING
+  // ===================================
+  const themeSwitch = document.getElementById('theme-switch');
+  if (themeSwitch) {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeSwitch.checked = true;
+    }
+    themeSwitch.addEventListener('change', function() {
+      if (this.checked) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
 
   // Add background to nav on scroll
 const nav = document.querySelector('nav');
@@ -308,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
+
 
 
 
