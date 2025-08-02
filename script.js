@@ -71,7 +71,26 @@ document.addEventListener("DOMContentLoaded", () => {
       hero.style.backgroundPositionY = `-${scrollPosition * 0.3}px`;
     });
   };
-
+  
+// Scroll Animations
+const scrollAnimations = () => {
+  const scrollElements = document.querySelectorAll(".js-scroll");
+  const elementInView = (el, dividend = 1) => {
+    const elementTop = el.getBoundingClientRect().top;
+    return elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend;
+  };
+  const displayScrollElement = el => el.classList.add("scrolled");
+  const handleScrollAnimation = () => {
+    scrollElements.forEach(el => {
+      if (elementInView(el, 1.25)) {
+        displayScrollElement(el);
+      }
+    });
+  };
+  window.addEventListener("scroll", handleScrollAnimation);
+  handleScrollAnimation();
+};
+  
   // Scroll Progress Bar
   const initScrollProgressBar = () => {
     const progressBar = document.getElementById('progressBar');
@@ -248,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Call all initialization functions here
   pageLoader();
+  scrollAnimations();
   initTicker();
   aboutHeroShrink();
   handleContactForm();
@@ -266,5 +286,3 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
-
-
