@@ -880,47 +880,6 @@ footer {
   margin: 0 auto;
 }
 
-/* Note Modal Styles */
-.note-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-[data-theme="light"] .note-modal {
-  background: rgba(0,0,0,0.6);
-}
-
-.modal-content {
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-  max-width: 600px;
-  width: 90%;
-  position: relative;
-  z-index: 1001;
-}
-
-.close-modal {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 1.5em;
-  cursor: pointer;
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-  color: var(--accent-color);
-}
-
 /* Loading Animation */
 .page-loader {
   position: fixed;
@@ -1348,48 +1307,7 @@ p {
   color: var(--text-muted);    /* Dimmed color (define if not existing) */
   opacity: 0.8;                /* Slight fade */
 }
-/* === Modal Visibility Control === */
-.note-modal.active {
-  display: block;
-}
 
-/* Prevent background scroll when modal is open */
-body.modal-open {
-  overflow: hidden;
-}
-
-/* Clickable backdrop overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-  display: none;
-}
-
-.modal-overlay.active {
-  display: block;
-}
-/* Ensure modal appears in center relative to viewport, not document scroll */
-.note-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-body.modal-open {
-  overflow: hidden;
-}
 /* === Clean Scrollbar Hide === */
 html, body {
   scrollbar-width: none;         /* Firefox */
@@ -1433,7 +1351,7 @@ nav ul {
   z-index: 10000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s 0.3s;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal-overlay.active {
@@ -1637,4 +1555,5 @@ nav ul {
 .read-more-btn:hover {
     background-color: #006666;
 }
+
 
