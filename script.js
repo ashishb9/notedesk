@@ -126,6 +126,44 @@ const scrollAnimations = () => {
     });
   };
 
+  // Function to fetch and display all notes
+async function fetchAndRenderNotes() {
+    try {
+        const response = await fetch('notes.json');
+        const notes = await response.json();
+        const notesGrid = document.querySelector('.notes-grid');
+
+        notesGrid.innerHTML = ''; // Clear any existing content
+
+        notes.forEach(note => {
+            const noteCard = document.createElement('div');
+            noteCard.classList.add('note-card', 'js-scroll');
+            noteCard.innerHTML = `
+                <h3>${note.title}</h3>
+                <p>${note.problem}</p>
+                <div class="note-date">Category: ${note.category}</div>
+            `;
+            notesGrid.appendChild(noteCard);
+        });
+        
+        // Re-run scroll animation observer for the new notes
+        initScrollAnimation(); 
+
+    } catch (error) {
+        console.error('Error fetching or rendering notes:', error);
+    }
+}
+
+// Call the function to run when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // ... other existing code ...
+
+    // Only fetch notes on the notes page
+    if (document.querySelector('.notes-container')) {
+        fetchAndRenderNotes();
+    }
+});
+
   // ===================================
   // 3. PAGE-SPECIFIC LOGIC
   // ===================================
@@ -296,4 +334,5 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
+
 
