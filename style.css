@@ -1020,11 +1020,11 @@ footer {
   overflow: hidden;
   transform-style: preserve-3d;
   perspective: 1000px;
-
+  
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 250px; /* 🔹 Uniform height */
+  /* Key change: height is now auto to fit content */
+  height: auto;
 }
 
 .note-card:hover {
@@ -1531,3 +1531,4 @@ nav ul {
 .bookmark-link:hover {
   color: var(--text-primary);
 }
+
