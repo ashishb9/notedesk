@@ -199,21 +199,6 @@ body.scrolled-about .hero.about-hero {
   transform: translateY(-2px);
 }
 
-.hero-link {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.05em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-}
-
-.hero-link:hover {
-  color: var(--text-primary);
-}
-
 .hero-link::after {
   content: '→';
   font-size: 1.2em;
@@ -1212,20 +1197,6 @@ footer {
     font-size: 0.9em;
   }
 }
-.hero-link {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.05em;
-  transition: transform 0.3s ease, color 0.3s ease;
-  display: inline-block;
-  margin-left: 15px;
-}
-
-.hero-link:hover {
-  transform: translateX(4px);
-  color: var(--text-primary);
-}
 /* Hero Link Styling */
 .hero-link {
   color: var(--text-secondary);
@@ -1563,3 +1534,4 @@ nav ul {
 .about-main-content ul li {
     margin-bottom: 8px;
 }
+
