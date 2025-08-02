@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Theme Switching
+
+  // ===================================
+  // 1. THEME SWITCHING
+  // ===================================
   const themeSwitch = document.getElementById('theme-switch');
   const savedTheme = localStorage.getItem('theme') || 'dark';
   if (savedTheme === 'light') {
@@ -15,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem('theme', 'dark');
     }
   });
+
+  // ===================================
+  // 2. UTILITY FUNCTIONS
+  // ===================================
 
   // Page Loader
   const pageLoader = () => {
@@ -74,6 +81,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Parallax Effect
+  const initParallax = () => {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.pageYOffset;
+      hero.style.backgroundPositionY = `-${scrollPosition * 0.3}px`;
+    });
+  };
+
+  // Scroll Progress Bar
+  const initScrollProgressBar = () => {
+    const progressBar = document.getElementById('progressBar');
+    if (!progressBar) return;
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = `${scrollPercent}%`;
+    });
+  };
+
+  // Back to Top Button
+  const initBackToTopBtn = () => {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (!backToTopBtn) return;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) backToTopBtn.classList.add('show');
+      else backToTopBtn.classList.remove('show');
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
+  // ===================================
+  // 3. PAGE-SPECIFIC LOGIC
+  // ===================================
+
   // Contact Form
   const handleContactForm = () => {
     const contactForm = document.getElementById('contactForm');
@@ -124,13 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const categoryButtons = document.querySelectorAll('.category-filters button');
         const modalFixesContainer = document.querySelector('.modal-fixes');
 
-        // Dynamically generate note cards from data
         const generateNoteCards = (data) => {
-          notesGrid.innerHTML = ''; // Clear existing cards
+          notesGrid.innerHTML = '';
           data.forEach(note => {
             const card = document.createElement('div');
             card.className = 'note-card';
-            card.dataset.id = note.id; // Store ID for lookup
+            card.dataset.id = note.id;
             card.dataset.category = note.category;
             card.dataset.title = note.title;
             card.innerHTML = `
@@ -141,15 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         };
 
-        // Initial card generation
-        generateNoteCards(notesData);
-
-        // Function to close modal
         const closeModal = () => {
           modalOverlay.classList.remove('active');
         };
 
-        // Open modal when a note card is clicked
         notesGrid.addEventListener('click', e => {
           const noteCard = e.target.closest('.note-card');
           if (!noteCard) return;
@@ -162,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
           modalTitle.textContent = note.title;
           modalProblem.textContent = note.problem;
 
-          // Clear previous fixes and add the new, detailed steps
           modalFixesContainer.innerHTML = '';
           if (note.fixes && Array.isArray(note.fixes)) {
             note.fixes.forEach(fix => {
@@ -185,24 +224,18 @@ document.addEventListener("DOMContentLoaded", () => {
           modalOverlay.classList.add('active');
         });
 
-        // Close modal via button
         closeModalBtn.addEventListener('click', closeModal);
-
-        // Close modal by clicking outside
         modalOverlay.addEventListener('click', (e) => {
           if (e.target === modalOverlay) {
             closeModal();
           }
         });
-
-        // Close modal with Esc key
         document.addEventListener('keydown', e => {
           if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
             closeModal();
           }
         });
 
-        // Search Filter
         searchInput?.addEventListener('input', e => {
           const term = e.target.value.toLowerCase();
           const filteredNotes = notesData.filter(note => 
@@ -213,7 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
           generateNoteCards(filteredNotes);
         });
 
-        // Category Filter
         categoryButtons.forEach(btn => {
           btn.addEventListener('click', () => {
             categoryButtons.forEach(b => b.classList.remove('active'));
@@ -226,17 +258,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // Parallax Effect
-  const initParallax = () => {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    window.addEventListener('scroll', () => {
-      const scrollPosition = window.pageYOffset;
-      hero.style.backgroundPositionY = `-${scrollPosition * 0.3}px`;
-    });
-  };
+  // ===================================
+  // 4. INITIALIZATION
+  // ===================================
 
-  // Activate
+  // Call all initialization functions here
   pageLoader();
   scrollAnimations();
   initTicker();
@@ -244,23 +270,6 @@ document.addEventListener("DOMContentLoaded", () => {
   handleContactForm();
   initNotesPage();
   initParallax();
-});
-
-// Scroll Progress Bar
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
-  const scrollPercent = (scrollTop / docHeight) * 100;
-  const progressBar = document.getElementById('progressBar');
-  if (progressBar) progressBar.style.width = `${scrollPercent}%`;
-});
-
-// Back to Top Button
-const backToTopBtn = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 400) backToTopBtn?.classList.add('show');
-  else backToTopBtn?.classList.remove('show');
-});
-backToTopBtn?.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  initScrollProgressBar();
+  initBackToTopBtn();
 });
