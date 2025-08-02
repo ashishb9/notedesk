@@ -1533,3 +1533,33 @@ nav ul {
 .read-more-link:hover {
     color: var(--text-primary);
 }
+/* --- About Page Specific Styles --- */
+.about-main-content p,
+.about-main-content li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.profile-card p {
+    color: var(--text-secondary);
+}
+
+.profile-card .socials a {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.profile-card .socials a i {
+    margin-right: 6px;
+}
+
+.about-main-content h3 {
+    margin-top: 1.8rem;
+}
+
+.about-main-content ul li {
+    margin-bottom: 8px;
+}
