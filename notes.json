@@ -224,5 +224,592 @@
         ]
       }
     ]
+  },
+  [
+  {
+    "id": 11,
+    "category": "windows",
+    "title": "Windows Update Stuck on 'Checking for Updates'",
+    "problem": "Windows Update seems to hang indefinitely without finding updates.",
+    "fixes": [
+      {
+        "title": "Method 1: Run the Windows Update Troubleshooter",
+        "steps": [
+          "Go to Settings > Update & Security > Troubleshoot > Additional troubleshooters.",
+          "Select 'Windows Update' and click 'Run the troubleshooter'. This will automatically detect and fix common issues."
+        ]
+      },
+      {
+        "title": "Method 2: Manually Reset Windows Update Components",
+        "steps": [
+          "Open Command Prompt as an administrator.",
+          "Type the following commands one by one, pressing Enter after each:",
+          "<code>net stop wuauserv</code>",
+          "<code>net stop cryptSvc</code>",
+          "<code>net stop bits</code>",
+          "<code>net stop msiserver</code>",
+          "Then, rename the SoftwareDistribution and Catroot2 folders:",
+          "<code>ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old</code>",
+          "<code>ren C:\\Windows\\System32\\catroot2 Catroot2.old</code>",
+          "Finally, restart the services:",
+          "<code>net start wuauserv</code>",
+          "<code>net start cryptSvc</code>",
+          "<code>net start bits</code>",
+          "<code>net start msiserver</code>",
+          "Restart your computer and try Windows Update again."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "category": "linux",
+    "title": "Troubleshooting a Failed Systemd Service",
+    "problem": "A crucial service failed to start or is not running correctly.",
+    "fixes": [
+      {
+        "title": "Method 1: Check the Service Status and Logs",
+        "steps": [
+          "Use <code>systemctl status service_name.service</code> to get a detailed status report, including error messages.",
+          "Examine the service's logs for clues with <code>journalctl -u service_name.service</code>. The <code>-f</code> flag can be used to follow the logs in real-time."
+        ]
+      },
+      {
+        "title": "Method 2: Debug with Systemd's 'Blame' Command",
+        "steps": [
+          "To identify slow-starting services that might be causing a cascade of failures, use <code>systemd-analyze blame</code>.",
+          "This command lists all services and their startup times, helping you pinpoint the root cause of a slow or failed boot."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "category": "web",
+    "title": "Implementing a Service Worker",
+    "problem": "How to make a web app work offline and be a Progressive Web App (PWA).",
+    "fixes": [
+      {
+        "title": "Method 1: Register the Service Worker",
+        "steps": [
+          "Create a `service-worker.js` file with your caching logic.",
+          "In your main JavaScript file, add code to register the service worker:",
+          "<code>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/service-worker.js'); }</code>",
+          "This tells the browser to start the service worker in the background."
+        ]
+      },
+      {
+        "title": "Method 2: Use a Workbox Library",
+        "steps": [
+          "Workbox is a set of libraries that simplifies common service worker tasks.",
+          "Use a tool like `workbox-cli` or `workbox-webpack-plugin` to generate your service worker file, which can automate caching strategies and pre-caching."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "category": "dev",
+    "title": "Setting up a Docker Development Environment",
+    "problem": "How to create a consistent and isolated development environment using Docker.",
+    "fixes": [
+      {
+        "title": "Method 1: Create a Dockerfile",
+        "steps": [
+          "Create a `Dockerfile` in your project root.",
+          "Use instructions like `FROM`, `RUN`, `COPY`, and `EXPOSE` to define the base image, dependencies, and environment for your application.",
+          "Build the image with <code>docker build -t my-app-image .</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Use Docker Compose",
+        "steps": [
+          "Create a `docker-compose.yml` file to define and run multi-container Docker applications.",
+          "Use this file to link services (e.g., a web server and a database) and manage their configuration.",
+          "Run everything with a single command: <code>docker-compose up</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "category": "cybersecurity",
+    "title": "Understanding Public Key Encryption",
+    "problem": "How to use public/private key pairs for secure communication.",
+    "fixes": [
+      {
+        "title": "Method 1: Generate a Key Pair",
+        "steps": [
+          "Use a tool like `ssh-keygen` to generate a new key pair with <code>ssh-keygen -t rsa -b 4096</code>.",
+          "This creates a private key (e.g., `id_rsa`) and a public key (e.g., `id_rsa.pub`). Never share your private key."
+        ]
+      },
+      {
+        "title": "Method 2: Use Keys for Authentication",
+        "steps": [
+          "To securely log into a remote server, copy your public key to the server using <code>ssh-copy-id user@host</code>.",
+          "The server will then verify your identity using your private key without needing a password."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "category": "productivity",
+    "title": "Automating Repetitive Tasks with Scripts",
+    "problem": "I have to do the same task every day; how can I automate it?",
+    "fixes": [
+      {
+        "title": "Method 1: Use Shell Scripts (Bash/PowerShell)",
+        "steps": [
+          "Identify the commands you run repeatedly (e.g., `git status`, `npm run build`).",
+          "Group these commands into a `.sh` or `.ps1` file.",
+          "Execute the script with a single command, such as <code>./my-script.sh</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Use Python for Complex Automation",
+        "steps": [
+          "For more complex tasks involving file manipulation, data processing, or web scraping, Python is an excellent choice.",
+          "Libraries like `os` and `subprocess` can be used to interact with the system and run other programs."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "category": "windows",
+    "title": "Fixing Corrupted User Profiles",
+    "problem": "Cannot log in or user profile is a temporary profile.",
+    "fixes": [
+      {
+        "title": "Method 1: Registry Fix (Advanced)",
+        "steps": [
+          "Boot into Safe Mode and open the Registry Editor (`regedit`).",
+          "Navigate to <code>HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList</code>.",
+          "Find the S-1-5 entry that has a `.bak` extension. Delete the entry without `.bak` and rename the `.bak` entry to remove the extension.",
+          "Restart your computer."
+        ]
+      },
+      {
+        "title": "Method 2: Create a New User Profile",
+        "steps": [
+          "If the registry method fails, create a new local user account.",
+          "Copy your data from the old user profile's folders (e.g., Desktop, Documents) to the new user's folders.",
+          "This is a more straightforward but less permanent fix."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "category": "linux",
+    "title": "Building and Installing from Source",
+    "problem": "Software is not available in official repositories; how do I install it?",
+    "fixes": [
+      {
+        "title": "Method 1: The 'Classic' Steps",
+        "steps": [
+          "Download the source code archive (e.g., a `.tar.gz` file).",
+          "Extract the archive and navigate to the directory.",
+          "Run the commands: <code>./configure</code>, then <code>make</code>, then <code>sudo make install</code>.",
+          "Read the `README` file for any special instructions, as these steps can vary."
+        ]
+      },
+      {
+        "title": "Method 2: Check for a Dedicated Build Tool",
+        "steps": [
+          "Many projects have a specific build tool (e.g., `cmake`, `meson`, `cargo`).",
+          "Always check the project's documentation for the recommended way to build and install their software."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "category": "web",
+    "title": "Troubleshooting Webpack Configuration",
+    "problem": "Webpack build fails or bundles are not being created correctly.",
+    "fixes": [
+      {
+        "title": "Method 1: Check the Webpack Config File",
+        "steps": [
+          "Review your `webpack.config.js` file for syntax errors or incorrect paths.",
+          "Ensure that your `entry`, `output`, `loaders`, and `plugins` are all configured correctly for your project.",
+          "Look for common mistakes like missing file extensions or incorrect regex patterns."
+        ]
+      },
+      {
+        "title": "Method 2: Use the `--json` Flag for Debugging",
+        "steps": [
+          "Run <code>webpack --json > stats.json</code> to generate a detailed JSON file of the build process.",
+          "Analyze the `stats.json` file for errors and warnings. You can use a tool like `webpack-bundle-analyzer` to visualize the output and find oversized files."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "category": "dev",
+    "title": "Setting up SSH with VS Code Remote Development",
+    "problem": "How to connect VS Code to a remote Linux server for coding.",
+    "fixes": [
+      {
+        "title": "Method 1: Configure SSH Keys",
+        "steps": [
+          "Ensure you have an SSH key pair set up on your local machine.",
+          "Copy your public key to the remote server's `~/.ssh/authorized_keys` file."
+        ]
+      },
+      {
+        "title": "Method 2: Configure VS Code's `settings.json`",
+        "steps": [
+          "Install the 'Remote - SSH' extension in VS Code.",
+          "Open the command palette (Ctrl+Shift+P) and search for 'Remote-SSH: Open Configuration File'.",
+          "Add a new host entry with the details of your remote server, including the hostname, user, and path to your private key."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "category": "cybersecurity",
+    "title": "Using Wireshark for Network Analysis",
+    "problem": "How to capture and analyze network traffic to debug issues or find vulnerabilities.",
+    "fixes": [
+      {
+        "title": "Method 1: Capture Packets",
+        "steps": [
+          "Open Wireshark and select the network interface you want to monitor (e.g., Ethernet, WiFi).",
+          "Click the 'Start capturing packets' button.",
+          "Perform the actions on your computer that you want to analyze (e.g., visit a website, run a command)."
+        ]
+      },
+      {
+        "title": "Method 2: Filter the Traffic",
+        "steps": [
+          "Wireshark captures a lot of data, so you'll need to filter it. Use the filter bar at the top.",
+          "Examples: `ip.addr == 192.168.1.1` to filter by IP, or `tcp.port == 80` to filter by a specific port.",
+          "You can also use protocols like `http`, `dns`, or `ssl` to narrow your search."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "category": "productivity",
+    "title": "Advanced Git Rebase Workflow",
+    "problem": "How to clean up your commit history before merging a branch.",
+    "fixes": [
+      {
+        "title": "Method 1: Interactive Rebase",
+        "steps": [
+          "Start an interactive rebase with <code>git rebase -i HEAD~N</code>, where N is the number of commits you want to edit.",
+          "In the editor, change `pick` to `squash` for commits you want to combine, or `reword` to change a commit message.",
+          "Save and close the editor. Git will then combine or edit your commits."
+        ]
+      },
+      {
+        "title": "Method 2: The 'Fixup' Command",
+        "steps": [
+          "Use <code>git commit --amend --no-edit</code> to add a change to the previous commit without changing the message.",
+          "For a more advanced workflow, use `git rebase -i --autosquash` with a `git commit --fixup` to automatically combine commits."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "category": "windows",
+    "title": "Using the Windows Subsystem for Linux (WSL)",
+    "problem": "How to run Linux command-line tools on a Windows machine.",
+    "fixes": [
+      {
+        "title": "Method 1: Install WSL and a Distribution",
+        "steps": [
+          "Open PowerShell as an administrator and run <code>wsl --install</code>.",
+          "This command will enable the necessary features and install a default Linux distribution (e.g., Ubuntu).",
+          "You can then install other distributions from the Microsoft Store."
+        ]
+      },
+      {
+        "title": "Method 2: Use VS Code with WSL",
+        "steps": [
+          "Install the 'Remote - WSL' extension in VS Code.",
+          "This allows you to open a project folder in WSL and have VS Code run completely inside your Linux environment, giving you full access to Linux tools and terminal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "category": "linux",
+    "title": "Managing Disk Space with `du` and `df`",
+    "problem": "My disk is full, and I need to find out what is taking up space.",
+    "fixes": [
+      {
+        "title": "Method 1: Check Total Disk Usage",
+        "steps": [
+          "Use <code>df -h</code> to view the total disk usage for all mounted filesystems in a human-readable format.",
+          "This will show you which partitions are nearing capacity."
+        ]
+      },
+      {
+        "title": "Method 2: Find Large Files/Directories",
+        "steps": [
+          "Use <code>du -h --max-depth=1</code> to show the total size of each folder in the current directory.",
+          "You can use this command recursively (by omitting `--max-depth`) to find the largest files and directories, helping you free up space."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "category": "web",
+    "title": "Debugging a 500 Internal Server Error",
+    "problem": "The server returns an unspecified error, making it hard to debug.",
+    "fixes": [
+      {
+        "title": "Method 1: Check Server Logs",
+        "steps": [
+          "The first place to look is always the server's error logs.",
+          "For Apache, check the `error.log`. For Nginx, check the `error.log`. For Node.js, check the console output or a log file.",
+          "The logs will almost always provide a specific error message and line number."
+        ]
+      },
+      {
+        "title": "Method 2: Enable Verbose Error Reporting",
+        "steps": [
+          "In a development environment, temporarily enable verbose error reporting (e.g., `display_errors` in PHP).",
+          "This will show the full error message in the browser, which can be invaluable for debugging."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "category": "dev",
+    "title": "Using `nvm` for Node.js Version Management",
+    "problem": "Need to switch between different Node.js versions for various projects.",
+    "fixes": [
+      {
+        "title": "Method 1: Install and Switch Versions",
+        "steps": [
+          "Install nvm with the official install script from GitHub.",
+          "To install a specific version, use <code>nvm install 16.14.0</code>.",
+          "To switch to that version, use <code>nvm use 16.14.0</code>. You can also set a default version."
+        ]
+      },
+      {
+        "title": "Method 2: `.nvmrc` for Project-Specific Versions",
+        "steps": [
+          "In your project's root directory, create a file named `.nvmrc`.",
+          "Add the desired Node.js version number to this file (e.g., `18.12.0`).",
+          "When you run <code>nvm use</code> in that directory, it will automatically switch to the version specified in the file."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "category": "cybersecurity",
+    "title": "Setting Up a Secure VPN with WireGuard",
+    "problem": "How to create a fast and secure personal VPN on your own server.",
+    "fixes": [
+      {
+        "title": "Method 1: Server and Client Configuration",
+        "steps": [
+          "Install WireGuard on your Linux server.",
+          "Generate public/private keys for both the server and your client device.",
+          "Configure the server's `wg0.conf` file with the server's IP, port, and the client's public key.",
+          "Configure the client's `wg0.conf` with the client's private key, the server's public key, and the server's IP address."
+        ]
+      },
+      {
+        "title": "Method 2: Use a Setup Script",
+        "steps": [
+          "There are many community-driven scripts that can automate the entire WireGuard setup process.",
+          "These scripts handle key generation, firewall rules, and the initial configuration for you, making the process much easier."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "category": "productivity",
+    "title": "Advanced Markdown for Technical Documentation",
+    "problem": "How to use Markdown to create clean, readable technical documents.",
+    "fixes": [
+      {
+        "title": "Method 1: Use Code Blocks and Fenced Code",
+        "steps": [
+          "For inline code, wrap text in single backticks: <code>`code here`</code>.",
+          "For multi-line code blocks, use three backticks (```) with the language name for syntax highlighting."
+        ]
+      },
+      {
+        "title": "Method 2: Create Tables and Blockquotes",
+        "steps": [
+          "Create tables using pipes (`|`) and hyphens (`-`) to organize data effectively.",
+          "Use the greater-than symbol (`>`) at the start of a line to create a blockquote for emphasizing text."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "category": "windows",
+    "title": "Using PowerShell for System Administration",
+    "problem": "How to automate tasks and manage your system with PowerShell.",
+    "fixes": [
+      {
+        "title": "Method 1: Run a Simple Command",
+        "steps": [
+          "Open PowerShell as an administrator.",
+          "Use commands like <code>Get-Service</code> to list running services or <code>Get-Process</code> to see current processes."
+        ]
+      },
+      {
+        "title": "Method 2: Create and Execute a PowerShell Script",
+        "steps": [
+          "Create a `.ps1` file with a sequence of commands.",
+          "By default, Windows blocks script execution. Run <code>Set-ExecutionPolicy RemoteSigned</code> to enable scripts you've created."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "category": "linux",
+    "title": "Troubleshooting SSH Connection Issues",
+    "problem": "Cannot connect to a remote server via SSH.",
+    "fixes": [
+      {
+        "title": "Method 1: Use Verbose Mode",
+        "steps": [
+          "Run your SSH command with the `-v` flag: <code>ssh -v user@host</code>.",
+          "The verbose output will show you exactly where the connection is failing, such as a permissions issue or a firewall block."
+        ]
+      },
+      {
+        "title": "Method 2: Check Firewall Settings",
+        "steps": [
+          "On the server, ensure that the SSH port (default 22) is open and not blocked by a firewall like `ufw` or `firewalld`.",
+          "On the client, check if a local firewall is blocking the outbound connection."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "category": "web",
+    "title": "Optimizing Website Performance",
+    "problem": "My website is slow, and I want to improve its loading speed.",
+    "fixes": [
+      {
+        "title": "Method 1: Minify and Bundle Assets",
+        "steps": [
+          "Use tools like Webpack or Parcel to minify your JavaScript and CSS files.",
+          "Combine multiple files into a single bundle to reduce the number of HTTP requests."
+        ]
+      },
+      {
+        "title": "Method 2: Optimize Images",
+        "steps": [
+          "Compress images without losing quality using tools like TinyPNG or `imagemin`.",
+          "Use modern image formats like WebP or AVIF.",
+          "Lazy-load images that are not in the initial viewport to speed up the initial page load."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "category": "dev",
+    "title": "Using Git Hooks for Automated Tasks",
+    "problem": "How to run scripts automatically before a commit or after a push.",
+    "fixes": [
+      {
+        "title": "Method 1: Configure a Pre-Commit Hook",
+        "steps": [
+          "Navigate to the `.git/hooks` directory in your repository.",
+          "Create a file named `pre-commit` (without an extension) and add your script. Make it executable with <code>chmod +x pre-commit</code>.",
+          "This script will run every time you run `git commit`."
+        ]
+      },
+      {
+        "title": "Method 2: Use a Hook Manager",
+        "steps": [
+          "Libraries like `Husky` for Node.js projects simplify Git hook management.",
+          "They allow you to easily define scripts in your `package.json` and automatically manage the hooks without manual file editing."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "category": "cybersecurity",
+    "title": "Scanning for Vulnerabilities with Nmap",
+    "problem": "How to use Nmap to discover open ports and services on a network.",
+    "fixes": [
+      {
+        "title": "Method 1: Simple Port Scan",
+        "steps": [
+          "Run a basic scan with <code>nmap target_ip</code> to see what ports are open.",
+          "Use the `-sV` flag to get service and version information for each open port."
+        ]
+      },
+      {
+        "title": "Method 2: Use Nmap Scripts",
+        "steps": [
+          "Nmap has a powerful scripting engine (NSE) for more advanced scans.",
+          "Use <code>nmap -sC -sV target_ip</code> to run default scripts and get detailed information about services, vulnerabilities, and more."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "category": "productivity",
+    "title": "Mastering the Command Line with Aliases",
+    "problem": "How to create shortcuts for long or frequently used commands.",
+    "fixes": [
+      {
+        "title": "Method 1: Create a Simple Alias",
+        "steps": [
+          "In your terminal, use <code>alias ll='ls -alF'</code> to create a temporary alias.",
+          "To make it permanent, add the line to your shell's configuration file (e.g., `~/.bashrc` or `~/.zshrc`)."
+        ]
+      },
+      {
+        "title": "Method 2: Use a Function for More Power",
+        "steps": [
+          "For more complex aliases with parameters, create a shell function.",
+          "For example, a function that creates a new directory and moves you into it: <code>mkcd() { mkdir \"$1\" && cd \"$1\"; }</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "category": "windows",
+    "title": "Using DISM to Repair Windows Image",
+    "problem": "System File Checker (sfc /scannow) fails to fix corrupted files.",
+    "fixes": [
+      {
+        "title": "Method 1: Check Health",
+        "steps": [
+          "Open Command Prompt as an administrator.",
+          "Run <code>DISM /Online /Cleanup-Image /CheckHealth</code> to check for component store corruption."
+        ]
+      },
+      {
+        "title": "Method 2: Restore Health",
+        "steps": [
+          "If issues are found, run <code>DISM /Online /Cleanup-Image /RestoreHealth</code>.",
+          "This command uses Windows Update to repair the local system image. After it completes, run <code>sfc /scannow</code> again."
+        ]
+      }
+    ]
   }
 ]
