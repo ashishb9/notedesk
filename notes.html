@@ -149,4 +149,22 @@
   <script src="script.js"></script>
 </body>
 </html>
+<div class="modal-overlay" id="noteModalOverlay">
+  <div class="modal-content" id="noteModalContent">
+    <div class="modal-header">
+      <h3 id="modalTitle"></h3>
+      <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Problem:</strong> <span id="modalProblem"></span></p>
+      <div class="modal-fixes">
+        <p><strong>Fix 1:</strong> <span id="modalFix1"></span></p>
+        <p><strong>Fix 2:</strong> <span id="modalFix2"></span></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="fix-details.html" class="bookmark-link"><i class="fa-solid fa-bookmark"></i> Read More</a>
+    </div>
+  </div>
+</div>
 
