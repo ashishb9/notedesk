@@ -487,6 +487,31 @@ h2 {
   background-color: rgba(245, 245, 245, 0.95);
 }
 
+/* Styling to make the explore links look like buttons */
+.explore .topics a {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-color);
+    text-decoration: none; /* This removes the underline */
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.explore .topics a:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-5px);
+}
+
+.explore .topics a i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
 /* === Fixed Background & Ticker Behavior === */
 .news-ticker {
   overflow: hidden;
@@ -1506,3 +1531,4 @@ nav.scrolled {
   background-color: var(--bg-primary);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
