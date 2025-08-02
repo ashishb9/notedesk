@@ -310,10 +310,3 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
-
-
-
-
-
-
-
