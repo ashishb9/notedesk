@@ -112,32 +112,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const notesGrid = document.getElementById('notesGrid');
     if (!notesGrid) return;
 
-    const modal = document.getElementById('noteModal');
+    const modalOverlay = document.getElementById('noteModalOverlay');
     const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
+    const modalProblem = document.getElementById('modalProblem');
+    const modalFix1 = document.getElementById('modalFix1');
+    const modalFix2 = document.getElementById('modalFix2');
+    const closeModalBtn = document.getElementById('closeModalBtn');
     const searchInput = document.getElementById('notes-search');
     const categoryButtons = document.querySelectorAll('.category-filters button');
-    const bookmarkBtn = document.getElementById('bookmarkBtn');
 
     notesGrid.addEventListener('click', e => {
       const noteCard = e.target.closest('.note-card');
       if (!noteCard) return;
-      modalTitle.textContent = noteCard.querySelector('h3').textContent;
-      // Use existing inner HTML for snippet
-      modalContent.innerHTML = '<div>' + noteCard.querySelector('p').outerHTML + '</div>';
-      bookmarkBtn.dataset.id = ''; // no id logic for manual cards
-      modal.style.display = 'flex';
-      document.body.classList.add('modal-open');
+
+      const title = noteCard.getAttribute('data-title');
+      const problem = noteCard.getAttribute('data-problem');
+      const fix1 = noteCard.getAttribute('data-fix1');
+      const fix2 = noteCard.getAttribute('data-fix2');
+
+      modalTitle.textContent = title;
+      modalProblem.textContent = problem;
+      modalFix1.textContent = fix1;
+      modalFix2.textContent = fix2;
+      
+      modalOverlay.classList.add('active');
     });
 
-    document.querySelector('.close-modal')?.addEventListener('click', closeModal);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+    closeModalBtn.addEventListener('click', () => {
+      modalOverlay.classList.remove('active');
     });
-    function closeModal() {
-      modal.style.display = 'none';
-      document.body.classList.remove('modal-open');
-    }
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+      }
+    });
 
     // Search Filter: filter visible note-cards
     searchInput?.addEventListener('input', e => {
