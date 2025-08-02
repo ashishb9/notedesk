@@ -1506,21 +1506,16 @@ nav ul {
   border-radius: 4px;
 }
 
-.read-more-btn {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
+/* Style for the Read More link */
+.read-more-link {
+    display: block; /* Makes it take its own line */
     margin-top: 20px;
-    transition: background-color 0.3s ease;
+    color: #008080; /* The color you requested */
+    font-weight: 600;
+    text-decoration: underline; /* Add an underline for clarity */
+    transition: color 0.3s ease;
 }
 
-.read-more-btn:hover {
-    background-color: #006666;
+.read-more-link:hover {
+    color: #00cccc; /* Slightly different color on hover */
 }
-
-
-
