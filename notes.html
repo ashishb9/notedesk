@@ -7,16 +7,25 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" href="img/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="img/favicon.png">
-<meta name="msapplication-TileImage" content="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <meta name="msapplication-TileImage" content="img/favicon.png">
   <meta name="description" content="Browse categorized tech notes and solutions">
+
+  <style>
+    .read-more {
+      color: #008080;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .read-more:hover {
+      text-decoration: underline;
+      color: #009999;
+    }
+  </style>
 </head>
 <body>
-  <!-- Scroll Progress Bar -->
-<div class="progress-bar" id="progressBar"></div>
-
-<!-- Back to Top Button -->
-<button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
+  <div class="progress-bar" id="progressBar"></div>
+  <button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
 
   <div class="page-loader">
     <div class="loader-logo">
@@ -25,22 +34,22 @@
   </div>
 
   <header class="hero notes-hero">
-   <nav>
-  <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-  <ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="notes.html" class="active">Notes</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-</ul>
-  <div class="theme-toggle">
-  <i id="theme-icon" class="fas fa-sun"></i>
-  <div class="toggle-switch">
-    <input type="checkbox" id="theme-switch">
-    <label for="theme-switch"></label>
-  </div>
-</div>
-</nav>
+    <nav>
+      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html" class="active">Notes</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="theme-toggle">
+        <i id="theme-icon" class="fas fa-sun"></i>
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-switch">
+          <label for="theme-switch"></label>
+        </div>
+      </div>
+    </nav>
     <div class="hero-content">
       <h1>Tech Notes Collection</h1>
       <p>Instant access to categorized solutions</p>
@@ -61,7 +70,6 @@
     </div>
 
     <div class="notes-grid" id="notesGrid">
-      <!-- Notes will be dynamically generated -->
      <div class="note-card" data-category="windows">
   <h3><i class="fa-solid fa-gear"></i> Task Manager Not Opening</h3>
   <p><strong>Problem:</strong> Clicking Task Manager shows nothing or crashes.</p>
@@ -142,16 +150,16 @@
   <a href="note-weather.html" class="read-more">Read More</a>
 </div> 
     </div>
-
   </section>
-<div class="note-modal" id="noteModal">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h3 id="modalTitle"></h3>
-    <div id="modalContent"></div>
-    <button class="bookmark-btn" id="bookmarkBtn"><i class="far fa-bookmark"></i> Bookmark</button>
+
+  <div class="note-modal" id="noteModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <div id="modalContent"></div>
+      <button class="bookmark-btn" id="bookmarkBtn"><i class="far fa-bookmark"></i> Bookmark</button>
+    </div>
   </div>
-</div>
 
   <footer>
     <div class="footer-content">
@@ -178,7 +186,6 @@
     </div>
   </footer>
 
- <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
