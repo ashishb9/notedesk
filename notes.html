@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes | NoteDesk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <meta name="msapplication-TileImage" content="img/favicon.png">
+  <meta name="description" content="Browse categorized tech notes and solutions">
+
+  <style>
+    .read-more {
+      color: #008080;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .read-more:hover {
+      text-decoration: underline;
+      color: #009999;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <button class="back-to-top" id="backToTop" title="Back to Top">↑</button>
+
+  <div class="page-loader">
+    <div class="loader-logo">
+      <i class="fa-solid fa-laptop"></i> NoteDesk
+    </div>
+  </div>
+
+  <header class="hero notes-hero">
+    <nav>
+      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html" class="active">Notes</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="theme-toggle">
+        <i id="theme-icon" class="fas fa-sun"></i>
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-switch">
+          <label for="theme-switch"></label>
+        </div>
+      </div>
+    </nav>
+    <div class="hero-content">
+      <h1>Tech Notes Collection</h1>
+      <p>Instant access to categorized solutions</p>
+    </div>
+  </header>
+
+  <section class="notes-container js-scroll">
+    <div class="notes-controls">
+      <input type="text" id="notes-search" placeholder="🔍 Search notes..." class="search-bar">
+      <div class="category-filters">
+        <button class="active" data-category="all">All</button>
+        <button data-category="windows">Windows</button>
+        <button data-category="linux">Linux</button>
+        <button data-category="web">Web</button>
+        <button data-category="mobile">Mobile</button>
+        <button data-category="productivity">Productivity</button>
+      </div>
+    </div>
+
+    <div class="notes-grid" id="notesGrid">
+     <div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-gear"></i> Task Manager Not Opening</h3>
+  <p><strong>Problem:</strong> Clicking Task Manager shows nothing or crashes.</p>
+  <p><strong>Fix 1:</strong> Press <code>Ctrl + Shift + Esc</code> directly.</p>
+  <p><strong>Fix 2:</strong> Run <code>sfc /scannow</code> in CMD (Admin).</p>
+  <a href="note-taskmgr.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-wifi"></i> WiFi Connected but No Internet</h3>
+  <p><strong>Problem:</strong> WiFi shows connected but websites don't load.</p>
+  <p><strong>Fix 1:</strong> Run <code>netsh winsock reset</code> in CMD (Admin).</p>
+  <p><strong>Fix 2:</strong> Set DNS to <code>8.8.8.8</code> and <code>8.8.4.4</code>.</p>
+  <a href="note-wifi.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-folder-open"></i> File Explorer Not Responding</h3>
+  <p><strong>Problem:</strong> Explorer.exe hangs or crashes often.</p>
+  <p><strong>Fix 1:</strong> End all "Windows Explorer" tasks and restart it.</p>
+  <p><strong>Fix 2:</strong> Disable Quick Access recent files.</p>
+  <a href="note-explorer.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-volume-high"></i> No Sound After Update</h3>
+  <p><strong>Problem:</strong> System has no audio after Windows Update.</p>
+  <p><strong>Fix 1:</strong> Set the correct output device in sound settings.</p>
+  <p><strong>Fix 2:</strong> Roll back or update the audio driver.</p>
+  <a href="note-nosound.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-clock-rotate-left"></i> System Restore Fails</h3>
+  <p><strong>Problem:</strong> System restore doesn’t complete or gives errors.</p>
+  <p><strong>Fix 1:</strong> Boot into Safe Mode and retry restore.</p>
+  <p><strong>Fix 2:</strong> Disable antivirus temporarily.</p>
+  <a href="note-restore.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-circle-exclamation"></i> Windows Update Error 0x80070005</h3>
+  <p><strong>Problem:</strong> Update fails with error 0x80070005 (permission denied).</p>
+  <p><strong>Fix 1:</strong> Run Windows Update Troubleshooter.</p>
+  <p><strong>Fix 2:</strong> Reset Windows Update components via script.</p>
+  <a href="note-updateerror.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-power-off"></i> Laptop Not Shutting Down</h3>
+  <p><strong>Problem:</strong> Clicking Shut Down just restarts or hangs.</p>
+  <p><strong>Fix 1:</strong> Disable Fast Startup in Power Options.</p>
+  <p><strong>Fix 2:</strong> Use <code>shutdown /s /f /t 0</code> via CMD.</p>
+  <a href="note-shutdown.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-microchip"></i> High CPU Usage (System Idle)</h3>
+  <p><strong>Problem:</strong> Task Manager shows high CPU but system is idle.</p>
+  <p><strong>Fix 1:</strong> Ignore "System Idle Process" – it’s normal.</p>
+  <p><strong>Fix 2:</strong> Check background tasks causing real spikes.</p>
+  <a href="note-cpuusage.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-keyboard"></i> Keyboard Not Working in Login</h3>
+  <p><strong>Problem:</strong> Can’t type anything on login screen.</p>
+  <p><strong>Fix 1:</strong> Use on-screen keyboard to log in and reinstall driver.</p>
+  <p><strong>Fix 2:</strong> Boot into Safe Mode and test keyboard.</p>
+  <a href="note-keyboard.html" class="read-more">Read More</a>
+</div>
+
+<div class="note-card" data-category="windows">
+  <h3><i class="fa-solid fa-cloud-sun"></i> Weather Widget Missing</h3>
+  <p><strong>Problem:</strong> News & Interests bar or weather icon disappeared.</p>
+  <p><strong>Fix 1:</strong> Right-click taskbar → Enable News & Interests.</p>
+  <p><strong>Fix 2:</strong> Restart Windows Explorer or sign out/in.</p>
+  <a href="note-weather.html" class="read-more">Read More</a>
+</div> 
+    </div>
+  </section>
+
+  <div class="note-modal" id="noteModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <div id="modalContent"></div>
+      <button class="bookmark-btn" id="bookmarkBtn"><i class="far fa-bookmark"></i> Bookmark</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3>About NoteDesk</h3>
+        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
+        No fluff. Just useful, real-world notes.</p>
+      </div>
+      <div>
+        <h3>Useful Pages</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 NoteDesk. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
