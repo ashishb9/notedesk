@@ -19,6 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Add background to nav on scroll
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
   // ===================================
   // 2. UTILITY FUNCTIONS
   // ===================================
@@ -286,3 +296,4 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
+
