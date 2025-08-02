@@ -1011,40 +1011,6 @@ footer {
   display: none;
 }
 
-.bookmark-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-}
-
-.bookmark-icon.active {
-  color: var(--accent-color);
-}
-
-.bookmark-icon:hover {
-  transform: scale(1.2);
-}
-
-.bookmark-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.bookmark-btn:hover {
-  background: #006666;
-}
-
 /* 3D Parallax Effect */
 .hero-content {
   transform-style: preserve-3d;
@@ -1555,5 +1521,6 @@ nav ul {
 .read-more-btn:hover {
     background-color: #006666;
 }
+
 
 
