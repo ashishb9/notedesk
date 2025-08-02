@@ -163,116 +163,125 @@ const scrollAnimations = () => {
     });
   };
 
-  // Notes Page: Modal, Search & Filter Behavior
   const initNotesPage = () => {
     const notesGrid = document.getElementById('notesGrid');
     if (!notesGrid) return;
     
     // Fetch data from the new JSON file
     fetch('notes.json')
-      .then(response => response.json())
-      .then(notesData => {
-        const modalOverlay = document.getElementById('noteModalOverlay');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalProblem = document.getElementById('modalProblem');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const searchInput = document.getElementById('notes-search');
-        const categoryButtons = document.querySelectorAll('.category-filters button');
-        const modalFixesContainer = document.querySelector('.modal-fixes');
+        .then(response => response.json())
+        .then(notesData => {
+            const modalOverlay = document.getElementById('noteModalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalProblem = document.getElementById('modalProblem');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const searchInput = document.getElementById('notes-search');
+            const categoryButtons = document.querySelectorAll('.category-filters button');
+            const modalFixesContainer = document.querySelector('.modal-fixes');
 
-        const generateNoteCards = (data) => {
-          notesGrid.innerHTML = '';
-          data.forEach(note => {
-            const card = document.createElement('div');
-            card.className = 'note-card';
-            card.dataset.id = note.id;
-            card.dataset.category = note.category;
-            card.dataset.title = note.title;
-            card.innerHTML = `
-              <h3><i class="fa-solid fa-gear"></i> ${note.title}</h3>
-              <p class="card-problem"><strong>Problem:</strong> ${note.problem}</p>
-            `;
-            notesGrid.appendChild(card);
-          });
-        };
-
-        const closeModal = () => {
-          modalOverlay.classList.remove('active');
-        };
-
-        notesGrid.addEventListener('click', e => {
-          const noteCard = e.target.closest('.note-card');
-          if (!noteCard) return;
-
-          const noteId = parseInt(noteCard.dataset.id);
-          const note = notesData.find(n => n.id === noteId);
-
-          if (!note) return;
-
-          modalTitle.textContent = note.title;
-          modalProblem.textContent = note.problem;
-
-          modalFixesContainer.innerHTML = '';
-          if (note.fixes && Array.isArray(note.fixes)) {
-            note.fixes.forEach(fix => {
-              const fixTitle = document.createElement('h4');
-              fixTitle.innerHTML = fix.title;
-              modalFixesContainer.appendChild(fixTitle);
-
-              const stepsList = document.createElement('ul');
-              if (fix.steps && Array.isArray(fix.steps)) {
-                fix.steps.forEach(step => {
-                  const stepItem = document.createElement('li');
-                  stepItem.innerHTML = step;
-                  stepsList.appendChild(stepItem);
+            const generateNoteCards = (data) => {
+                notesGrid.innerHTML = '';
+                data.forEach(note => {
+                    const card = document.createElement('div');
+                    card.className = 'note-card';
+                    card.dataset.id = note.id;
+                    card.dataset.category = note.category;
+                    card.dataset.title = note.title;
+                    card.innerHTML = `
+                        <h3><i class="fa-solid fa-gear"></i> ${note.title}</h3>
+                        <p class="card-problem"><strong>Problem:</strong> ${note.problem}</p>
+                    `;
+                    notesGrid.appendChild(card);
                 });
-              }
-              modalFixesContainer.appendChild(stepsList);
+            };
+
+            const closeModal = () => {
+                if (modalOverlay) modalOverlay.classList.remove('active');
+            };
+
+            notesGrid.addEventListener('click', e => {
+                const noteCard = e.target.closest('.note-card');
+                if (!noteCard) return;
+
+                const noteId = parseInt(noteCard.dataset.id);
+                const note = notesData.find(n => n.id === noteId);
+
+                if (!note) return;
+
+                if (modalTitle) modalTitle.textContent = note.title;
+                if (modalProblem) modalProblem.textContent = note.problem;
+
+                if (modalFixesContainer) {
+                    modalFixesContainer.innerHTML = '';
+                    if (note.fixes && Array.isArray(note.fixes)) {
+                        note.fixes.forEach(fix => {
+                            const fixTitle = document.createElement('h4');
+                            fixTitle.innerHTML = fix.title;
+                            modalFixesContainer.appendChild(fixTitle);
+
+                            const stepsList = document.createElement('ul');
+                            if (fix.steps && Array.isArray(fix.steps)) {
+                                fix.steps.forEach(step => {
+                                    const stepItem = document.createElement('li');
+                                    stepItem.innerHTML = step;
+                                    stepsList.appendChild(stepItem);
+                                });
+                            }
+                            modalFixesContainer.appendChild(stepsList);
+                        });
+                    }
+                }
+                
+                if (modalOverlay) modalOverlay.classList.add('active');
             });
-          }
-          
-          modalOverlay.classList.add('active');
-        });
 
-        // Check that the modal elements exist before adding listeners
-if (closeModalBtn && modalOverlay) {
-  closeModalBtn.addEventListener('click', closeModal);
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      closeModal();
-    }
-  });
-}
-        document.addEventListener('keydown', e => {
-          if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-            closeModal();
-          }
-        });
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target === modalOverlay) {
+                        closeModal();
+                    }
+                });
+            }
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
 
-        searchInput?.addEventListener('input', e => {
-          const term = e.target.value.toLowerCase();
-          const filteredNotes = notesData.filter(note => 
-            note.title.toLowerCase().includes(term) ||
-            note.problem.toLowerCase().includes(term) ||
-            note.fixes.some(fix => fix.title.toLowerCase().includes(term) || fix.steps.some(step => step.toLowerCase().includes(term)))
-          );
-          generateNoteCards(filteredNotes);
+            if (searchInput) {
+                searchInput.addEventListener('input', e => {
+                    const term = e.target.value.toLowerCase();
+                    const filteredNotes = notesData.filter(note => 
+                        note.title.toLowerCase().includes(term) ||
+                        note.problem.toLowerCase().includes(term) ||
+                        (note.fixes && note.fixes.some(fix => fix.title.toLowerCase().includes(term) || (fix.steps && fix.steps.some(step => step.toLowerCase().includes(term)))))
+                    );
+                    generateNoteCards(filteredNotes);
+                });
+            }
+            
+            if (categoryButtons) {
+                categoryButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        categoryButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const category = btn.dataset.category;
+                        const filteredNotes = category === 'all' ? notesData : notesData.filter(note => note.category === category);
+                        generateNoteCards(filteredNotes);
+                    });
+                });
+            }
+            
+            // Fix: Force a click on the 'All' button to display all notes on initial load.
+            const allButton = document.querySelector('.category-filters button[data-category="all"]');
+            if (allButton) {
+                allButton.click();
+            }
         });
-
-        categoryButtons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            categoryButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const category = btn.dataset.category;
-            const filteredNotes = category === 'all' ? notesData : notesData.filter(note => note.category === category);
-            generateNoteCards(filteredNotes);
-          });
-        });
-        
-        // Fix: Force a click on the 'All' button to display all notes on initial load.
-        document.querySelector('.category-filters button[data-category="all"]').click();
-      });
-  };
+};
 
   // ===================================
   // 4. INITIALIZATION
@@ -299,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
+
 
 
 
