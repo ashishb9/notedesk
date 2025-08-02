@@ -69,28 +69,6 @@
 
 /* === END OF FILE === */
 
-/* General Body & Typography */
-:root {
-  --bg-primary: #000000;
-  --bg-secondary: #1a1a1a;
-  --text-primary: #ffffff;
-  --text-secondary: #E0E0E0;
-  --accent-color: #008080;
-  --card-bg: rgba(26, 26, 26, 0.8);
-  --border-color: rgba(255, 255, 255, 0.15);
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] {
-  --bg-primary: #f5f7fa;
-  --bg-secondary: #ffffff;
-  --text-primary: #2d3748;
-  --text-secondary: #4a5568;
-  --accent-color: #2b6cb0;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --border-color: rgba(0, 0, 0, 0.1);
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
 html {
   scroll-behavior: smooth;
 }
@@ -1421,5 +1399,6 @@ nav ul {
 .about-main-content ul li {
     margin-bottom: 8px;
 }
+
 
 
