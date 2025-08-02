@@ -234,12 +234,15 @@ const scrollAnimations = () => {
           modalOverlay.classList.add('active');
         });
 
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-          if (e.target === modalOverlay) {
-            closeModal();
-          }
-        });
+        // Check that the modal elements exist before adding listeners
+if (closeModalBtn && modalOverlay) {
+  closeModalBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      closeModal();
+    }
+  });
+}
         document.addEventListener('keydown', e => {
           if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
             closeModal();
@@ -296,6 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
+
 
 
 
