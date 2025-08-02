@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ... other existing code ...
 
     // Only fetch notes on the notes page
-    if (document.querySelector('.notes-container')) {
+    if (document.querySelector('.notes-grid')) {
         fetchAndRenderNotes();
     }
 });
@@ -334,5 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.body.classList.toggle('menu-open');
     });
 });
+
 
 
