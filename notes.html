@@ -43,24 +43,24 @@
       <p>Instant access to categorized solutions</p>
     </div>
   </header>
+  
+  <main>
+    <section class="notes-container js-scroll">
+      <div class="notes-controls">
+        <input type="text" id="notes-search" placeholder="🔍 Search notes..." class="search-bar">
+        <div class="category-filters">
+          <button class="active" data-category="all">All</button>
+          <button data-category="windows">Windows</button>
+          <button data-category="linux">Linux</button>
+          <button data-category="web">Web</button>
+          <button data-category="mobile">Mobile</button>
+          <button data-category="productivity">Productivity</button>
+        </div>
+      </div>
+      <div class="notes-grid" id="notesGrid"></div>
+    </section>
   </main>
 
-  <section class="notes-container js-scroll">
-    <div class="notes-controls">
-      <input type="text" id="notes-search" placeholder="🔍 Search notes..." class="search-bar">
-      <div class="category-filters">
-        <button class="active" data-category="all">All</button>
-        <button data-category="windows">Windows</button>
-        <button data-category="linux">Linux</button>
-        <button data-category="web">Web</button>
-        <button data-category="mobile">Mobile</button>
-        <button data-category="productivity">Productivity</button>
-      </div>
-    </div>
-
-   <div class="notes-grid" id="notesGrid">
-    </div>
-  </section>
   <footer>
     <div class="footer-content">
       <div>
@@ -84,29 +84,25 @@
     <div class="footer-bottom">
       &copy; 2025 NoteDesk. All rights reserved.
     </div>
-    </main>
   </footer>
+
+  <div class="modal-overlay" id="noteModalOverlay">
+    <div class="modal-content" id="noteModalContent">
+      <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Problem:</strong> <span id="modalProblem"></span></p>
+        <div class="modal-fixes">
+          <p><strong>Fix 1:</strong> <span id="modalFix1"></span></p>
+          <p><strong>Fix 2:</strong> <span id="modalFix2"></span></p>
+        </div>
+        <a href="fix-details.html" class="read-more-link">View Full Solution</a>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-<div class="modal-overlay" id="noteModalOverlay">
-  <div class="modal-content" id="noteModalContent">
-    <div class="modal-header">
-      <h3 id="modalTitle"></h3>
-      <button class="close-modal-btn" id="closeModalBtn">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p><strong>Problem:</strong> <span id="modalProblem"></span></p>
-      <div class="modal-fixes">
-        <p><strong>Fix 1:</strong> <span id="modalFix1"></span></p>
-        <p><strong>Fix 2:</strong> <span id="modalFix2"></span></p>
-      </div>
-      <a href="fix-details.html" class="read-more-link">View Full Solution</a>
-    </div>
-  </div>
-</div>
-
-
-
-
