@@ -1,0 +1,3 @@
+const apiKey="0a4d93266a064206bc67158cb87d5f60";const apiUrl=`https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${apiKey}`;const newsTickerContent=document.getElementById("news-ticker-content");async function fetchNews(){try{const response=await fetch(apiUrl);const data=await response.json();if(data.status==="ok"){const articles=data.articles.slice(0,20);displayNews(articles)}else{console.error("Error fetching news:",data.message)}}catch(error){console.error("An error occurred:",error)}}
+function displayNews(articles){newsTickerContent.innerHTML="";for(let i=0;i<2;i++){articles.forEach(article=>{const newsItem=document.createElement("span");newsItem.textContent=` ${article.title} `;newsTickerContent.appendChild(newsItem)})}}
+fetchNews()
