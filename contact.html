@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact NoteDesk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <meta name="msapplication-TileImage" content="img/favicon.png">
+  <meta name="description" content="Contact NoteDesk for collaborations and questions">
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <button class="back-to-top" id="backToTop" title="Back to Top" aria-label="Back to Top">↑</button>
+
+  <div class="page-loader">
+    <div class="loader-logo">
+      <i class="fa-solid fa-laptop"></i> NoteDesk
+    </div>
+  </div>
+
+  <header class="hero about-hero">
+    <nav>
+      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="theme-toggle">
+        <i id="theme-icon" class="fas fa-sun"></i>
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-switch" aria-label="Toggle light and dark theme">
+          <label for="theme-switch"></label>
+        </div>
+      </div>
+    </nav>
+    <div class="hero-content">
+      <h1>Get in Touch</h1>
+      <p>Reach out for collaborations, questions, or just to say hello!</p>
+    </div>
+  </header>
+  
+  <main>
+    <div class="about-page-container">
+      <aside class="profile-card">
+        <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='img/placeholder.jpg'" />
+        <h2>Ashish B</h2>
+        <p>Support Engineer & Tech Enthusiast</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/ashishb9" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </aside>
+
+      <div class="about-main-content">
+        <div class="contact-form-container">
+          <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); showSuccessMessage();">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
+            </div>
+            <button type="submit" class="form-submit-btn">Send Message</button>
+          </form>
+
+          <div id="formSuccess" class="form-success-message" style="display:none;">
+            <i class="fas fa-check-circle"></i>
+            <p>Message sent! I'll get back to you soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3>About NoteDesk</h3>
+        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
+        No fluff. Just useful, real-world notes.</p>
+      </div>
+      <div>
+        <h3>Useful Pages</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 NoteDesk. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
