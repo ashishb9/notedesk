@@ -73,9 +73,6 @@
 }
 
 /* === Existing CSS continues === */
-/* Leave the rest of your CSS exactly as-is from the version you pasted above */
-
-/* === END OF FILE === */
 
 html {
   scroll-behavior: smooth;
@@ -505,7 +502,7 @@ h2 {
     align-items: center;
     gap: 1rem;
     color: var(--text-color);
-    text-decoration: none; /* This removes the underline */
+    text-decoration: none;
     font-size: 1.1rem;
     transition: all 0.3s ease;
 }
@@ -529,55 +526,15 @@ h2 {
   border-bottom: none;
   max-width: 1200px;
   margin: 0 auto;
-  overflow: hidden; /* Keep this to hide content outside the box */
-
-  /* Flexbox settings for proper alignment */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 15px; /* Adds space between the heading and the ticker */
+  gap: 15px;
 }
 
-/* On light theme, just change the background */
 [data-theme="light"] .news-ticker {
   background-color: rgba(255, 255, 255, 0.9);
-}
-
-.ticker {
-  display: flex;
-  white-space: nowrap;
-  animation: ticker-scroll 140s linear infinite; /* Adjust this speed value */
-  gap: 60px;
-  font-weight: 500;
-  font-size: 1em;
-  animation-play-state: running;
-  width: max-content;
-  
-  /* The position properties are removed to fix alignment */
-}
-
-.ticker:hover {
-  animation-play-state: paused;
-}
-
-.ticker span {
-  display: inline-block;
-  color: var(--text-primary);
-}
-
-.ticker span:not(:last-child)::after {
-  content: "•";
-  color: var(--accent-color);
-  margin-left: 20px;
-}
-
-@keyframes ticker-scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(calc(-100% / 2));
-  }
 }
 
 /* Footer */
@@ -979,10 +936,8 @@ footer {
   overflow: hidden;
   transform-style: preserve-3d;
   perspective: 1000px;
-  
   display: flex;
   flex-direction: column;
-  /* Key change: height is now auto to fit content */
   height: auto;
 }
 
@@ -994,7 +949,7 @@ footer {
 
 .note-card h3 {
   margin-top: 0;
-  font-size: 1.2em; /* 🔹 Title size */
+  font-size: 1.2em;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 10px;
@@ -1002,7 +957,7 @@ footer {
 
 .note-card p {
   color: var(--text-secondary);
-  font-size: 0.9em;  /* 🔹 Slightly smaller for content */
+  font-size: 0.9em;
   flex-grow: 1;
   margin-bottom: 15px;
 }
@@ -1091,12 +1046,6 @@ footer {
   }
   .footer-content > div {
     width: 100%;
-  }
-  .news-ticker .ticker {
-    gap: 30px;
-  }
-  .news-ticker .ticker span:not(:last-child)::after {
-    margin-left: 15px;
   }
   /* About Page Responsive */
   .about-page-container {
@@ -1231,52 +1180,55 @@ footer {
   box-shadow: none;
   transform: translateX(4px);
 }
+
 /* === Typography Hierarchy Fix === */
 h1 {
-  font-size: 2.5rem;           /* Large for main titles */
-  font-weight: 700;            /* Bold */
-  color: var(--text-primary);  /* Uses your existing color theme */
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
   margin-bottom: 0.5em;
 }
 
 h2 {
-  font-size: 1.8rem;           /* Slightly smaller */
+  font-size: 1.8rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.4em;
 }
 
 p {
-  font-size: 1rem;             /* Regular size for normal paragraphs */
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 1.6;            /* Good line spacing */
-  color: var(--text-secondary); /* Slightly softer color if available */
+  line-height: 1.6;
+  color: var(--text-secondary);
   margin-bottom: 1em;
 }
 
 .subtext {
-  font-size: 0.9rem;           /* Smaller size */
-  color: var(--text-muted);    /* Dimmed color (define if not existing) */
-  opacity: 0.8;                /* Slight fade */
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  opacity: 0.8;
 }
 
 /* === Clean Scrollbar Hide === */
 html, body {
-  scrollbar-width: none;         /* Firefox */
-  -ms-overflow-style: none;      /* IE 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none;                 /* Chrome, Safari, Edge */
+  display: none;
 }
+
 /* Smaller page headings for About, Notes, Contact */
 .about-hero .hero-content h1,
 .notes-hero .hero-content h1,
 .contact-hero .hero-content h1 {
-  font-size: 2.2rem; /* adjust as needed */
+  font-size: 2.2rem;
   line-height: 1.3;
 }
+
 nav ul {
   list-style: none;
   display: flex;
@@ -1284,10 +1236,10 @@ nav ul {
   gap: 30px;
   margin: 0;
   padding: 0;
-  margin-left: auto;      /* pushes nav items to right */
-  margin-right: 80px;     /* ✅ ADD this line to avoid overlap */
-
+  margin-left: auto;
+  margin-right: 80px;
 }
+
 /* === Modal Pop-up Styles === */
 .modal-overlay {
   position: fixed;
@@ -1379,7 +1331,6 @@ nav ul {
   border-radius: 4px;
 }
 
-/* Style for the Read More link */
 .read-more-link {
   display: block;
   margin-top: 20px;
@@ -1481,7 +1432,7 @@ nav ul {
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: #000; /* Now uses a solid black background for full opacity */
+    background-color: #000;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1501,7 +1452,7 @@ nav ul {
   }
 
   .nav-links a {
-    font-size: 1.5em; /* Reduced font size for better mobile experience */
+    font-size: 1.5em;
     font-weight: 700;
     color: var(--text-primary);
   }
@@ -1511,13 +1462,11 @@ nav ul {
     margin-right: 20px;
   }
 }
-/* === End Mobile Nav === */
 
-/* Prevent page from scrolling when menu is active */
 body.menu-open {
     overflow-y: hidden;
 }
-/* Final fix for body background showing through menu */
+
 body.menu-open .why,
 body.menu-open .explore,
 body.menu-open .featured,
@@ -1527,7 +1476,52 @@ body.menu-open footer {
     opacity: 0;
     transition: opacity 0.4s, visibility 0s 0.4s;
 }
+
 nav.scrolled {
   background-color: var(--bg-primary);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================================
+   === ADDED TICKER ANIMATION (APPENDED SAFELY AT BOTTOM) ===
+   ======================================================== */
+.ticker-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  gap: 50px;
+  will-change: transform;
+  animation: continuousTickerScroll 30s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-track span {
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.ticker-track span::after {
+  content: "•";
+  color: var(--accent-color);
+  margin-left: 50px;
+}
+
+@keyframes continuousTickerScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
