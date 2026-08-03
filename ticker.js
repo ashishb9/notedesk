@@ -1,25 +1,33 @@
-// ticker.js - Complete File with In-Site Modal Reader
+// ticker.js - Modernized News Ticker & Rich Reader Modal
 
-const FALLBACK_FEED_URL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.ycombinator.com%2Frss";
-let fetchedArticles = [];
+// Using Dev.to RSS feed converted to JSON (Provides rich full summaries & direct links!)
+const PRIMARY_TECH_FEED = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdev.to%2Ffeed%2Ftag%2Ftechnology";
+const FALLBACK_FEED = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fhnrss.org%2Fnewest%3Fpoints%3D50";
+
+let articlesList = [];
 
 async function fetchNews() {
   const newsTickerContent = document.getElementById("news-ticker-content");
   if (!newsTickerContent) return;
 
   try {
-    const response = await fetch(FALLBACK_FEED_URL);
-    if (!response.ok) throw new Error("Network response was not ok");
+    let response = await fetch(PRIMARY_TECH_FEED);
+    let data = await response.json();
 
-    const data = await response.json();
+    if (!data || data.status !== "ok" || !Array.isArray(data.items) || data.items.length === 0) {
+      // Fallback if primary fails
+      response = await fetch(FALLBACK_FEED);
+      data = await response.json();
+    }
+
     if (data && data.status === "ok" && Array.isArray(data.items)) {
-      fetchedArticles = data.items.slice(0, 12);
-      displayNews(fetchedArticles, newsTickerContent);
+      articlesList = data.items.slice(0, 12);
+      displayNews(articlesList, newsTickerContent);
     } else {
       displayFallback("Latest tech news updates loading soon...", newsTickerContent);
     }
   } catch (error) {
-    console.error("News Ticker Error:", error);
+    console.error("News Ticker Fetch Error:", error);
     displayFallback("Tech News Ticker Temporarily Offline", newsTickerContent);
   }
 }
@@ -28,7 +36,7 @@ function displayNews(articles, container) {
   container.innerHTML = "";
   const fragment = document.createDocumentFragment();
 
-  // Duplicate the list twice for seamless continuous loop
+  // Create duplicate set for infinite seamless scrolling
   for (let loop = 0; loop < 2; loop++) {
     articles.forEach((article, index) => {
       if (!article.title) return;
@@ -37,7 +45,7 @@ function displayNews(articles, container) {
       newsItem.className = "ticker-item";
       newsItem.dataset.index = index;
       
-      // Open article modal on click
+      // Open modal on click
       newsItem.addEventListener("click", () => openNewsModal(article));
       
       fragment.appendChild(newsItem);
@@ -52,16 +60,56 @@ function openNewsModal(article) {
   const modalTitle = document.getElementById("newsModalTitle");
   const modalDate = document.getElementById("newsModalDate");
   const modalDesc = document.getElementById("newsModalDescription");
+  const modalLink = document.getElementById("newsModalSourceLink");
 
   if (!modal) return;
 
-  if (modalTitle) modalTitle.textContent = article.title || "Tech Headline";
-  if (modalDate) modalDate.textContent = article.pubDate ? new Date(article.pubDate).toLocaleDateString() : "Recent";
+  // Set Title
+  if (modalTitle) modalTitle.textContent = article.title || "Tech Article Details";
+
+  // Set Date
+  if (modalDate) {
+    const pubDate = article.pubDate ? new Date(article.pubDate) : new Date();
+    modalDate.innerHTML = `<i class="fa-regular fa-calendar"></i> ${pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+  }
+
+  // Set Rich Summary Content
   if (modalDesc) {
-    // Strip raw HTML tags if description has any
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = article.description || article.content || "No detailed summary available for this headline.";
-    modalDesc.textContent = tempDiv.textContent || tempDiv.innerText || "";
+    let summaryText = "";
+
+    if (article.description || article.content) {
+      // Clean HTML tags and inline styles for a ultra-clean text view
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = article.description || article.content;
+      
+      // Grab text contents while preserving standard paragraph structure
+      const paragraphs = tempDiv.querySelectorAll("p");
+      if (paragraphs.length > 0) {
+        summaryText = Array.from(paragraphs)
+          .map(p => p.textContent.trim())
+          .filter(t => t.length > 20)
+          .slice(0, 3)
+          .join("<br><br>");
+      } else {
+        summaryText = tempDiv.textContent || tempDiv.innerText || "";
+      }
+    }
+
+    if (!summaryText || summaryText.trim().length < 30) {
+      summaryText = "Explore the full coverage and discussion on this recent technology topic using the original source link below.";
+    }
+
+    modalDesc.innerHTML = summaryText;
+  }
+
+  // Set External Link
+  if (modalLink) {
+    if (article.link || article.guid) {
+      modalLink.href = article.link || article.guid;
+      modalLink.style.display = "inline-flex";
+    } else {
+      modalLink.style.display = "none";
+    }
   }
 
   modal.classList.add("active");
@@ -74,7 +122,7 @@ function displayFallback(message, container) {
   container.appendChild(fallbackItem);
 }
 
-// Modal Close Listener
+// Attach Close Event Handlers safely
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("newsModalOverlay");
   const closeBtn = document.getElementById("closeNewsModalBtn");
@@ -87,6 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target === modal) modal.classList.remove("active");
     });
   }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && modal.classList.contains("active")) {
+      modal.classList.remove("active");
+    }
+  });
 });
 
 if (document.readyState === "loading") {
