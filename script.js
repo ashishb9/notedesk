@@ -51,6 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // News Ticker
+const initTicker = () => {
+    const ticker = document.querySelector('.ticker');
+    if (ticker) {
+        // This is the correct way to clone the content for the loop
+        ticker.innerHTML = ticker.innerHTML + ticker.innerHTML;
+    }
+};
+
     // About Page Hero
     const aboutHeroShrink = () => {
         const aboutHero = document.querySelector(".hero.about-hero");
@@ -169,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const notesGrid = document.getElementById('notesGrid');
         if (!notesGrid) return;
 
+        // Fetch data from the new JSON file
         fetch('notes.json')
             .then(response => response.json())
             .then(notesData => {
@@ -276,6 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
+                // Check for a category in the URL and apply filter, otherwise default to 'All'
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlCategory = urlParams.get('category');
 
@@ -284,9 +295,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (categoryButton) {
                         categoryButton.click();
                     } else {
+                        // Fallback to 'All' if the category in the URL doesn't exist
                         document.querySelector('.category-filters button[data-category="all"]').click();
                     }
                 } else {
+                    // Default to 'All' if no category is specified in the URL
                     const allButton = document.querySelector('.category-filters button[data-category="all"]');
                     if (allButton) {
                         allButton.click();
@@ -295,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     };
     
-    // Hamburger Menu
+    // Hamburger Menu (This was a separate listener, now it's integrated)
     const initHamburger = () => {
         const hamburger = document.querySelector('.hamburger-menu');
         const navLinks = document.querySelector('.nav-links');
@@ -310,13 +323,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===================================
     // 4. INITIALIZATION
     // ===================================
+
+    // Call all initialization functions here
     pageLoader();
     scrollAnimations();
+    initTicker();
     aboutHeroShrink();
     handleContactForm();
     initNotesPage();
     initParallax();
     initScrollProgressBar();
     initBackToTopBtn();
-    initHamburger();
+    initHamburger(); // Added the hamburger menu function call
 });
+
