@@ -51,15 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // News Ticker
-const initTicker = () => {
-    const ticker = document.querySelector('.ticker');
-    if (ticker) {
-        // This is the correct way to clone the content for the loop
-        ticker.innerHTML = ticker.innerHTML + ticker.innerHTML;
-    }
-};
-
     // About Page Hero
     const aboutHeroShrink = () => {
         const aboutHero = document.querySelector(".hero.about-hero");
@@ -308,7 +299,7 @@ const initTicker = () => {
             });
     };
     
-    // Hamburger Menu (This was a separate listener, now it's integrated)
+    // Hamburger Menu
     const initHamburger = () => {
         const hamburger = document.querySelector('.hamburger-menu');
         const navLinks = document.querySelector('.nav-links');
@@ -327,13 +318,11 @@ const initTicker = () => {
     // Call all initialization functions here
     pageLoader();
     scrollAnimations();
-    initTicker();
     aboutHeroShrink();
     handleContactForm();
     initNotesPage();
     initParallax();
     initScrollProgressBar();
     initBackToTopBtn();
-    initHamburger(); // Added the hamburger menu function call
+    initHamburger();
 });
-
