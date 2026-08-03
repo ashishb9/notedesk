@@ -457,7 +457,7 @@ h2 {
   color: var(--text-primary);
 }
 
-/* Featured Notes */
+/* Featured Notes Card Styling - Explicit Contrast Fix */
 .featured-notes {
   display: flex;
   flex-wrap: wrap;
@@ -474,9 +474,10 @@ h2 {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   transition: all 0.4s ease;
-  color: var(--text-secondary);
+  color: var(--text-primary) !important; /* Forces bright text in dark & light themes */
   text-align: left;
-  font-size: 1.1em;
+  font-size: 1.05em;
+  font-weight: 600;
   perspective: 1000px;
   transform-style: preserve-3d;
 }
@@ -484,11 +485,8 @@ h2 {
 .note:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
   transform: translateY(-8px) rotateX(1deg);
-  background-color: rgba(36, 36, 36, 0.9);
-}
-
-[data-theme="light"] .note:hover {
-  background-color: rgba(245, 245, 245, 0.95);
+  background-color: var(--hover-bg);
+  border-color: var(--accent-color);
 }
 
 .explore .topics a {
@@ -1215,108 +1213,166 @@ nav ul {
   margin-right: 80px;
 }
 
-/* === Modal Pop-up Styles === */
+/* === CLASSY & HIGH-CONTRAST MODAL POPUP STYLES === */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px); /* Modern backdrop glassmorphism */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s 0.3s;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s 0.3s;
 }
 
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.modal-content {
-  background-color: var(--bg-secondary);
+.modal-content.news-modal-content {
+  background: var(--bg-secondary);
   color: var(--text-primary);
-  border-radius: 12px;
+  border-radius: 16px;
   width: 90%;
-  max-width: 600px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
+  max-width: 650px;
+  padding: 35px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-color);
+  transform: scale(0.92) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.modal-overlay.active .modal-content {
-  transform: scale(1);
+.modal-overlay.active .modal-content.news-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+[data-theme="light"] .modal-content.news-modal-content {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 15px;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-.modal-header h3 {
-  margin: 0;
-  font-size: 1.8em;
-  font-weight: 700;
-  color: var(--accent-color);
+.news-modal-badges {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.news-badge {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.category-badge {
+  background-color: rgba(0, 128, 128, 0.2);
+  color: var(--scroll-progress-color);
+  border: 1px solid rgba(0, 204, 204, 0.3);
+}
+
+.date-badge {
+  background-color: var(--card-bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
 }
 
 .close-modal-btn {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 2em;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   cursor: pointer;
-  line-height: 1;
-  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .close-modal-btn:hover {
-  color: var(--text-primary);
+  background-color: var(--accent-color);
+  color: #ffffff;
+  transform: rotate(90deg);
 }
 
-.modal-body {
-  margin-bottom: 20px;
+.news-modal-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-primary) !important; /* Forces high-contrast white header */
+  line-height: 1.35;
+  margin: 10px 0 0 0;
+  letter-spacing: -0.01em;
 }
 
-.modal-body p {
-  margin: 0 0 10px 0;
-  font-size: 1.1em;
-  line-height: 1.6;
+.news-modal-divider {
+  height: 1px;
+  background: var(--border-color);
+  width: 100%;
+  margin: 15px 0;
 }
 
-.modal-body p strong {
-  color: var(--text-primary);
+.news-modal-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary) !important;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
-.modal-body code {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
+.news-modal-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.read-more-link {
-  display: block;
-  margin-top: 20px;
-  color: var(--accent-color);
+.news-source-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--accent-color);
+  color: #ffffff !important;
+  padding: 12px 22px;
+  border-radius: 8px;
   font-weight: 600;
-  text-decoration: underline;
-  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25 ease;
+  box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
 }
 
-.read-more-link:hover {
-  color: var(--text-primary);
+.news-source-btn:hover {
+  background-color: #006666;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 128, 128, 0.45);
 }
 
 /* --- About Page Specific Styles --- */
@@ -1350,7 +1406,7 @@ nav ul {
   margin-bottom: 8px;
 }
 
-/* === Mobile Nav (Final & Fixed) === */
+/* === Mobile Nav === */
 .hamburger-menu {
   display: none;
   background: none;
@@ -1464,8 +1520,8 @@ nav.scrolled {
   background-color: rgba(0, 0, 0, 0.85);
   color: var(--text-primary);
   padding: 50px 0;
-  width: 100%;            /* Forces 100% full screen width */
-  max-width: 100% !important; /* Overrides original 1200px constraint */
+  width: 100%;
+  max-width: 100% !important;
   margin: 0;
   overflow: hidden;
   border-top: 1px solid var(--border-color);
@@ -1482,7 +1538,7 @@ nav.scrolled {
 }
 
 .ticker-viewport {
-  width: 100vw;           /* Spans entire browser screen width */
+  width: 100vw;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
@@ -1494,6 +1550,7 @@ nav.scrolled {
   gap: 50px;
   will-change: transform;
   animation: continuousTickerScroll 35s linear infinite;
+  align-items: center; /* Ensures perfect vertical alignment */
 }
 
 .ticker-track:hover {
