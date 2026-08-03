@@ -25,7 +25,12 @@
   <header class="hero about-hero">
     <nav>
       <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
+      <button class="hamburger-menu" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="notes.html">Notes</a></li>
         <li><a href="about.html">About</a></li>
@@ -58,7 +63,7 @@
 
       <div class="about-main-content">
         <div class="contact-form-container">
-          <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); showSuccessMessage();">
+          <form id="contactForm" class="contact-form">
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" required placeholder="Your full name">
@@ -111,4 +116,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
