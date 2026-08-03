@@ -1,44 +1,56 @@
-// Your unique API key from GNews.io
-const apiKey = "a659cee2d64617f673090302d3bc6055";
+// ticker.js - Complete File
 
-// The API endpoint for top headlines
-const apiUrl = `https://gnews.io/api/v4/top-headlines?category=technology&lang=en&country=us&token=${apiKey}`;
+const FALLBACK_FEED_URL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.ycombinator.com%2Frss";
 
-// The HTML element where the news headlines will be displayed
-const newsTickerContent = document.getElementById("news-ticker-content");
-
-// Function to fetch news from the API
 async function fetchNews() {
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+  const newsTickerContent = document.getElementById("news-ticker-content");
+  if (!newsTickerContent) return;
 
-    // Check for successful response and data
-    if (data && data.articles) {
-      const articles = data.articles.slice(0, 20); // Get the top 20 articles
-      displayNews(articles);
-    } else {
-      console.error("Error fetching news:", data.message);
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  try {
+    const response = await fetch(FALLBACK_FEED_URL);
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    const data = await response.json();
+    if (data && data.status === "ok" && Array.isArray(data.items)) {
+      displayNews(data.items, newsTickerContent);
+    } else {
+      displayFallback("Latest tech news updates loading soon...", newsTickerContent);
+    }
+  } catch (error) {
+    console.error("News Ticker Error:", error);
+    displayFallback("Tech News Ticker Temporarily Offline", newsTickerContent);
+  }
 }
 
-// Function to display the news headlines in the ticker
-function displayNews(articles) {
-  // Clear existing content from the ticker container
-  newsTickerContent.innerHTML = "";
+function displayNews(articles, container) {
+  container.innerHTML = "";
 
-  // To create a continuous loop, we need two full sets of content.
-  for (let i = 0; i < 2; i++) {
-    articles.forEach(article => {
-      const newsItem = document.createElement("span");
-      newsItem.textContent = ` ${article.title} `;
-      newsTickerContent.appendChild(newsItem);
-    });
-  }
+  const limitedArticles = articles.slice(0, 12);
+  const fragment = document.createDocumentFragment();
+
+  // Create two duplicate sets so the continuous loop never breaks
+  for (let i = 0; i < 2; i++) {
+    limitedArticles.forEach(article => {
+      if (!article.title) return;
+      const newsItem = document.createElement("span");
+      newsItem.textContent = article.title.trim();
+      fragment.appendChild(newsItem);
+    });
+  }
+
+  container.appendChild(fragment);
+}
+
+function displayFallback(message, container) {
+  container.innerHTML = "";
+  const fallbackItem = document.createElement("span");
+  fallbackItem.textContent = message;
+  container.appendChild(fallbackItem);
 }
 
 // Fetch the news when the page loads
-fetchNews();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", fetchNews);
+} else {
+  fetchNews();
+}
