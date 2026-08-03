@@ -136,14 +136,23 @@
   </footer>
 
   <div class="modal-overlay" id="newsModalOverlay">
-    <div class="modal-content">
+    <div class="modal-content news-modal-content">
       <div class="modal-header">
-        <h3 id="newsModalTitle">Tech News</h3>
-        <button class="close-modal-btn" id="closeNewsModalBtn">&times;</button>
+        <div class="news-modal-badges">
+          <span class="news-badge category-badge"><i class="fa-solid fa-newspaper"></i> Tech Update</span>
+          <span class="news-badge date-badge" id="newsModalDate"><i class="fa-regular fa-calendar"></i> Recent</span>
+        </div>
+        <button class="close-modal-btn" id="closeNewsModalBtn" aria-label="Close modal">&times;</button>
       </div>
-      <div class="modal-body">
-        <p><strong>Published:</strong> <span id="newsModalDate">-</span></p>
-        <p id="newsModalDescription" style="margin-top: 15px; font-size: 1em; line-height: 1.6;"></p>
+      <div class="news-modal-body">
+        <h3 id="newsModalTitle" class="news-modal-title">Article Headline</h3>
+        <div class="news-modal-divider"></div>
+        <div id="newsModalDescription" class="news-modal-text"></div>
+      </div>
+      <div class="news-modal-footer">
+        <a id="newsModalSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="news-source-btn">
+          <span>Read Full Article on Source</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
       </div>
     </div>
   </div>
