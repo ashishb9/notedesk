@@ -1587,3 +1587,90 @@ nav.scrolled {
     transform: translateX(-50%);
   }
 }
+
+
+/* === SURGICAL POPUP MODAL & CARD FIXES (APPENDED AT BOTTOM) === */
+
+/* Force modal overlay to cover the exact visible screen viewport */
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(8px);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 10000 !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity 0.3s ease;
+}
+
+/* Modal Content Card Styling */
+.modal-content {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 14px !important;
+  width: 90% !important;
+  max-width: 680px !important;
+  padding: 30px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid var(--border-color) !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  position: relative !important;
+}
+
+/* Clean Close Button in Top Right Corner */
+.close-modal-btn {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.4rem !important;
+  line-height: 1 !important;
+}
+
+.close-modal-btn:hover {
+  background-color: var(--accent-color) !important;
+  color: #ffffff !important;
+}
+
+/* View Solution Button Styling on Cards */
+.view-fix-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  background: rgba(0, 128, 128, 0.12);
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 128, 128, 0.3);
+  margin-top: 15px;
+  transition: all 0.2s ease;
+}
+
+.note-card:hover .view-fix-btn {
+  background: var(--accent-color);
+  color: #ffffff;
+}
