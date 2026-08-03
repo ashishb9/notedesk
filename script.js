@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ===================================
-    // 3. NOTES PAGE LOGIC & MODAL FIXES
+    // 3. NOTES PAGE LOGIC & HIGH-CONTRAST MODAL
     // ===================================
     const initNotesPage = () => {
         const notesGrid = document.getElementById('notesGrid');
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const generateNoteCards = (data) => {
                     notesGrid.innerHTML = '';
                     if (!data || data.length === 0) {
-                        notesGrid.innerHTML = '<p class="no-results" style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No matching notes found. Try searching for another topic!</p>';
+                        notesGrid.innerHTML = '<p class="no-results">No matching notes found. Try searching for another topic!</p>';
                         return;
                     }
                     data.forEach(note => {
@@ -182,9 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="note-badge badge-${note.category}">${categoryName}</span>
                             </div>
                             <h3 class="note-card-title">${note.title}</h3>
-                            <p class="card-problem">${note.problem}</p>
+                            <p class="card-problem"><strong>Problem:</strong> ${note.problem}</p>
                             <div class="note-card-footer">
-                                <span class="view-fix-btn">View Solution &amp; Steps <i class="fa-solid fa-arrow-right"></i></span>
+                                <span>View Fix & Steps &rarr;</span>
                             </div>
                         `;
                         notesGrid.appendChild(card);
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         modalFixesContainer.innerHTML = '';
 
                         if (note.fixes && Array.isArray(note.fixes)) {
-                            note.fixes.forEach(fix => {
+                            note.fixes.forEach((fix, fixIndex) => {
                                 const fixBlock = document.createElement('div');
                                 fixBlock.className = 'modal-fix-block';
 
@@ -221,8 +221,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                     fix.steps.forEach(stepText => {
                                         const stepItem = document.createElement('li');
+                                        
+                                        // Format step text with inline code blocks
                                         stepItem.innerHTML = stepText;
 
+                                        // If the step contains a code element, add a copy button
                                         const codeTags = stepItem.querySelectorAll('code');
                                         codeTags.forEach(codeEl => {
                                             const copyBtn = document.createElement('button');
@@ -251,7 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     if (modalOverlay) {
                         modalOverlay.classList.add('active');
-                        document.body.style.overflow = 'hidden'; // Prevent background scrolling when modal is open
                         window.location.hash = `note-${note.id}`;
                     }
                 };
@@ -259,7 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const closeModal = () => {
                     if (modalOverlay) {
                         modalOverlay.classList.remove('active');
-                        document.body.style.overflow = ''; // Restore page scrolling
                         history.pushState("", document.title, window.location.pathname + window.location.search);
                     }
                 };
@@ -273,9 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     openModalForNote(note);
                 });
 
-                if (closeModalBtn) {
-                    closeModalBtn.addEventListener('click', closeModal);
-                }
+                if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 
                 if (modalOverlay) {
                     modalOverlay.addEventListener('click', (e) => {
@@ -314,6 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
+                // Handle URL category filter
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlCategory = urlParams.get('category');
 
@@ -326,6 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (allButton) allButton.click();
                 }
 
+                // Handle URL hash deep linking (e.g. notes.html#note-5)
                 const hash = window.location.hash;
                 if (hash && hash.startsWith('#note-')) {
                     const targetId = parseInt(hash.replace('#note-', ''));
