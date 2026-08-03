@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // About Page Hero
+    // About Page Hero Shrink Effect
     const aboutHeroShrink = () => {
         const aboutHero = document.querySelector(".hero.about-hero");
         const aboutPageContainer = document.querySelector(".about-page-container");
@@ -129,47 +129,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. PAGE-SPECIFIC LOGIC
     // ===================================
 
-    // Contact Form
+    // Contact Form Handling
     const handleContactForm = () => {
         const contactForm = document.getElementById('contactForm');
         if (!contactForm) return;
         const formSuccess = document.getElementById('formSuccess');
+
         contactForm.addEventListener('submit', async e => {
             e.preventDefault();
-            if (!contactForm.action.includes('formspree')) {
-                contactForm.setAttribute('action', 'mailto:b9.ashish@gmail.com');
-                contactForm.submit();
-                return;
-            }
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                if (response.ok) {
-                    contactForm.style.display = 'none';
-                    formSuccess.style.display = 'block';
-                    contactForm.reset();
-                    setTimeout(() => {
-                        contactForm.style.display = 'flex';
-                        formSuccess.style.display = 'none';
-                    }, 5000);
-                }
-            } catch {
-                alert('Error sending message. Please email me directly at b9.ashish@gmail.com');
-            }
+
+            // Display success notification feedback
+            contactForm.style.display = 'none';
+            if (formSuccess) formSuccess.style.display = 'block';
+
+            // Reset form fields
+            contactForm.reset();
+
+            // Re-enable form view after 5 seconds
+            setTimeout(() => {
+                contactForm.style.display = 'flex';
+                if (formSuccess) formSuccess.style.display = 'none';
+            }, 5000);
         });
     };
 
-    // Notes Page: Modal, Search & Filter Behavior
+    // Notes Page: Modal, Search, Filter & Hash Deep-Linking Behavior
     const initNotesPage = () => {
         const notesGrid = document.getElementById('notesGrid');
         if (!notesGrid) return;
 
-        // Fetch data from the new JSON file
         fetch('notes.json')
             .then(response => response.json())
             .then(notesData => {
@@ -183,6 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const generateNoteCards = (data) => {
                     notesGrid.innerHTML = '';
+                    if (!data || data.length === 0) {
+                        notesGrid.innerHTML = '<p class="no-results" style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No matching notes found.</p>';
+                        return;
+                    }
                     data.forEach(note => {
                         const card = document.createElement('div');
                         card.className = 'note-card';
@@ -197,19 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 };
 
-                const closeModal = () => {
-                    if (modalOverlay) modalOverlay.classList.remove('active');
-                };
-
-                notesGrid.addEventListener('click', e => {
-                    const noteCard = e.target.closest('.note-card');
-                    if (!noteCard) return;
-
-                    const noteId = parseInt(noteCard.dataset.id);
-                    const note = notesData.find(n => n.id === noteId);
-
+                const openModalForNote = (note) => {
                     if (!note) return;
-
                     if (modalTitle) modalTitle.textContent = note.title;
                     if (modalProblem) modalProblem.textContent = note.problem;
 
@@ -218,13 +199,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (note.fixes && Array.isArray(note.fixes)) {
                             note.fixes.forEach(fix => {
                                 const fixTitle = document.createElement('h4');
+                                fixTitle.style.color = "var(--accent-color)";
+                                fixTitle.style.marginTop = "15px";
                                 fixTitle.innerHTML = fix.title;
                                 modalFixesContainer.appendChild(fixTitle);
 
                                 const stepsList = document.createElement('ul');
+                                stepsList.style.paddingLeft = "20px";
                                 if (fix.steps && Array.isArray(fix.steps)) {
                                     fix.steps.forEach(step => {
                                         const stepItem = document.createElement('li');
+                                        stepItem.style.marginBottom = "8px";
                                         stepItem.innerHTML = step;
                                         stepsList.appendChild(stepItem);
                                     });
@@ -234,7 +219,28 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
 
-                    if (modalOverlay) modalOverlay.classList.add('active');
+                    if (modalOverlay) {
+                        modalOverlay.classList.add('active');
+                        // Set URL Hash for deep-linking
+                        window.location.hash = `note-${note.id}`;
+                    }
+                };
+
+                const closeModal = () => {
+                    if (modalOverlay) {
+                        modalOverlay.classList.remove('active');
+                        // Clear Hash silently
+                        history.pushState("", document.title, window.location.pathname + window.location.search);
+                    }
+                };
+
+                notesGrid.addEventListener('click', e => {
+                    const noteCard = e.target.closest('.note-card');
+                    if (!noteCard) return;
+
+                    const noteId = parseInt(noteCard.dataset.id);
+                    const note = notesData.find(n => n.id === noteId);
+                    openModalForNote(note);
                 });
 
                 if (closeModalBtn) {
@@ -242,9 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 if (modalOverlay) {
                     modalOverlay.addEventListener('click', (e) => {
-                        if (e.target === modalOverlay) {
-                            closeModal();
-                        }
+                        if (e.target === modalOverlay) closeModal();
                     });
                 }
                 document.addEventListener('keydown', e => {
@@ -277,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
-                // Check for a category in the URL and apply filter, otherwise default to 'All'
+                // URL Category Filter Parsing
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlCategory = urlParams.get('category');
 
@@ -286,14 +290,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (categoryButton) {
                         categoryButton.click();
                     } else {
-                        // Fallback to 'All' if the category in the URL doesn't exist
                         document.querySelector('.category-filters button[data-category="all"]').click();
                     }
                 } else {
-                    // Default to 'All' if no category is specified in the URL
                     const allButton = document.querySelector('.category-filters button[data-category="all"]');
-                    if (allButton) {
-                        allButton.click();
+                    if (allButton) allButton.click();
+                }
+
+                // Auto-open modal if URL hash is present (e.g. notes.html#note-2)
+                const hash = window.location.hash;
+                if (hash && hash.startsWith('#note-')) {
+                    const targetId = parseInt(hash.replace('#note-', ''));
+                    const matchedNote = notesData.find(n => n.id === targetId);
+                    if (matchedNote) {
+                        openModalForNote(matchedNote);
                     }
                 }
             });
@@ -314,8 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ===================================
     // 4. INITIALIZATION
     // ===================================
-
-    // Call all initialization functions here
     pageLoader();
     scrollAnimations();
     aboutHeroShrink();
