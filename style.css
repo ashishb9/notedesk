@@ -72,11 +72,10 @@
   transform: scale(1.1);
 }
 
-/* === Existing CSS continues === */
-
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -237,6 +236,7 @@ nav .logo i {
 nav .logo:hover i {
   color: var(--text-primary);
 }
+
 nav a {
   text-decoration: none;
   color: var(--text-secondary);
@@ -320,7 +320,7 @@ input:checked + label:before {
 }
 
 /* Section Styling */
-.why, .explore, .featured, .news-ticker {
+.why, .explore, .featured {
   padding: 100px 40px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.75);
@@ -333,8 +333,7 @@ input:checked + label:before {
 
 [data-theme="light"] .why,
 [data-theme="light"] .explore,
-[data-theme="light"] .featured,
-[data-theme="light"] .news-ticker {
+[data-theme="light"] .featured {
   background-color: rgba(255, 255, 255, 0.9);
   color: var(--text-primary);
 }
@@ -492,7 +491,6 @@ h2 {
   background-color: rgba(245, 245, 245, 0.95);
 }
 
-/* Styling to make the explore links look like buttons */
 .explore .topics a {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -515,26 +513,6 @@ h2 {
 .explore .topics a i {
     font-size: 1.5rem;
     color: var(--primary-color);
-}
-
-/* === Fixed Background & Ticker Behavior === */
-.news-ticker {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: var(--text-primary);
-  padding: 40px 20px;
-  border-top: none;
-  border-bottom: none;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-}
-
-[data-theme="light"] .news-ticker {
-  background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Footer */
@@ -1161,7 +1139,7 @@ footer {
     font-size: 0.9em;
   }
 }
-/* Hero Link Styling */
+
 .hero-link {
   color: var(--text-secondary);
   font-weight: 500;
@@ -1181,7 +1159,6 @@ footer {
   transform: translateX(4px);
 }
 
-/* === Typography Hierarchy Fix === */
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -1210,7 +1187,6 @@ p {
   opacity: 0.8;
 }
 
-/* === Clean Scrollbar Hide === */
 html, body {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -1221,7 +1197,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* Smaller page headings for About, Notes, Contact */
 .about-hero .hero-content h1,
 .notes-hero .hero-content h1,
 .contact-hero .hero-content h1 {
@@ -1483,10 +1458,31 @@ nav.scrolled {
 }
 
 /* ========================================================
-   === ADDED TICKER ANIMATION (APPENDED SAFELY AT BOTTOM) ===
+   === FULL-WIDTH SCREEN EDGE-TO-EDGE TICKER STYLES ===
    ======================================================== */
+.news-ticker {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: var(--text-primary);
+  padding: 50px 0;
+  width: 100%;            /* Forces 100% full screen width */
+  max-width: 100% !important; /* Overrides original 1200px constraint */
+  margin: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .news-ticker {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.news-ticker h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
 .ticker-viewport {
-  width: 100%;
+  width: 100vw;           /* Spans entire browser screen width */
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
@@ -1497,24 +1493,33 @@ nav.scrolled {
   white-space: nowrap;
   gap: 50px;
   will-change: transform;
-  animation: continuousTickerScroll 30s linear infinite;
+  animation: continuousTickerScroll 35s linear infinite;
 }
 
 .ticker-track:hover {
   animation-play-state: paused;
 }
 
-.ticker-track span {
+.ticker-item {
   display: inline-block;
-  font-size: 1em;
+  font-size: 1.05em;
   font-weight: 500;
   color: var(--text-primary);
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.ticker-track span::after {
+.ticker-item:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.ticker-item::after {
   content: "•";
   color: var(--accent-color);
   margin-left: 50px;
+  display: inline-block;
+  text-decoration: none;
 }
 
 @keyframes continuousTickerScroll {
