@@ -1,6 +1,7 @@
-// ticker.js - Complete File
+// ticker.js - Complete File with In-Site Modal Reader
 
 const FALLBACK_FEED_URL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.ycombinator.com%2Frss";
+let fetchedArticles = [];
 
 async function fetchNews() {
   const newsTickerContent = document.getElementById("news-ticker-content");
@@ -12,7 +13,8 @@ async function fetchNews() {
 
     const data = await response.json();
     if (data && data.status === "ok" && Array.isArray(data.items)) {
-      displayNews(data.items, newsTickerContent);
+      fetchedArticles = data.items.slice(0, 12);
+      displayNews(fetchedArticles, newsTickerContent);
     } else {
       displayFallback("Latest tech news updates loading soon...", newsTickerContent);
     }
@@ -24,21 +26,45 @@ async function fetchNews() {
 
 function displayNews(articles, container) {
   container.innerHTML = "";
-
-  const limitedArticles = articles.slice(0, 12);
   const fragment = document.createDocumentFragment();
 
-  // Create two duplicate sets so the continuous loop never breaks
-  for (let i = 0; i < 2; i++) {
-    limitedArticles.forEach(article => {
+  // Duplicate the list twice for seamless continuous loop
+  for (let loop = 0; loop < 2; loop++) {
+    articles.forEach((article, index) => {
       if (!article.title) return;
       const newsItem = document.createElement("span");
       newsItem.textContent = article.title.trim();
+      newsItem.className = "ticker-item";
+      newsItem.dataset.index = index;
+      
+      // Open article modal on click
+      newsItem.addEventListener("click", () => openNewsModal(article));
+      
       fragment.appendChild(newsItem);
     });
   }
 
   container.appendChild(fragment);
+}
+
+function openNewsModal(article) {
+  const modal = document.getElementById("newsModalOverlay");
+  const modalTitle = document.getElementById("newsModalTitle");
+  const modalDate = document.getElementById("newsModalDate");
+  const modalDesc = document.getElementById("newsModalDescription");
+
+  if (!modal) return;
+
+  if (modalTitle) modalTitle.textContent = article.title || "Tech Headline";
+  if (modalDate) modalDate.textContent = article.pubDate ? new Date(article.pubDate).toLocaleDateString() : "Recent";
+  if (modalDesc) {
+    // Strip raw HTML tags if description has any
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = article.description || article.content || "No detailed summary available for this headline.";
+    modalDesc.textContent = tempDiv.textContent || tempDiv.innerText || "";
+  }
+
+  modal.classList.add("active");
 }
 
 function displayFallback(message, container) {
@@ -48,7 +74,21 @@ function displayFallback(message, container) {
   container.appendChild(fallbackItem);
 }
 
-// Fetch the news when the page loads
+// Modal Close Listener
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("newsModalOverlay");
+  const closeBtn = document.getElementById("closeNewsModalBtn");
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+  }
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("active");
+    });
+  }
+});
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", fetchNews);
 } else {
