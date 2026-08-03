@@ -335,7 +335,7 @@ h2 {
   letter-spacing: -0.02em;
 }
 
-/* Why NoteDesk? Cards */
+/* Cards */
 .cards {
   display: flex;
   justify-content: center;
@@ -437,66 +437,63 @@ h2 {
 }
 
 /* =========================================
-   === FIXED & WORKING NEWS TICKER STYLES ===
+   === GUARANTEED TICKER SCROLLING STYLES ===
    ========================================= */
 .news-ticker {
   background-color: rgba(0, 0, 0, 0.85);
   color: var(--text-primary);
   padding: 30px 0;
   width: 100%;
-  overflow: hidden; /* Standard clipping container */
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 [data-theme="light"] .news-ticker {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
-.ticker {
+/* Masking Wrapper Container */
+.ticker-wrap {
   width: 100%;
-  overflow: hidden; /* Clips the scrolling content cleanly */
-  position: relative;
-  display: flex;
-  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 100%; /* Ensures initial offset for smooth start */
 }
 
-/* The element containing headlines that scrolls */
-#news-ticker-content {
-  display: inline-flex;
-  white-space: nowrap;
-  gap: 40px;
-  will-change: transform;
-  animation: ticker-scroll 45s linear infinite; /* Fixed speed and smooth motion */
-}
-
-#news-ticker-content:hover {
-  animation-play-state: paused; /* Pauses when user hovers */
-}
-
-#news-ticker-content span {
+/* Moving Elements Track */
+.ticker-move {
   display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  animation-name: tickerAnimation;
+  animation-duration: 35s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.ticker-move:hover {
+  animation-play-state: paused;
+}
+
+.ticker-move span {
+  display: inline-block;
+  padding: 0 20px;
   font-size: 1.1em;
   font-weight: 500;
   color: var(--text-primary);
-  cursor: pointer;
 }
 
-#news-ticker-content span:after {
-  content: "  •  ";
+.ticker-move span:after {
+  content: "•";
   color: var(--accent-color);
   margin-left: 40px;
 }
 
-/* Infinite Scrolling Animation Keyframes */
-@keyframes ticker-scroll {
+/* Pure CSS Infinite Translation */
+@keyframes tickerAnimation {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%); /* Moves exactly halfway (since content is cloned x2) */
+    transform: translate3d(-100%, 0, 0);
   }
 }
 
@@ -622,7 +619,7 @@ footer {
   }
 }
 
-/* === Clean Scrollbar Hide === */
+/* Hide Scrollbar */
 html, body {
   scrollbar-width: none;
   -ms-overflow-style: none;
