@@ -1221,7 +1221,7 @@ nav ul {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.82);
-  backdrop-filter: blur(8px); /* Modern backdrop glassmorphism */
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1326,7 +1326,7 @@ nav ul {
 .news-modal-title {
   font-size: 1.55rem;
   font-weight: 700;
-  color: var(--text-primary) !important; /* Forces high-contrast white header */
+  color: var(--text-primary) !important;
   line-height: 1.35;
   margin: 10px 0 0 0;
   letter-spacing: -0.01em;
@@ -1550,7 +1550,7 @@ nav.scrolled {
   gap: 50px;
   will-change: transform;
   animation: continuousTickerScroll 35s linear infinite;
-  align-items: center; /* Ensures perfect vertical alignment */
+  align-items: center;
 }
 
 .ticker-track:hover {
@@ -1587,7 +1587,6 @@ nav.scrolled {
     transform: translateX(-50%);
   }
 }
-
 
 /* === SURGICAL POPUP MODAL & CARD FIXES (APPENDED AT BOTTOM) === */
 
