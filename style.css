@@ -1888,3 +1888,12 @@ nav.scrolled {
   border-color: var(--accent-color) !important;
   box-shadow: 0 4px 12px rgba(0, 128, 128, 0.4) !important;
 }
+
+/* Safety rule: Hide any raw text nodes directly inside category-filters */
+.category-filters {
+  font-size: 0 !important; /* Hides raw text node artifacts */
+}
+
+.category-filters button {
+  font-size: 0.9rem !important; /* Restores button text size */
+}
