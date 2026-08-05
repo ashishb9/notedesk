@@ -24,7 +24,12 @@
   <header class="hero notes-hero">
     <nav>
       <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
+      <button class="hamburger-menu" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="notes.html" class="active">Notes</a></li>
         <li><a href="about.html">About</a></li>
@@ -40,21 +45,25 @@
     </nav>
     <div class="hero-content">
       <h1>Tech Notes Collection</h1>
-      <p>Instant access to categorized solutions</p>
+      <p>Instant access to categorized solutions and step-by-step guides</p>
     </div>
   </header>
   
   <main>
     <section class="notes-container js-scroll">
       <div class="notes-controls">
-        <input type="text" id="notes-search" placeholder="🔍 Search notes..." class="search-bar">
-        <div class="category-filters">
-          <button class="active" data-category="all">All</button>
-          <button data-category="windows">Windows</button>
-          <button data-category="linux">Linux</button>
-          <button data-category="web">Web</button>
-          <button data-category="mobile">Mobile</button>
-          <button data-category="productivity">Productivity</button>
+        <div class="search-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="notes-search" placeholder="Search by topic, command, or issue..." class="search-bar">
+        </div>
+        <div class="category-filters" id="categoryFilters">
+          <button class="category-btn active" data-category="all">All</button>
+          <button class="category-btn" data-category="windows">Windows</button>
+          <button class="category-btn" data-category="linux">Linux</button>
+          <button class="category-btn" data-category="web">Web</button>
+          <button class="category-btn" data-category="dev">Dev Setup</button>
+          <button class="category-btn" data-category="productivity">Productivity</button>
+          <button class="category-btn" data-category="cybersecurity">AI & Cyber</button>
         </div>
       </div>
       <div class="notes-grid" id="notesGrid"></div>
@@ -87,34 +96,23 @@
   </footer>
 
   <div class="modal-overlay" id="noteModalOverlay">
-    <div class="modal-content" id="noteModalContent">
+    <div class="modal-content note-modal-card" id="noteModalContent">
       <div class="modal-header">
-        <h3 id="modalTitle"></h3>
-        <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+        <div class="modal-title-group">
+          <span class="note-badge" id="modalCategoryBadge">Category</span>
+          <h3 id="modalTitle">Note Title</h3>
+        </div>
+        <button class="close-modal-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
-        <p><strong>Problem:</strong> <span id="modalProblem"></span></p>
-        <div class="modal-fixes">
-          <p><strong>Fix 1:</strong> <span id="modalFix1"></span></p>
-          <p><strong>Fix 2:</strong> <span id="modalFix2"></span></p>
+        <div class="problem-box">
+          <p id="modalProblem"></p>
         </div>
-        <a href="fix-details.html" class="read-more-link">View Full Solution</a>
+        <div class="modal-fixes" id="modalFixesContainer"></div>
       </div>
     </div>
   </div>
-<div id="noteModalOverlay" class="modal-overlay">
-  <div class="modal-content">
-    <button id="closeModalBtn" class="close-btn">&times;</button>
-    <div class="modal-body">
-      <h2 id="modalTitle"></h2>
-      <p id="modalProblem"></p>
-      <div class="modal-fixes">
-        </div>
-    </div>
-  </div>
-</div>
+
   <script src="script.js"></script>
 </body>
 </html>
-
-

@@ -474,7 +474,7 @@ h2 {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   transition: all 0.4s ease;
-  color: var(--text-primary) !important; /* Forces bright text in dark & light themes */
+  color: var(--text-primary) !important;
   text-align: left;
   font-size: 1.05em;
   font-weight: 600;
@@ -790,6 +790,29 @@ footer {
 
 .form-submit-btn:hover {
   background: #006666;
+}
+
+.form-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-error-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 14px 16px;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid #dc3545;
+  border-radius: 8px;
+  color: #dc3545;
+  font-size: 0.9em;
+}
+
+.form-error-message i {
+  font-size: 1.2em;
+  flex-shrink: 0;
 }
 
 .form-success-message {
@@ -1221,7 +1244,7 @@ nav ul {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.82);
-  backdrop-filter: blur(8px); /* Modern backdrop glassmorphism */
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1326,7 +1349,7 @@ nav ul {
 .news-modal-title {
   font-size: 1.55rem;
   font-weight: 700;
-  color: var(--text-primary) !important; /* Forces high-contrast white header */
+  color: var(--text-primary) !important;
   line-height: 1.35;
   margin: 10px 0 0 0;
   letter-spacing: -0.01em;
@@ -1550,7 +1573,7 @@ nav.scrolled {
   gap: 50px;
   will-change: transform;
   animation: continuousTickerScroll 35s linear infinite;
-  align-items: center; /* Ensures perfect vertical alignment */
+  align-items: center;
 }
 
 .ticker-track:hover {
@@ -1586,4 +1609,314 @@ nav.scrolled {
   100% {
     transform: translateX(-50%);
   }
+}
+
+/* === SURGICAL POPUP MODAL & COLORFUL BADGES FIXES === */
+
+/* Force modal overlay to cover the exact visible screen viewport */
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(8px);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 10000 !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity 0.3s ease;
+}
+
+/* Modal Content Card Styling */
+.modal-content {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-radius: 14px !important;
+  width: 90% !important;
+  max-width: 680px !important;
+  padding: 30px !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid var(--border-color) !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  position: relative !important;
+}
+
+/* Clean Close Button in Top Right Corner */
+.close-modal-btn {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.4rem !important;
+  line-height: 1 !important;
+}
+
+.close-modal-btn:hover {
+  background-color: var(--accent-color) !important;
+  color: #ffffff !important;
+}
+
+/* Note Card Header & Badge Styles */
+.note-card-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.note-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-windows {
+  background-color: rgba(0, 120, 212, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.badge-linux {
+  background-color: rgba(234, 179, 8, 0.2);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.badge-web {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+.badge-dev {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.badge-productivity {
+  background-color: rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+  border: 1px solid rgba(244, 114, 182, 0.3);
+}
+
+.badge-cybersecurity {
+  background-color: rgba(20, 184, 166, 0.2);
+  color: #2dd4bf;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+.note-card-title {
+  margin: 0 0 12px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  line-height: 1.35;
+}
+
+.card-problem {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+/* ========================================================
+   === SEARCH BAR & MODAL CODE SNIPPET ENHANCEMENTS ===
+   ======================================================== */
+
+/* Search Bar Wrapper Fixes */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-wrapper .search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-color);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 14px 20px 14px 48px !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  font-size: 1rem !important;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.search-bar:focus {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.25) !important;
+  outline: none;
+  background: var(--bg-secondary) !important;
+}
+
+/* Modal Headers & High-Contrast Typography */
+.modal-title-group h3 {
+  color: var(--accent-color) !important;
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  margin-top: 5px !important;
+}
+
+.problem-box {
+  background: rgba(0, 128, 128, 0.12) !important;
+  border-left: 4px solid var(--scroll-progress-color) !important;
+  padding: 14px 18px !important;
+  border-radius: 8px !important;
+  margin: 15px 0 20px 0 !important;
+}
+
+.problem-box p {
+  color: var(--text-primary) !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+}
+
+.modal-fix-title {
+  color: var(--scroll-progress-color) !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  margin: 18px 0 10px 0 !important;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+}
+
+/* Code Snippet Box & Micro Copy Button */
+.code-snippet-box {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  margin: 6px 0 !important;
+  max-width: 100% !important;
+  gap: 15px !important;
+}
+
+[data-theme="light"] .code-snippet-box {
+  background: #f1f5f9 !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.code-text-content {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+  color: #2dd4bf !important;
+  font-size: 0.9rem !important;
+  word-break: break-all;
+}
+
+[data-theme="light"] .code-text-content {
+  color: #0f766e !important;
+}
+
+.copy-code-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+  cursor: pointer !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.copy-code-btn:hover {
+  color: var(--text-primary) !important;
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
+.copy-code-btn.copied {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+}
+
+/* ========================================================
+   === CATEGORY PILL BUTTONS POLISH & DUPLICATE TEXT FIX ===
+   ======================================================== */
+
+.category-filters {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+  margin-top: 15px !important;
+}
+
+/* Ensure only button elements are visible and styled as pills */
+.category-filters .category-btn {
+  padding: 8px 18px !important;
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.category-filters .category-btn:hover {
+  background: var(--hover-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--accent-color) !important;
+  transform: translateY(-2px) !important;
+}
+
+.category-filters .category-btn.active {
+  background: var(--accent-color) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 4px 12px rgba(0, 128, 128, 0.4) !important;
+}
+
+/* Safety rule: Hide any raw text nodes directly inside category-filters */
+.category-filters {
+  font-size: 0 !important; /* Hides raw text node artifacts */
+}
+
+.category-filters button {
+  font-size: 0.9rem !important; /* Restores button text size */
 }

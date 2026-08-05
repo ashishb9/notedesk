@@ -25,7 +25,12 @@
   <header class="hero about-hero">
     <nav>
       <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <ul>
+      <button class="hamburger-menu" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="notes.html">Notes</a></li>
         <li><a href="about.html">About</a></li>
@@ -58,7 +63,19 @@
 
       <div class="about-main-content">
         <div class="contact-form-container">
-          <form id="contactForm" class="contact-form" onsubmit="event.preventDefault(); showSuccessMessage();">
+          <!--
+            WEB3FORMS SETUP:
+            1. Go to https://web3forms.com and enter your email to get a free Access Key (no signup/password needed).
+            2. Paste that key below, replacing YOUR_ACCESS_KEY_HERE.
+            That's it — submissions will be emailed straight to your inbox.
+          -->
+          <form id="contactForm" class="contact-form">
+            <input type="hidden" name="access_key" value="70d98935-a038-499d-a87a-95e8849cabe9">
+            <input type="hidden" name="subject" value="New message from NoteDesk contact form">
+            <input type="hidden" name="from_name" value="NoteDesk Website">
+            <!-- Honeypot field to catch spam bots. Keep this hidden via CSS, never remove it. -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+
             <div class="form-group">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" required placeholder="Your full name">
@@ -71,7 +88,13 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
             </div>
-            <button type="submit" class="form-submit-btn">Send Message</button>
+            <button type="submit" class="form-submit-btn">
+              <span class="btn-text">Send Message</span>
+            </button>
+            <p id="formError" class="form-error-message" style="display:none;">
+              <i class="fas fa-exclamation-circle"></i>
+              <span>Something went wrong. Please try again, or email me directly at b9.ashish@gmail.com.</span>
+            </p>
           </form>
 
           <div id="formSuccess" class="form-success-message" style="display:none;">
@@ -111,4 +134,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
