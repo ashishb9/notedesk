@@ -221,20 +221,34 @@ document.addEventListener("DOMContentLoaded", () => {
                                         const stepItem = document.createElement('li');
                                         stepItem.innerHTML = stepText;
 
-                                        const codeTags = stepItem.querySelectorAll('code');
+                                  const codeTags = stepItem.querySelectorAll('code');
                                         codeTags.forEach(codeEl => {
+                                            const codeWrapper = document.createElement('div');
+                                            codeWrapper.className = 'code-snippet-box';
+
+                                            const codeText = document.createElement('span');
+                                            codeText.className = 'code-text-content';
+                                            codeText.textContent = codeEl.textContent;
+
                                             const copyBtn = document.createElement('button');
                                             copyBtn.className = 'copy-code-btn';
                                             copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+                                            copyBtn.title = "Copy command";
+
                                             copyBtn.addEventListener('click', (e) => {
                                                 e.stopPropagation();
-                                                navigator.clipboard.writeText(codeEl.textContent.trim());
-                                                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                                                navigator.clipboard.writeText(codeText.textContent.trim());
+                                                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                                                copyBtn.classList.add('copied');
                                                 setTimeout(() => {
                                                     copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+                                                    copyBtn.classList.remove('copied');
                                                 }, 2000);
                                             });
-                                            codeEl.appendChild(copyBtn);
+
+                                            codeWrapper.appendChild(codeText);
+                                            codeWrapper.appendChild(copyBtn);
+                                            codeEl.parentNode.replaceChild(codeWrapper, codeEl);
                                         });
 
                                         stepsList.appendChild(stepItem);
