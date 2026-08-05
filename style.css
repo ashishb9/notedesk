@@ -474,7 +474,7 @@ h2 {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   transition: all 0.4s ease;
-  color: var(--text-primary) !important; /* Forces bright text in dark & light themes */
+  color: var(--text-primary) !important;
   text-align: left;
   font-size: 1.05em;
   font-weight: 600;
@@ -1588,7 +1588,7 @@ nav.scrolled {
   }
 }
 
-/* === SURGICAL POPUP MODAL & CARD FIXES (APPENDED AT BOTTOM) === */
+/* === SURGICAL POPUP MODAL & COLORFUL BADGES FIXES === */
 
 /* Force modal overlay to cover the exact visible screen viewport */
 .modal-overlay {
@@ -1653,23 +1653,70 @@ nav.scrolled {
   color: #ffffff !important;
 }
 
-/* View Solution Button Styling on Cards */
-.view-fix-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent-color);
-  background: rgba(0, 128, 128, 0.12);
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid rgba(0, 128, 128, 0.3);
-  margin-top: 15px;
-  transition: all 0.2s ease;
+/* Note Card Header & Badge Styles */
+.note-card-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
 }
 
-.note-card:hover .view-fix-btn {
-  background: var(--accent-color);
-  color: #ffffff;
+.note-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-windows {
+  background-color: rgba(0, 120, 212, 0.2);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.badge-linux {
+  background-color: rgba(234, 179, 8, 0.2);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.3);
+}
+
+.badge-web {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+.badge-dev {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.badge-productivity {
+  background-color: rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+  border: 1px solid rgba(244, 114, 182, 0.3);
+}
+
+.badge-cybersecurity {
+  background-color: rgba(20, 184, 166, 0.2);
+  color: #2dd4bf;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+.note-card-title {
+  margin: 0 0 12px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  line-height: 1.35;
+}
+
+.card-problem {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 10px;
 }
