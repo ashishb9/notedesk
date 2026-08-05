@@ -177,16 +177,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         const categoryName = note.category.toUpperCase();
 
-                        // Clean Card HTML: Removed redundant "Problem:" text and added readable solution button
+                        // Clean Card Layout: Header Badges, Bold Title, Clean Problem Text
                         card.innerHTML = `
                             <div class="note-card-header">
                                 <span class="note-badge badge-${note.category}">${categoryName}</span>
                             </div>
                             <h3 class="note-card-title">${note.title}</h3>
                             <p class="card-problem">${note.problem}</p>
-                            <div class="note-card-footer">
-                                <span class="view-fix-btn">View Solution &amp; Steps <i class="fa-solid fa-arrow-right"></i></span>
-                            </div>
                         `;
                         notesGrid.appendChild(card);
                     });
@@ -252,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     if (modalOverlay) {
                         modalOverlay.classList.add('active');
-                        document.body.style.overflow = 'hidden'; // Lock background scrolling while modal is open
+                        document.body.style.overflow = 'hidden'; // Lock background scrolling
                         window.location.hash = `note-${note.id}`;
                     }
                 };
@@ -260,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const closeModal = () => {
                     if (modalOverlay) {
                         modalOverlay.classList.remove('active');
-                        document.body.style.overflow = ''; // Restore background scrolling
+                        document.body.style.overflow = ''; // Restore scrolling
                         history.pushState("", document.title, window.location.pathname + window.location.search);
                     }
                 };
@@ -274,9 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     openModalForNote(note);
                 });
 
-                if (closeModalBtn) {
-                    closeModalBtn.addEventListener('click', closeModal);
-                }
+                if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 
                 if (modalOverlay) {
                     modalOverlay.addEventListener('click', (e) => {
