@@ -1720,3 +1720,132 @@ nav.scrolled {
   flex-grow: 1;
   margin-bottom: 10px;
 }
+
+/* ========================================================
+   === SEARCH BAR & MODAL CODE SNIPPET ENHANCEMENTS ===
+   ======================================================== */
+
+/* Search Bar Wrapper Fixes */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-wrapper .search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-color);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 14px 20px 14px 48px !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  font-size: 1rem !important;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.search-bar:focus {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.25) !important;
+  outline: none;
+  background: var(--bg-secondary) !important;
+}
+
+/* Modal Headers & High-Contrast Typography */
+.modal-title-group h3 {
+  color: var(--accent-color) !important;
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  margin-top: 5px !important;
+}
+
+.problem-box {
+  background: rgba(0, 128, 128, 0.12) !important;
+  border-left: 4px solid var(--scroll-progress-color) !important;
+  padding: 14px 18px !important;
+  border-radius: 8px !important;
+  margin: 15px 0 20px 0 !important;
+}
+
+.problem-box p {
+  color: var(--text-primary) !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+}
+
+.modal-fix-title {
+  color: var(--scroll-progress-color) !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  margin: 18px 0 10px 0 !important;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+}
+
+/* Code Snippet Box & Micro Copy Button */
+.code-snippet-box {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  margin: 6px 0 !important;
+  max-width: 100% !important;
+  gap: 15px !important;
+}
+
+[data-theme="light"] .code-snippet-box {
+  background: #f1f5f9 !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.code-text-content {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+  color: #2dd4bf !important;
+  font-size: 0.9rem !important;
+  word-break: break-all;
+}
+
+[data-theme="light"] .code-text-content {
+  color: #0f766e !important;
+}
+
+.copy-code-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+  cursor: pointer !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.copy-code-btn:hover {
+  color: var(--text-primary) !important;
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
+.copy-code-btn.copied {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+}
