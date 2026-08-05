@@ -177,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         const categoryName = note.category.toUpperCase();
 
-                        // Clean Card Layout: Header Badges, Bold Title, Clean Problem Text
                         card.innerHTML = `
                             <div class="note-card-header">
                                 <span class="note-badge badge-${note.category}">${categoryName}</span>
@@ -221,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         const stepItem = document.createElement('li');
                                         stepItem.innerHTML = stepText;
 
-                                  const codeTags = stepItem.querySelectorAll('code');
+                                        const codeTags = stepItem.querySelectorAll('code');
                                         codeTags.forEach(codeEl => {
                                             const codeWrapper = document.createElement('div');
                                             codeWrapper.className = 'code-snippet-box';
@@ -263,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     if (modalOverlay) {
                         modalOverlay.classList.add('active');
-                        document.body.style.overflow = 'hidden'; // Lock background scrolling
+                        document.body.style.overflow = 'hidden';
                         window.location.hash = `note-${note.id}`;
                     }
                 };
@@ -271,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const closeModal = () => {
                     if (modalOverlay) {
                         modalOverlay.classList.remove('active');
-                        document.body.style.overflow = ''; // Restore scrolling
+                        document.body.style.overflow = '';
                         history.pushState("", document.title, window.location.pathname + window.location.search);
                     }
                 };
