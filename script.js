@@ -140,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Basic guard: don't let users spam the submit button mid-request
             if (submitBtn) submitBtn.disabled = true;
             if (btnText) btnText.textContent = 'Sending...';
             if (formError) formError.style.display = 'none';
@@ -148,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = new FormData(contactForm);
             const accessKey = formData.get('access_key');
 
-            // Friendly reminder if the site owner forgot to set up their key
             if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
                 console.error('NoteDesk contact form: please set your Web3Forms access_key in contact.html (get one free at https://web3forms.com)');
                 if (formError) {
@@ -194,15 +192,78 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ===================================
+    // FEATURED NOTES LOGIC
+    // ===================================
+    const initFeaturedNotes = () => {
+        const featuredContainer = document.getElementById('featuredNotesContainer');
+        if (!featuredContainer) return;
+
+        fetch('notes.json')
+            .then(res => res.json())
+            .then(data => {
+                if (!data || data.length === 0) return;
+                
+                // Shuffle and pick 3 random notes
+                const shuffled = [...data].sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, 3);
+                
+                featuredContainer.innerHTML = '';
+                selected.forEach(note => {
+                    const card = document.createElement('div');
+                    card.className = 'note';
+                    
+                    const badge = document.createElement('span');
+                    badge.className = `note-badge badge-${note.category}`;
+                    badge.textContent = note.category.toUpperCase();
+                    badge.style.display = 'inline-block';
+                    badge.style.marginBottom = '12px';
+                    
+                    const title = document.createElement('h3');
+                    title.textContent = note.title;
+                    title.style.marginTop = '0';
+                    title.style.fontSize = '1.15em';
+                    
+                    const prob = document.createElement('p');
+                    prob.textContent = note.problem;
+                    prob.style.fontSize = '0.95em';
+                    prob.style.color = 'var(--text-secondary)';
+                    prob.style.margin = '0';
+                    prob.style.lineHeight = '1.5';
+                    
+                    card.appendChild(badge);
+                    card.appendChild(title);
+                    card.appendChild(prob);
+                    
+                    card.addEventListener('click', () => {
+                        window.location.href = `notes.html#note-${note.id}`;
+                    });
+                    
+                    featuredContainer.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching featured notes:', err);
+                featuredContainer.innerHTML = '<p>Unable to load featured notes at this time.</p>';
+            });
+    };
+
+    // ===================================
     // 3. NOTES PAGE LOGIC & MODAL FIXES
     // ===================================
     const initNotesPage = () => {
         const notesGrid = document.getElementById('notesGrid');
         if (!notesGrid) return;
 
+        // Shared State for Search & Categories
+        let currentCategory = 'all';
+        let currentSearchTerm = '';
+        let allNotesData = [];
+
         fetch('notes.json')
             .then(response => response.json())
             .then(notesData => {
+                allNotesData = notesData;
+                
                 const modalOverlay = document.getElementById('noteModalOverlay');
                 const modalTitle = document.getElementById('modalTitle');
                 const modalProblem = document.getElementById('modalProblem');
@@ -235,6 +296,21 @@ document.addEventListener("DOMContentLoaded", () => {
                         `;
                         notesGrid.appendChild(card);
                     });
+                };
+
+                const updateNotesDisplay = () => {
+                    const term = currentSearchTerm;
+                    const filteredNotes = allNotesData.filter(note => {
+                        const matchesCategory = currentCategory === 'all' || note.category === currentCategory;
+                        const matchesSearch = !term || 
+                            note.title.toLowerCase().includes(term) ||
+                            note.problem.toLowerCase().includes(term) ||
+                            note.category.toLowerCase().includes(term) ||
+                            (note.fixes && note.fixes.some(fix => fix.title.toLowerCase().includes(term) || (fix.steps && fix.steps.some(step => step.toLowerCase().includes(term)))));
+                        
+                        return matchesCategory && matchesSearch;
+                    });
+                    generateNoteCards(filteredNotes);
                 };
 
                 const openModalForNote = (note) => {
@@ -349,14 +425,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (searchInput) {
                     searchInput.addEventListener('input', e => {
-                        const term = e.target.value.toLowerCase().trim();
-                        const filteredNotes = notesData.filter(note =>
-                            note.title.toLowerCase().includes(term) ||
-                            note.problem.toLowerCase().includes(term) ||
-                            note.category.toLowerCase().includes(term) ||
-                            (note.fixes && note.fixes.some(fix => fix.title.toLowerCase().includes(term) || (fix.steps && fix.steps.some(step => step.toLowerCase().includes(term)))))
-                        );
-                        generateNoteCards(filteredNotes);
+                        currentSearchTerm = e.target.value.toLowerCase().trim();
+                        updateNotesDisplay();
                     });
                 }
 
@@ -365,25 +435,35 @@ document.addEventListener("DOMContentLoaded", () => {
                         btn.addEventListener('click', () => {
                             categoryButtons.forEach(b => b.classList.remove('active'));
                             btn.classList.add('active');
-                            const category = btn.dataset.category;
-                            const filteredNotes = category === 'all' ? notesData : notesData.filter(note => note.category === category);
-                            generateNoteCards(filteredNotes);
+                            currentCategory = btn.dataset.category;
+                            updateNotesDisplay();
                         });
                     });
                 }
 
+                // Check URL Params for Initial State
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlCategory = urlParams.get('category');
 
                 if (urlCategory) {
+                    currentCategory = urlCategory;
+                    categoryButtons.forEach(b => b.classList.remove('active'));
                     const categoryButton = document.querySelector(`.category-filters button[data-category="${urlCategory}"]`);
-                    if (categoryButton) categoryButton.click();
-                    else document.querySelector('.category-filters button[data-category="all"]').click();
+                    if (categoryButton) categoryButton.classList.add('active');
+                    else {
+                        document.querySelector('.category-filters button[data-category="all"]').classList.add('active');
+                        currentCategory = 'all';
+                    }
                 } else {
+                    categoryButtons.forEach(b => b.classList.remove('active'));
                     const allButton = document.querySelector('.category-filters button[data-category="all"]');
-                    if (allButton) allButton.click();
+                    if (allButton) allButton.classList.add('active');
                 }
 
+                // Initial Generation
+                updateNotesDisplay();
+
+                // Check Hash for Direct Linking
                 const hash = window.location.hash;
                 if (hash && hash.startsWith('#note-')) {
                     const targetId = parseInt(hash.replace('#note-', ''));
@@ -409,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Auto-updating copyright year (never needs a manual edit again)
+    // Auto-updating copyright year
     const initCopyrightYear = () => {
         document.querySelectorAll('.copyright-year').forEach(el => {
             el.textContent = new Date().getFullYear();
@@ -423,6 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollAnimations();
     aboutHeroShrink();
     handleContactForm();
+    initFeaturedNotes();
     initNotesPage();
     initParallax();
     initScrollProgressBar();
