@@ -486,6 +486,7 @@ h2 {
   font-weight: 600;
   perspective: 1000px;
   transform-style: preserve-3d;
+  cursor: pointer; /* Added for Phase 1 - makes featured cards clickable */
 }
 
 .note:hover {
