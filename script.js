@@ -3,19 +3,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. THEME SWITCHING
     // ===================================
     const themeSwitch = document.getElementById('theme-switch');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    const updateThemeIcon = (theme) => {
+        if(themeIcon) {
+            themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    };
+
     if (themeSwitch) {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             document.documentElement.setAttribute('data-theme', 'light');
             themeSwitch.checked = true;
+            updateThemeIcon('light');
+        } else {
+            updateThemeIcon('dark');
         }
         themeSwitch.addEventListener('change', function() {
             if (this.checked) {
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
+                updateThemeIcon('light');
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
+                updateThemeIcon('dark');
             }
         });
     }
@@ -203,7 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 if (!data || data.length === 0) return;
                 
-                // Shuffle and pick 3 random notes
                 const shuffled = [...data].sort(() => 0.5 - Math.random());
                 const selected = shuffled.slice(0, 3);
                 
@@ -254,7 +266,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const notesGrid = document.getElementById('notesGrid');
         if (!notesGrid) return;
 
-        // Shared State for Search & Categories
         let currentCategory = 'all';
         let currentSearchTerm = '';
         let allNotesData = [];
@@ -441,7 +452,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
 
-                // Check URL Params for Initial State
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlCategory = urlParams.get('category');
 
@@ -460,10 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (allButton) allButton.classList.add('active');
                 }
 
-                // Initial Generation
                 updateNotesDisplay();
 
-                // Check Hash for Direct Linking
                 const hash = window.location.hash;
                 if (hash && hash.startsWith('#note-')) {
                     const targetId = parseInt(hash.replace('#note-', ''));
@@ -485,6 +493,18 @@ document.addEventListener("DOMContentLoaded", () => {
             hamburger.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+            });
+
+            // Close menu when a link is clicked
+            const links = navLinks.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
             });
         }
     };
