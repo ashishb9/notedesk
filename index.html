@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.min.css" />
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
 
@@ -46,7 +46,7 @@
   <header class="hero">
   <nav>
     <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-    <button class="hamburger-menu" aria-label="Toggle Navigation Menu">
+    <button class="hamburger-menu" aria-label="Toggle Navigation Menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
@@ -58,7 +58,7 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="theme-toggle">
-      <i id="theme-icon" class="fas fa-sun"></i>
+      <i id="theme-icon" class="fas fa-moon"></i>
       <div class="toggle-switch">
         <input type="checkbox" id="theme-switch" aria-label="Toggle light and dark theme">
         <label for="theme-switch"></label>
@@ -142,6 +142,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="notes.html">Notes</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -179,7 +180,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
-  <script src="ticker.js"></script>
+  <script src="script.min.js"></script>
+  <script src="ticker.min.js"></script>
 </body>
 </html>
