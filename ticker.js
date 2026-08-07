@@ -126,6 +126,7 @@ function openNewsModal(article) {
   }
 
   modal.classList.add("active");
+  document.body.style.overflow = "hidden"; // Phase 2: Scroll Lock Added
 }
 
 function displayFallback(message, container) {
@@ -140,17 +141,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("newsModalOverlay");
   const closeBtn = document.getElementById("closeNewsModalBtn");
 
+  const closeNewsModal = () => {
+    if (modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = ""; // Phase 2: Scroll Unlock Restored
+    }
+  };
+
   if (closeBtn && modal) {
-    closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+    closeBtn.addEventListener("click", closeNewsModal);
   }
   if (modal) {
     modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.remove("active");
+      if (e.target === modal) closeNewsModal();
     });
   }
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal && modal.classList.contains("active")) {
-      modal.classList.remove("active");
+      closeNewsModal();
     }
   });
 });
