@@ -1071,8 +1071,14 @@ footer {
     font-size: 2.2em;
   }
   nav {
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 20px 20px;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+    order: 3;
   }
   .why, .explore, .featured, .news-ticker {
     padding: 80px 20px;
@@ -1534,13 +1540,13 @@ nav ul {
     display: block;
   }
   
-  .nav-links {
+.nav-links {
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: #000;
+    background-color: var(--bg-primary);
     flex-direction: column;
     justify-content: center;
     align-items: center;
