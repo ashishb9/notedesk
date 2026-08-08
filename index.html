@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NoteDesk</title>
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://notedeskapp.com/" />
+
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,17 +23,32 @@
 
   <!-- Open Graph / Facebook / LinkedIn -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://notedeskapp.com/index.html">
+  <meta property="og:url" content="https://notedeskapp.com/">
   <meta property="og:title" content="NoteDesk — Your Tech Reference, One Note at a Time">
   <meta property="og:description" content="Fixes, guides, and insights all in one place — a curated library of real-world tech notes.">
   <meta property="og:image" content="https://notedeskapp.com/img/tech-pattern.jpg">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://notedeskapp.com/index.html">
+  <meta name="twitter:url" content="https://notedeskapp.com/">
   <meta name="twitter:title" content="NoteDesk — Your Tech Reference, One Note at a Time">
   <meta name="twitter:description" content="Fixes, guides, and insights all in one place — a curated library of real-world tech notes.">
   <meta name="twitter:image" content="https://notedeskapp.com/img/tech-pattern.jpg">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NoteDesk",
+    "url": "https://notedeskapp.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://notedeskapp.com/notes.html?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 </head>
 <body>
   <div class="progress-bar" id="progressBar"></div>
@@ -181,6 +199,6 @@
   </div>
 
   <script src="script.js"></script>
-  <script src="ticker.min.js"></script>
+  <script src="ticker.js"></script>
 </body>
 </html>
