@@ -406,6 +406,36 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
 
+                 // Phase 8: Copy Link to Note Logic
+                    const copyLinkBtn = document.getElementById('copyLinkBtn');
+                    if (copyLinkBtn) {
+                        const newCopyLinkBtn = copyLinkBtn.cloneNode(true);
+                        copyLinkBtn.parentNode.replaceChild(newCopyLinkBtn, copyLinkBtn);
+                        
+                        newCopyLinkBtn.addEventListener('click', () => {
+                            const noteUrl = `${window.location.origin}${window.location.pathname}#note-${note.id}`;
+                            navigator.clipboard.writeText(noteUrl);
+                            const origHTML = newCopyLinkBtn.innerHTML;
+                            newCopyLinkBtn.innerHTML = '<i class="fa-solid fa-check"></i> Link Copied!';
+                            newCopyLinkBtn.classList.add('copied');
+                            setTimeout(() => {
+                                newCopyLinkBtn.innerHTML = origHTML;
+                                newCopyLinkBtn.classList.remove('copied');
+                            }, 2000);
+                        });
+                    }
+
+                    // Phase 8: Print Note Logic
+                    const printNoteBtn = document.getElementById('printNoteBtn');
+                    if (printNoteBtn) {
+                        const newPrintBtn = printNoteBtn.cloneNode(true);
+                        printNoteBtn.parentNode.replaceChild(newPrintBtn, printNoteBtn);
+                        
+                        newPrintBtn.addEventListener('click', () => {
+                            window.print();
+                        });
+                    }
+
                     // Phase 4: Copy All Steps Logic
                     const copyAllBtn = document.getElementById('copyAllStepsBtn');
                     if (copyAllBtn) {
@@ -556,6 +586,20 @@ document.addEventListener("DOMContentLoaded", () => {
                         updateNotesDisplay();
                     });
                 }
+
+                // Phase 8: '/' keyboard shortcut to focus search
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === '/') {
+                        const activeTag = document.activeElement ? document.activeElement.tagName : '';
+                        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag)) return;
+                        
+                        if (searchInput) {
+                            e.preventDefault();
+                            searchInput.focus();
+                            searchInput.select();
+                        }
+                    }
+                });
 
                 if (categoryButtons) {
                     categoryButtons.forEach(btn => {

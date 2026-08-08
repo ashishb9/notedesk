@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   
-  <!-- Phase 4: Highlight.js CSS Theme -->
+  <!-- Highlight.js CSS Theme -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/night-owl.min.css">
   
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -51,9 +51,9 @@
       { "@type": "ListItem", "position": 2, "name": "Linux", "url": "https://notedeskapp.com/notes.html?category=linux" },
       { "@type": "ListItem", "position": 3, "name": "Web Development", "url": "https://notedeskapp.com/notes.html?category=web" },
       { "@type": "ListItem", "position": 4, "name": "Dev Tools", "url": "https://notedeskapp.com/notes.html?category=dev" },
-      { "@type": "ListItem", "position": 5, "name": "Productivity", "url": "[https://notedeskapp.com/notes.html?category=productivity](https://notedeskapp.com/notes.html?category=productivity)" },
-      { "@type": "ListItem", "position": 6, "name": "Cybersecurity", "url": "[https://notedeskapp.com/notes.html?category=cybersecurity](https://notedeskapp.com/notes.html?category=cybersecurity)" },
-      { "@type": "ListItem", "position": 7, "name": "AI & Prompts", "url": "[https://notedeskapp.com/notes.html?category=ai](https://notedeskapp.com/notes.html?category=ai)" }
+      { "@type": "ListItem", "position": 5, "name": "Productivity", "url": "https://notedeskapp.com/notes.html?category=productivity" },
+      { "@type": "ListItem", "position": 6, "name": "Cybersecurity", "url": "https://notedeskapp.com/notes.html?category=cybersecurity" },
+      { "@type": "ListItem", "position": 7, "name": "AI & Prompts", "url": "https://notedeskapp.com/notes.html?category=ai" }
     ]
   }
   </script>
@@ -101,7 +101,7 @@
       <div class="notes-controls">
         <div class="search-wrapper">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="notes-search" placeholder="Search by topic, command, or issue..." class="search-bar">
+          <input type="text" id="notes-search" placeholder="Search by topic, command, or issue... (Press '/' to focus)" class="search-bar">
         </div>
         <div class="category-filters" id="categoryFilters">
           <button class="category-btn active" data-category="all">All</button>
@@ -161,15 +161,19 @@
           <p id="modalProblem"></p>
         </div>
         
-        <!-- Phase 4: Copy All Steps Header Added Here -->
-        <div class="modal-fixes-header" style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        <!-- Phase 8: Action Buttons (Copy Link, Print, Copy All Steps) -->
+        <div class="modal-fixes-header" style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; flex-wrap: wrap; gap: 10px;">
           <h4 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">Solutions</h4>
-          <button id="copyAllStepsBtn" class="copy-all-btn"><i class="fa-regular fa-copy"></i> Copy All Steps</button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button id="copyLinkBtn" class="copy-all-btn" title="Copy link to this note"><i class="fa-solid fa-link"></i> Copy Link</button>
+            <button id="printNoteBtn" class="copy-all-btn" title="Print or save as PDF"><i class="fa-solid fa-print"></i> Print</button>
+            <button id="copyAllStepsBtn" class="copy-all-btn"><i class="fa-regular fa-copy"></i> Copy All Steps</button>
+          </div>
         </div>
         
         <div class="modal-fixes" id="modalFixesContainer"></div>
         
-        <!-- Phase 4: Related Notes Container -->
+        <!-- Related Notes Container -->
         <div class="modal-related-notes" id="modalRelatedNotesContainer" style="display: none;">
           <h4 class="related-notes-title">Related Notes</h4>
           <div class="related-notes-grid" id="relatedNotesGrid"></div>
@@ -179,7 +183,6 @@
   </div>
 
   <script src="script.js"></script>
-  <!-- Phase 4: Highlight.js Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </body>
 </html>
