@@ -836,4 +836,13 @@ const updateNotesDisplay = () => {
     initBackToTopBtn();
     initHamburger();
     initCopyrightYear();
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('ServiceWorker registered successfully:', reg.scope))
+                .catch(err => console.error('ServiceWorker registration failed:', err));
+        });
+    }
 });

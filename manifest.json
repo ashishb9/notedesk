@@ -1,0 +1,21 @@
+{
+  "name": "NoteDesk",
+  "short_name": "NoteDesk",
+  "description": "Your Tech Reference, One Note at a Time",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#008080",
+  "icons": [
+    {
+      "src": "img/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
