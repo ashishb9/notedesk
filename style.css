@@ -98,19 +98,18 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: -1;
+body {
+  /* ...keep all your other existing properties... */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/tech-pattern.jpg');
+  background-size: cover, cover;
+  background-attachment: fixed, fixed;
+  background-position: center center, center center;
+  background-repeat: no-repeat, no-repeat;
 }
 
-[data-theme="light"] body::before {
-  background-color: rgba(245, 247, 250, 0.7);
+/* ADD this new rule right after body: */
+[data-theme="light"] body {
+  background-image: linear-gradient(rgba(245, 247, 250, 0.7), rgba(245, 247, 250, 0.7)), url('img/tech-pattern.jpg');
 }
 
 /* Hero Section */
