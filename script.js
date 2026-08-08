@@ -313,6 +313,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 };
 
+const highlightText = (text, term) => {
+                    if (!term) return text;
+                    const regex = new RegExp(`(${term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+                    return text.replace(regex, '<mark>$1</mark>');
+                };
+
                 const generateNoteCards = (data) => {
                     notesGrid.innerHTML = '';
                     const bookmarks = getBookmarks();
@@ -320,6 +326,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     let displayData = data;
                     if (currentCategory === 'saved') {
                         displayData = data.filter(note => bookmarks.includes(note.id));
+                    } else if (currentCategory && currentCategory.startsWith('tag:')) {
+                        const tagName = currentCategory.replace('tag:', '');
+                        displayData = data.filter(note => note.tags && note.tags.includes(tagName));
                     }
 
                     if (!displayData || displayData.length === 0) {
@@ -337,6 +346,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         const categoryName = note.category.toUpperCase();
                         const isBookmarked = bookmarks.includes(note.id);
 
+                        const highlightedTitle = highlightText(note.title, currentSearchTerm);
+                        const highlightedProblem = highlightText(note.problem, currentSearchTerm);
+
+                        let tagsHTML = '';
+                        if (note.tags && Array.isArray(note.tags)) {
+                            tagsHTML = `<div class="note-tags">` + note.tags.map(t => `<span class="tag-pill" data-tag="${t}">#${t}</span>`).join('') + `</div>`;
+                        }
+
                         card.innerHTML = `
                             <div class="note-card-header" style="display: flex; justify-content: space-between; align-items: center;">
                                 <button class="card-bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" title="${isBookmarked ? 'Remove bookmark' : 'Bookmark note'}">
@@ -344,37 +361,53 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </button>
                                 <span class="note-badge badge-${note.category}">${categoryName}</span>
                             </div>
-                            <h3 class="note-card-title">${note.title}</h3>
-                            <p class="card-problem">${note.problem}</p>
+                            <h3 class="note-card-title">${highlightedTitle}</h3>
+                            <p class="card-problem">${highlightedProblem}</p>
+                            ${tagsHTML}
                         `;
 
                         const bookmarkBtn = card.querySelector('.card-bookmark-btn');
                         bookmarkBtn.addEventListener('click', (e) => toggleBookmark(note.id, e));
 
+                        card.querySelectorAll('.tag-pill').forEach(pill => {
+                            pill.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                const tagVal = pill.dataset.tag;
+                                currentCategory = `tag:${tagVal}`;
+                                categoryButtons.forEach(b => b.classList.remove('active'));
+                                updateNotesDisplay();
+                            });
+                        });
+
                         notesGrid.appendChild(card);
                     });
                 };
-
-            const updateNotesDisplay = () => {
+const updateNotesDisplay = () => {
                     const term = currentSearchTerm;
                     const bookmarks = getBookmarks();
 
                     const filteredNotes = allNotesData.filter(note => {
-                        const matchesCategory = currentCategory === 'all' || 
-                            (currentCategory === 'saved' && bookmarks.includes(note.id)) || 
-                            note.category === currentCategory;
+                        let matchesCategory = true;
+                        if (currentCategory === 'saved') {
+                            matchesCategory = bookmarks.includes(note.id);
+                        } else if (currentCategory && currentCategory.startsWith('tag:')) {
+                            const tagName = currentCategory.replace('tag:', '');
+                            matchesCategory = note.tags && note.tags.includes(tagName);
+                        } else if (currentCategory !== 'all') {
+                            matchesCategory = note.category === currentCategory;
+                        }
 
                         const matchesSearch = !term || 
                             note.title.toLowerCase().includes(term) ||
                             note.problem.toLowerCase().includes(term) ||
                             note.category.toLowerCase().includes(term) ||
+                            (note.tags && note.tags.some(t => t.toLowerCase().includes(term))) ||
                             (note.fixes && note.fixes.some(fix => fix.title.toLowerCase().includes(term) || (fix.steps && fix.steps.some(step => step.toLowerCase().includes(term)))));
                         
                         return matchesCategory && matchesSearch;
                     });
                     generateNoteCards(filteredNotes);
                 };
-
                const openModalForNote = (note) => {
                     if (!note) return;
 

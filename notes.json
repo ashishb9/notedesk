@@ -4,6 +4,7 @@
     "category": "windows",
     "title": "Task Manager Not Opening",
     "problem": "Clicking Task Manager shows nothing or crashes.",
+    "tags": ["windows", "task-manager", "crash", "ui"],
     "fixes": [
       {
         "title": "Method 1: Keyboard Shortcut",
@@ -27,6 +28,7 @@
     "category": "windows",
     "title": "WiFi Connected but No Internet",
     "problem": "WiFi shows connected but websites don't load.",
+    "tags": ["windows", "wifi", "network", "dns"],
     "fixes": [
       {
         "title": "Method 1: Reset Winsock Catalog",
@@ -51,6 +53,7 @@
     "category": "linux",
     "title": "Permission Denied Error",
     "problem": "Cannot write or execute files even as root.",
+    "tags": ["linux", "permissions", "chmod", "chown"],
     "fixes": [
       {
         "title": "Method 1: Check File Ownership",
@@ -73,6 +76,7 @@
     "category": "web",
     "title": "CORS Policy Blocked",
     "problem": "API calls fail with 'Access-Control-Allow-Origin' error.",
+    "tags": ["web", "cors", "api", "security"],
     "fixes": [
       {
         "title": "Method 1: Configure Backend Server",
@@ -97,6 +101,7 @@
     "category": "productivity",
     "title": "Slow Startup Time",
     "problem": "Computer takes too long to boot up.",
+    "tags": ["productivity", "startup", "performance", "windows"],
     "fixes": [
       {
         "title": "Method 1: Disable Startup Programs",
@@ -120,6 +125,7 @@
     "category": "windows",
     "title": "Blue Screen of Death (BSOD)",
     "problem": "System crashes unexpectedly with a blue screen.",
+    "tags": ["windows", "bsod", "crash", "hardware"],
     "fixes": [
       {
         "title": "Method 1: Check for Recent Changes",
@@ -143,6 +149,7 @@
     "category": "linux",
     "title": "Apt-Get Not Working",
     "problem": "Cannot install or update packages using apt-get.",
+    "tags": ["linux", "apt", "packages", "network"],
     "fixes": [
       {
         "title": "Method 1: Check Network Connectivity",
@@ -165,6 +172,7 @@
     "category": "web",
     "title": "Layout Breaks in Mobile",
     "problem": "Website looks fine on desktop but is broken on mobile.",
+    "tags": ["web", "responsive", "css", "mobile"],
     "fixes": [
       {
         "title": "Method 1: Check Media Queries",
@@ -187,6 +195,7 @@
     "category": "productivity",
     "title": "Keyboard Shortcuts Not Working",
     "problem": "Common keyboard shortcuts like Ctrl+C fail.",
+    "tags": ["productivity", "shortcuts", "clipboard"],
     "fixes": [
       {
         "title": "Method 1: Restart Applications",
@@ -209,6 +218,7 @@
     "category": "windows",
     "title": "Printer Not Responding",
     "problem": "Printer is online but will not print documents.",
+    "tags": ["windows", "printer", "hardware"],
     "fixes": [
       {
         "title": "Method 1: Restart All Devices",
@@ -230,6 +240,7 @@
     "category": "windows",
     "title": "Windows Update Stuck on 'Checking for Updates'",
     "problem": "Windows Update seems to hang indefinitely without finding updates.",
+    "tags": ["windows", "update", "troubleshoot"],
     "fixes": [
       {
         "title": "Method 1: Run the Windows Update Troubleshooter",
@@ -265,6 +276,7 @@
     "category": "linux",
     "title": "Troubleshooting a Failed Systemd Service",
     "problem": "A crucial service failed to start or is not running correctly.",
+    "tags": ["linux", "systemd", "services", "logs"],
     "fixes": [
       {
         "title": "Method 1: Check the Service Status and Logs",
@@ -287,6 +299,7 @@
     "category": "web",
     "title": "Implementing a Service Worker",
     "problem": "How to make a web app work offline and be a Progressive Web App (PWA).",
+    "tags": ["web", "pwa", "service-worker", "offline"],
     "fixes": [
       {
         "title": "Method 1: Register the Service Worker",
@@ -311,6 +324,7 @@
     "category": "dev",
     "title": "Setting up a Docker Development Environment",
     "problem": "How to create a consistent and isolated development environment using Docker.",
+    "tags": ["dev", "docker", "containers", "setup"],
     "fixes": [
       {
         "title": "Method 1: Create a Dockerfile",
@@ -335,6 +349,7 @@
     "category": "cybersecurity",
     "title": "Understanding Public Key Encryption",
     "problem": "How to use public/private key pairs for secure communication.",
+    "tags": ["cybersecurity", "encryption", "ssh", "keys"],
     "fixes": [
       {
         "title": "Method 1: Generate a Key Pair",
@@ -357,6 +372,7 @@
     "category": "productivity",
     "title": "Automating Repetitive Tasks with Scripts",
     "problem": "I have to do the same task every day; how can I automate it?",
+    "tags": ["productivity", "automation", "bash", "python"],
     "fixes": [
       {
         "title": "Method 1: Use Shell Scripts (Bash/PowerShell)",
@@ -380,6 +396,7 @@
     "category": "windows",
     "title": "Fixing Corrupted User Profiles",
     "problem": "Cannot log in or user profile is a temporary profile.",
+    "tags": ["windows", "profile", "registry", "login"],
     "fixes": [
       {
         "title": "Method 1: Registry Fix (Advanced)",
@@ -405,6 +422,7 @@
     "category": "linux",
     "title": "Building and Installing from Source",
     "problem": "Software is not available in official repositories; how do I install it?",
+    "tags": ["linux", "source", "compile", "make"],
     "fixes": [
       {
         "title": "Method 1: The 'Classic' Steps",
@@ -429,6 +447,7 @@
     "category": "web",
     "title": "Troubleshooting Webpack Configuration",
     "problem": "Webpack build fails or bundles are not being created correctly.",
+    "tags": ["web", "webpack", "bundler", "debug"],
     "fixes": [
       {
         "title": "Method 1: Check the Webpack Config File",
@@ -452,6 +471,7 @@
     "category": "dev",
     "title": "Setting up SSH with VS Code Remote Development",
     "problem": "How to connect VS Code to a remote Linux server for coding.",
+    "tags": ["dev", "ssh", "vscode", "remote"],
     "fixes": [
       {
         "title": "Method 1: Configure SSH Keys",
@@ -475,6 +495,7 @@
     "category": "cybersecurity",
     "title": "Using Wireshark for Network Analysis",
     "problem": "How to capture and analyze network traffic to debug issues or find vulnerabilities.",
+    "tags": ["cybersecurity", "wireshark", "packets", "network"],
     "fixes": [
       {
         "title": "Method 1: Capture Packets",
@@ -499,6 +520,7 @@
     "category": "productivity",
     "title": "Advanced Git Rebase Workflow",
     "problem": "How to clean up your commit history before merging a branch.",
+    "tags": ["productivity", "git", "rebase", "history"],
     "fixes": [
       {
         "title": "Method 1: Interactive Rebase",
@@ -522,6 +544,7 @@
     "category": "windows",
     "title": "Using the Windows Subsystem for Linux (WSL)",
     "problem": "How to run Linux command-line tools on a Windows machine.",
+    "tags": ["windows", "wsl", "linux", "terminal"],
     "fixes": [
       {
         "title": "Method 1: Install WSL and a Distribution",
@@ -545,6 +568,7 @@
     "category": "linux",
     "title": "Managing Disk Space with `du` and `df`",
     "problem": "My disk is full, and I need to find out what is taking up space.",
+    "tags": ["linux", "disk", "storage", "du", "df"],
     "fixes": [
       {
         "title": "Method 1: Check Total Disk Usage",
@@ -567,6 +591,7 @@
     "category": "web",
     "title": "Debugging a 500 Internal Server Error",
     "problem": "The server returns an unspecified error, making it hard to debug.",
+    "tags": ["web", "server", "error", "debug"],
     "fixes": [
       {
         "title": "Method 1: Check Server Logs",
@@ -590,6 +615,7 @@
     "category": "dev",
     "title": "Using `nvm` for Node.js Version Management",
     "problem": "Need to switch between different Node.js versions for various projects.",
+    "tags": ["dev", "nvm", "node", "versions"],
     "fixes": [
       {
         "title": "Method 1: Install and Switch Versions",
@@ -614,6 +640,7 @@
     "category": "cybersecurity",
     "title": "Setting Up a Secure VPN with WireGuard",
     "problem": "How to create a fast and secure personal VPN on your own server.",
+    "tags": ["cybersecurity", "vpn", "wireguard", "security"],
     "fixes": [
       {
         "title": "Method 1: Server and Client Configuration",
@@ -638,6 +665,7 @@
     "category": "productivity",
     "title": "Advanced Markdown for Technical Documentation",
     "problem": "How to use Markdown to create clean, readable technical documents.",
+    "tags": ["productivity", "markdown", "docs"],
     "fixes": [
       {
         "title": "Method 1: Use Code Blocks and Fenced Code",
@@ -660,6 +688,7 @@
     "category": "windows",
     "title": "Using PowerShell for System Administration",
     "problem": "How to automate tasks and manage your system with PowerShell.",
+    "tags": ["windows", "powershell", "admin", "automation"],
     "fixes": [
       {
         "title": "Method 1: Run a Simple Command",
@@ -682,6 +711,7 @@
     "category": "linux",
     "title": "Troubleshooting SSH Connection Issues",
     "problem": "Cannot connect to a remote server via SSH.",
+    "tags": ["linux", "ssh", "network", "debug"],
     "fixes": [
       {
         "title": "Method 1: Use Verbose Mode",
@@ -704,6 +734,7 @@
     "category": "web",
     "title": "Optimizing Website Performance",
     "problem": "My website is slow, and I want to improve its loading speed.",
+    "tags": ["web", "performance", "optimization", "speed"],
     "fixes": [
       {
         "title": "Method 1: Minify and Bundle Assets",
@@ -727,6 +758,7 @@
     "category": "dev",
     "title": "Using Git Hooks for Automated Tasks",
     "problem": "How to run scripts automatically before a commit or after a push.",
+    "tags": ["dev", "git", "hooks", "automation"],
     "fixes": [
       {
         "title": "Method 1: Configure a Pre-Commit Hook",
@@ -750,6 +782,7 @@
     "category": "cybersecurity",
     "title": "Scanning for Vulnerabilities with Nmap",
     "problem": "How to use Nmap to discover open ports and services on a network.",
+    "tags": ["cybersecurity", "nmap", "scan", "network"],
     "fixes": [
       {
         "title": "Method 1: Simple Port Scan",
@@ -772,6 +805,7 @@
     "category": "productivity",
     "title": "Mastering the Command Line with Aliases",
     "problem": "How to create shortcuts for long or frequently used commands.",
+    "tags": ["productivity", "cli", "aliases", "bash"],
     "fixes": [
       {
         "title": "Method 1: Create a Simple Alias",
@@ -794,6 +828,7 @@
     "category": "windows",
     "title": "Using DISM to Repair Windows Image",
     "problem": "System File Checker (sfc /scannow) fails to fix corrupted files.",
+    "tags": ["windows", "dism", "repair", "system"],
     "fixes": [
       {
         "title": "Method 1: Check Health",
@@ -816,6 +851,7 @@
     "category": "ai",
     "title": "Writing Effective AI Prompts for Code",
     "problem": "Getting generic, buggy, or incomplete code from AI assistants.",
+    "tags": ["ai", "prompts", "coding", "llm"],
     "fixes": [
       {
         "title": "Method 1: Provide Constraints and Context",
@@ -837,6 +873,7 @@
     "category": "ai",
     "title": "Bypassing AI Hallucinations in Terminal Commands",
     "problem": "AI suggests terminal commands that contain deprecated flags or hallucinated packages.",
+    "tags": ["ai", "hallucinations", "terminal", "safety"],
     "fixes": [
       {
         "title": "Method 1: Request Official Documentation Links",

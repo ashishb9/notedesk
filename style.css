@@ -2213,3 +2213,40 @@ nav.scrolled {
   border-color: var(--accent-color) !important;
   color: var(--accent-color) !important;
 }
+
+
+/* === Phase 10A: Tag Pills & Search Highlighting === */
+.note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.tag-pill {
+  font-size: 0.72rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+mark {
+  background: rgba(0, 128, 128, 0.4);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+[data-theme="light"] mark {
+  background: rgba(0, 115, 115, 0.25);
+}
