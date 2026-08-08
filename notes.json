@@ -913,7 +913,7 @@
     "tags": ["ai", "hallucinations", "terminal", "safety"],
     "fixes": [
       {
-        "title": "Method 1: Request Official Documentation Limits",
+        "title": "Method 1: Request Official Documentation Links",
         "steps": [
           "Ask the AI to <code>Include the link to the official man page or documentation for this command</code> to verify its authenticity before running it."
         ]
@@ -922,6 +922,1171 @@
         "title": "Method 2: Use Dry-Run Flags",
         "steps": [
           "Always append <code>--dry-run</code> or <code>--simulate</code> to commands suggested by AI to see what they will do before actually executing them."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "category": "linux",
+    "title": "No Space Left on Device (But Disk Looks Empty)",
+    "problem": "Cannot write to disk, but 'df -h' shows plenty of free space.",
+    "dateAdded": "2026-04-10",
+    "tags": ["linux", "storage", "inodes", "troubleshooting"],
+    "fixes": [
+      {
+        "title": "Method 1: Check Inode Usage",
+        "steps": [
+          "Run <code>df -i</code> to check inode usage instead of block usage.",
+          "If Use% is at 100%, you have run out of file index nodes, usually caused by millions of tiny files (like session files or logs).",
+          "Find the culprit directory by running: <code>sudo find . -xdev -type f | cut -d \"/\" -f 2 | sort | uniq -c | sort -n</code> in the root directory."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "category": "cybersecurity",
+    "title": "Checking SSL/TLS Certificate Expiration via CLI",
+    "problem": "Need to quickly verify when a remote server's certificate expires without a browser.",
+    "dateAdded": "2026-04-12",
+    "tags": ["cybersecurity", "ssl", "tls", "openssl"],
+    "fixes": [
+      {
+        "title": "Method 1: Use OpenSSL s_client",
+        "steps": [
+          "Run <code>echo | openssl s_client -servername yourdomain.com -connect yourdomain.com:443 2>/dev/null | openssl x509 -noout -dates</code>",
+          "This will output the 'notBefore' (issue date) and 'notAfter' (expiration date) directly to your terminal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "category": "dev",
+    "title": "Docker Container Exiting Immediately",
+    "problem": "A newly started Docker container exits with code 0 or 1 right after starting.",
+    "dateAdded": "2026-04-15",
+    "tags": ["dev", "docker", "containers", "debug"],
+    "fixes": [
+      {
+        "title": "Method 1: Inspect Container Logs",
+        "steps": [
+          "Run <code>docker ps -a</code> to find the exited container's ID.",
+          "Check the crash output using <code>docker logs &lt;container_id&gt;</code>.",
+          "If the container is exiting because the main foreground process finishes, force it to stay alive by adding <code>tail -f /dev/null</code> to your entrypoint or command."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "category": "linux",
+    "title": "Finding Which Process is Listening on a Port",
+    "problem": "Cannot start an application because the port is already in use.",
+    "dateAdded": "2026-04-18",
+    "tags": ["linux", "networking", "ports", "netstat"],
+    "fixes": [
+      {
+        "title": "Method 1: Use netstat or ss",
+        "steps": [
+          "Run <code>sudo netstat -tulpn | grep :&lt;port_number&gt;</code> to identify the PID and program name.",
+          "Alternatively, use the faster, modern command: <code>sudo ss -lptn 'sport = :&lt;port_number&gt;'</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Use lsof",
+        "steps": [
+          "Run <code>sudo lsof -i :&lt;port_number&gt;</code>.",
+          "Kill the conflicting process using <code>sudo kill -9 &lt;PID&gt;</code> if it is safe to do so."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "category": "productivity",
+    "title": "Keeping Terminal Sessions Alive on Disconnect",
+    "problem": "Long-running scripts die if the SSH connection drops.",
+    "dateAdded": "2026-04-20",
+    "tags": ["productivity", "ssh", "tmux", "terminal"],
+    "fixes": [
+      {
+        "title": "Method 1: Use Tmux",
+        "steps": [
+          "Start a new persistent session by typing <code>tmux</code>.",
+          "Run your script. If you get disconnected, simply SSH back in and type <code>tmux attach</code> to return exactly where you left off.",
+          "To detach manually without killing the script, press <code>Ctrl+B</code> then <code>D</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "category": "web",
+    "title": "Testing REST API Endpoints via CLI",
+    "problem": "Need to verify an API response, headers, and status codes quickly.",
+    "dateAdded": "2026-04-24",
+    "tags": ["web", "api", "curl", "json"],
+    "fixes": [
+      {
+        "title": "Method 1: Use cURL with Verbose Output",
+        "steps": [
+          "To view headers and the payload, run <code>curl -i [https://api.example.com/data](https://api.example.com/data)</code>.",
+          "For a POST request with JSON: <code>curl -X POST [https://api.example.com](https://api.example.com) -H \"Content-Type: application/json\" -d '{\"key\":\"value\"}'</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Pipe to jq for Readability",
+        "steps": [
+          "If the API returns a massive unformatted JSON blob, format it by appending <code>| jq</code> to your curl command."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "category": "cybersecurity",
+    "title": "Generating a Secure Random Password in Terminal",
+    "problem": "Need a strong, cryptographically secure password for a database or service account.",
+    "dateAdded": "2026-04-28",
+    "tags": ["cybersecurity", "passwords", "openssl", "admin"],
+    "fixes": [
+      {
+        "title": "Method 1: OpenSSL Rand",
+        "steps": [
+          "Run <code>openssl rand -base64 24</code>.",
+          "This generates a 24-character, base64-encoded secure random string."
+        ]
+      },
+      {
+        "title": "Method 2: /dev/urandom",
+        "steps": [
+          "Run <code>< /dev/urandom tr -dc A-Za-z0-9 | head -c 24; echo</code> for an alphanumeric password without special characters."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "category": "linux",
+    "title": "Search File Contents Recursively for a String",
+    "problem": "Need to find a specific configuration parameter or error string across thousands of files.",
+    "dateAdded": "2026-05-02",
+    "tags": ["linux", "grep", "search", "logs"],
+    "fixes": [
+      {
+        "title": "Method 1: grep -rnw",
+        "steps": [
+          "Run <code>grep -rnw '/path/to/search' -e 'your_string'</code>.",
+          "-r means recursive, -n displays line numbers, and -w ensures it matches whole words only."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "category": "dev",
+    "title": "Clearing Stale Docker Volumes and Images",
+    "problem": "Docker is consuming massive amounts of disk space with old, unused data.",
+    "dateAdded": "2026-05-05",
+    "tags": ["dev", "docker", "storage", "cleanup"],
+    "fixes": [
+      {
+        "title": "Method 1: Docker System Prune",
+        "steps": [
+          "Run <code>docker system prune -a --volumes</code>.",
+          "WARNING: This will stop and remove ALL unused containers, networks, images (both dangling and unreferenced), and volumes. Ensure you are not removing data you still need."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "category": "linux",
+    "title": "Linux Server is Out of Memory (OOM)",
+    "problem": "Applications are crashing and the OOM killer is terminating processes.",
+    "dateAdded": "2026-05-08",
+    "tags": ["linux", "memory", "performance", "oom"],
+    "fixes": [
+      {
+        "title": "Method 1: Identify Memory Hogs",
+        "steps": [
+          "Run <code>ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head</code> to see the top memory-consuming processes.",
+          "Check the system logs for OOM killer activity: <code>dmesg | grep -i oom</code> or <code>grep -i 'killed process' /var/log/syslog</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Clear RAM Cache (Temporary Fix)",
+        "steps": [
+          "Run <code>sudo sync && sudo sysctl -w vm.drop_caches=3</code>.",
+          "This safely clears pagecache, dentries, and inodes to free up memory without terminating applications."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "category": "windows",
+    "title": "Flushing DNS Resolver Cache",
+    "problem": "Website IP addresses have changed, but Windows is routing to the old, stale IPs.",
+    "dateAdded": "2026-05-11",
+    "tags": ["windows", "dns", "networking", "cache"],
+    "fixes": [
+      {
+        "title": "Method 1: Command Prompt",
+        "steps": [
+          "Open Command Prompt as Administrator.",
+          "Type <code>ipconfig /flushdns</code> and press Enter.",
+          "You should see the message: 'Successfully flushed the DNS Resolver Cache'."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "category": "productivity",
+    "title": "Python: Reading and Parsing a JSON File",
+    "problem": "Need a quick script to load configuration or data from a JSON file.",
+    "dateAdded": "2026-05-15",
+    "tags": ["productivity", "python", "automation", "json"],
+    "fixes": [
+      {
+        "title": "Method 1: The 'json' Module",
+        "steps": [
+          "Import the module: <code>import json</code>",
+          "Open and load: <code>with open('data.json', 'r') as file: data = json.load(file)</code>",
+          "You can now access the parsed data as a standard Python dictionary."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "category": "cybersecurity",
+    "title": "Basic Network Vulnerability Testing with Nmap",
+    "problem": "Need to quickly check if a specific host has an outdated or vulnerable service exposed.",
+    "dateAdded": "2026-05-19",
+    "tags": ["cybersecurity", "nmap", "vuln", "scanning"],
+    "fixes": [
+      {
+        "title": "Method 1: Nmap Vuln Script",
+        "steps": [
+          "Run <code>nmap -sV --script vuln &lt;target_ip&gt;</code>.",
+          "This probes open ports, identifies the exact service versions, and runs the Nmap Scripting Engine against known CVE databases."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "category": "web",
+    "title": "Nginx: Apply Changes Without Dropping Connections",
+    "problem": "Need to update an Nginx configuration file on a live production server without downtime.",
+    "dateAdded": "2026-05-22",
+    "tags": ["web", "nginx", "server", "zero-downtime"],
+    "fixes": [
+      {
+        "title": "Method 1: Test and Reload",
+        "steps": [
+          "Always verify your syntax first by running <code>sudo nginx -t</code>.",
+          "If the syntax is ok, apply changes gracefully by running <code>sudo nginx -s reload</code>.",
+          "Unlike 'restart', 'reload' keeps old worker processes alive until they finish serving active requests."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "category": "linux",
+    "title": "Finding Large Files Consuming Disk Space",
+    "problem": "A volume is 100% full and you need to find the largest files quickly.",
+    "dateAdded": "2026-05-26",
+    "tags": ["linux", "storage", "find", "cleanup"],
+    "fixes": [
+      {
+        "title": "Method 1: Find command",
+        "steps": [
+          "Run <code>find /var -type f -size +500M -exec ls -lh {} \\; | awk '{ print $5 \": \" $9 }'</code>.",
+          "This searches the /var directory (replace as needed) for any file strictly larger than 500 Megabytes and prints its size and path."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "category": "windows",
+    "title": "Restarting IIS (Internet Information Services)",
+    "problem": "An enterprise web application on a Windows server is unresponsive.",
+    "dateAdded": "2026-05-29",
+    "tags": ["windows", "iis", "server", "admin"],
+    "fixes": [
+      {
+        "title": "Method 1: CLI IIS Reset",
+        "steps": [
+          "Open Command Prompt as Administrator.",
+          "Run <code>iisreset</code> to stop and restart all IIS services.",
+          "To restart gracefully without terminating active user sessions right away, consider recycling the specific Application Pool via the IIS Manager GUI instead."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "category": "dev",
+    "title": "Git: Finding Which Commit Broke the Code",
+    "problem": "A bug was introduced recently, but you aren't sure which commit caused it.",
+    "dateAdded": "2026-06-03",
+    "tags": ["dev", "git", "bisect", "debug"],
+    "fixes": [
+      {
+        "title": "Method 1: Git Bisect",
+        "steps": [
+          "Run <code>git bisect start</code>.",
+          "Tag the current broken commit: <code>git bisect bad</code>.",
+          "Tag a known working older commit: <code>git bisect good &lt;commit_hash&gt;</code>.",
+          "Git will check out a commit halfway between. Test your code, then type either <code>git bisect good</code> or <code>git bisect bad</code>. Repeat until Git identifies the exact faulty commit."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "category": "ai",
+    "title": "Extracting JSON Data Confiably Using AI Prompts",
+    "problem": "LLMs output conversational filler around JSON responses, breaking programmatic parsing.",
+    "dateAdded": "2026-06-07",
+    "tags": ["ai", "prompts", "json", "automation"],
+    "fixes": [
+      {
+        "title": "Method 1: Strict Output Constraints",
+        "steps": [
+          "End your prompt with: <code>Output ONLY valid JSON. Do not include markdown formatting, backticks, or conversational text. Start directly with { and end with }</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "category": "productivity",
+    "title": "Executing Commands on Multiple Linux Servers",
+    "problem": "Need to run the same update or check script across a fleet of 10+ servers.",
+    "dateAdded": "2026-06-11",
+    "tags": ["productivity", "ssh", "automation", "ansible"],
+    "fixes": [
+      {
+        "title": "Method 1: Ansible Ad-Hoc Commands",
+        "steps": [
+          "If Ansible is installed and your inventory is configured, run: <code>ansible all -m shell -a \"uptime\"</code> to get the uptime of every server simultaneously.",
+          "Use <code>-b</code> to run as root (become)."
+        ]
+      },
+      {
+        "title": "Method 2: SSH Loop in Bash",
+        "steps": [
+          "For a quick loop without tools: <code>for server in web1 web2 web3; do ssh user@$server \"df -h\"; done</code>"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "category": "linux",
+    "title": "Checking Live System Logs",
+    "problem": "Need to watch an application's logs in real-time as an error occurs.",
+    "dateAdded": "2026-06-15",
+    "tags": ["linux", "logs", "tail", "journalctl"],
+    "fixes": [
+      {
+        "title": "Method 1: tail -f",
+        "steps": [
+          "Run <code>tail -f /var/log/syslog</code> (or the specific app log). This prints new lines to the screen instantly as they are written to the file."
+        ]
+      },
+      {
+        "title": "Method 2: journalctl",
+        "steps": [
+          "For systemd-managed services, run <code>journalctl -u service_name.service -f</code> to follow the logs dynamically."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "category": "cybersecurity",
+    "title": "Locking Down SSH Access",
+    "problem": "Servers are receiving thousands of brute-force SSH login attempts.",
+    "dateAdded": "2026-06-20",
+    "tags": ["cybersecurity", "ssh", "hardening", "security"],
+    "fixes": [
+      {
+        "title": "Method 1: Edit sshd_config",
+        "steps": [
+          "Open <code>/etc/ssh/sshd_config</code>.",
+          "Set <code>PasswordAuthentication no</code> to force SSH key logins only.",
+          "Set <code>PermitRootLogin no</code> to prevent direct root access.",
+          "Run <code>sudo systemctl restart sshd</code> to apply."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "category": "windows",
+    "title": "Checking Active Active Directory (AD) Lockouts",
+    "problem": "A user's account keeps getting locked out on the enterprise domain.",
+    "dateAdded": "2026-06-24",
+    "tags": ["windows", "active-directory", "admin", "lockout"],
+    "fixes": [
+      {
+        "title": "Method 1: PowerShell Search-ADAccount",
+        "steps": [
+          "Open PowerShell as Admin with AD tools installed.",
+          "Run <code>Search-ADAccount -LockedOut | Select-Object Name, SamAccountName</code> to list all currently locked accounts.",
+          "Unlock a specific user with <code>Unlock-ADAccount -Identity \"username\"</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "category": "dev",
+    "title": "Purging Git Commit History (Accidental Secrets)",
+    "problem": "A password or API key was accidentally pushed to a Git repository.",
+    "dateAdded": "2026-06-28",
+    "tags": ["dev", "git", "secrets", "security"],
+    "fixes": [
+      {
+        "title": "Method 1: BFG Repo-Cleaner / Filter-Branch",
+        "steps": [
+          "WARNING: Changing history alters commit hashes for everyone. Treat the exposed key as compromised immediately and rotate it first.",
+          "Use a tool like BFG Repo-Cleaner: <code>java -jar bfg.jar --delete-text passwords.txt my-repo.git</code>",
+          "Force push the rewritten history: <code>git push --force</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "category": "web",
+    "title": "Forcing HTTPS Redirects in Nginx",
+    "problem": "Traffic is hitting HTTP (port 80) and not automatically upgrading to HTTPS.",
+    "dateAdded": "2026-07-03",
+    "tags": ["web", "nginx", "ssl", "redirect"],
+    "fixes": [
+      {
+        "title": "Method 1: Server Block Redirect",
+        "steps": [
+          "In your Nginx config block for port 80, add:",
+          "<code>server { listen 80; server_name example.com; return 301 https://$host$request_uri; }</code>",
+          "Reload Nginx to apply changes."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "category": "productivity",
+    "title": "Running Scripts on a Schedule",
+    "problem": "Need a Python or Bash script to execute automatically every night at 2 AM.",
+    "dateAdded": "2026-07-08",
+    "tags": ["productivity", "cron", "automation", "linux"],
+    "fixes": [
+      {
+        "title": "Method 1: Crontab Configuration",
+        "steps": [
+          "Run <code>crontab -e</code> to open the schedule file.",
+          "Add the line: <code>0 2 * * * /usr/bin/python3 /path/to/your/script.py</code>.",
+          "Ensure the script has execute permissions and you use absolute paths to executables."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "category": "cybersecurity",
+    "title": "Blocking an IP Address Quickly",
+    "problem": "An identified malicious IP is attacking the server and needs to be dropped.",
+    "dateAdded": "2026-07-12",
+    "tags": ["cybersecurity", "firewall", "iptables", "ufw"],
+    "fixes": [
+      {
+        "title": "Method 1: UFW (Uncomplicated Firewall)",
+        "steps": [
+          "Run <code>sudo ufw deny from &lt;IP_ADDRESS&gt;</code>.",
+          "Run <code>sudo ufw reload</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Iptables",
+        "steps": [
+          "Run <code>sudo iptables -A INPUT -s &lt;IP_ADDRESS&gt; -j DROP</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "category": "linux",
+    "title": "Diagnosing High Load Average",
+    "problem": "The server is lagging, and 'uptime' shows a load average significantly higher than the CPU core count.",
+    "dateAdded": "2026-07-18",
+    "tags": ["linux", "performance", "cpu", "top"],
+    "fixes": [
+      {
+        "title": "Method 1: Use 'top' or 'htop'",
+        "steps": [
+          "Run <code>htop</code> (if installed) or <code>top</code>.",
+          "Check the 'wa' (IO-wait) CPU percentage. If it's high, the CPU is waiting on slow disk or network I/O, not actually processing computations.",
+          "Press 'c' in top to view the full command path of processes eating CPU cycles."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "category": "dev",
+    "title": "Formatting JSON in Terminal",
+    "problem": "A configuration file or log is a single unreadable line of JSON.",
+    "dateAdded": "2026-07-22",
+    "tags": ["dev", "json", "jq", "python"],
+    "fixes": [
+      {
+        "title": "Method 1: jq",
+        "steps": [
+          "If jq is installed, run: <code>cat file.json | jq .</code> to pretty-print the output with colors."
+        ]
+      },
+      {
+        "title": "Method 2: Python json.tool",
+        "steps": [
+          "If jq is unavailable, run: <code>cat file.json | python3 -m json.tool</code> to instantly pretty-print it using Python's standard library."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "category": "windows",
+    "title": "Finding What is Locking a File",
+    "problem": "Cannot delete or modify a file because Windows says it is 'open in another program'.",
+    "dateAdded": "2026-07-27",
+    "tags": ["windows", "files", "admin", "resource-monitor"],
+    "fixes": [
+      {
+        "title": "Method 1: Resource Monitor",
+        "steps": [
+          "Press Windows Key, type <code>resmon</code>, and hit Enter.",
+          "Go to the 'CPU' tab.",
+          "Expand the 'Associated Handles' section and search for the name of your locked file. Right-click the process locking it and select 'End Process'."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "category": "productivity",
+    "title": "Syncing Files Securely Across Servers",
+    "problem": "Need to securely copy a large directory from a local machine to a remote server, resuming if interrupted.",
+    "dateAdded": "2026-08-01",
+    "tags": ["productivity", "rsync", "ssh", "backup"],
+    "fixes": [
+      {
+        "title": "Method 1: Rsync via SSH",
+        "steps": [
+          "Run <code>rsync -avzP -e ssh /local/dir/ user@remote_ip:/remote/dir/</code>.",
+          "The flags mean: archive mode, verbose, compress data, and show progress. If the connection fails, re-running the exact same command will pick up exactly where it left off."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "category": "windows",
+    "title": "Clearing Print Queue Spooler Manually",
+    "problem": "A print job is stuck, and the printer won't process new documents or allow deletion via the UI.",
+    "dateAdded": "2026-08-03",
+    "tags": ["windows", "printer", "spooler", "services"],
+    "fixes": [
+      {
+        "title": "Method 1: Command Prompt Services Restart",
+        "steps": [
+          "Open Command Prompt as Administrator.",
+          "Stop the spooler: <code>net stop spooler</code>.",
+          "Delete the stuck jobs: <code>del /Q /F /S \"%systemroot%\\System32\\Spool\\Printers\\*.*\"</code>.",
+          "Start the spooler: <code>net start spooler</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "category": "linux",
+    "title": "Testing Network Port Connectivity (Without Telnet/NC)",
+    "problem": "Need to verify if a remote port is open, but telnet, nc, or nmap are not installed.",
+    "dateAdded": "2026-08-04",
+    "tags": ["linux", "networking", "bash", "ports"],
+    "fixes": [
+      {
+        "title": "Method 1: Bash /dev/tcp",
+        "steps": [
+          "Bash has built-in network capabilities. Run: <code>timeout 2 bash -c '&lt;/dev/tcp/remote_ip/port' &amp;&amp; echo \"Port is open\" || echo \"Port is closed\"</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "category": "web",
+    "title": "Bypassing Browser Cache for CSS/JS Updates",
+    "problem": "Deployed new styles or scripts, but users still see the old cached versions.",
+    "dateAdded": "2026-08-04",
+    "tags": ["web", "cache", "frontend", "html"],
+    "fixes": [
+      {
+        "title": "Method 1: Cache Busting via Query Strings",
+        "steps": [
+          "In your HTML file, append a version or timestamp query parameter to the asset URL.",
+          "Change <code>&lt;link rel=\"stylesheet\" href=\"style.css\"&gt;</code> to <code>&lt;link rel=\"stylesheet\" href=\"style.css?v=1.1\"&gt;</code>.",
+          "The browser treats this as a completely new file and fetches the fresh version."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "category": "dev",
+    "title": "Reverting the Last Git Commit (Keeping Changes)",
+    "problem": "Accidentally committed files, but want to keep the modifications staged and undo the commit.",
+    "dateAdded": "2026-08-05",
+    "tags": ["dev", "git", "commits", "undo"],
+    "fixes": [
+      {
+        "title": "Method 1: Git Reset Soft",
+        "steps": [
+          "Run <code>git reset --soft HEAD~1</code>.",
+          "This moves the HEAD pointer back one commit but leaves all your changed files staged and ready for a new commit."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "category": "productivity",
+    "title": "Generating a Directory Tree Structure in Text",
+    "problem": "Need to share a project's folder structure in documentation or a README file.",
+    "dateAdded": "2026-08-05",
+    "tags": ["productivity", "docs", "terminal", "tree"],
+    "fixes": [
+      {
+        "title": "Method 1: The 'tree' Command",
+        "steps": [
+          "Install tree (e.g., <code>sudo apt install tree</code> or <code>brew install tree</code>).",
+          "Run <code>tree -L 2 -I 'node_modules|.git'</code> to generate a text-based tree, ignoring deep dependency folders and limiting depth to 2 levels."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "category": "cybersecurity",
+    "title": "Verifying File Integrity with Hashes",
+    "problem": "Downloaded a large ISO or binary and need to verify it wasn't tampered with or corrupted.",
+    "dateAdded": "2026-08-06",
+    "tags": ["cybersecurity", "hashes", "integrity", "sha256"],
+    "fixes": [
+      {
+        "title": "Method 1: SHA256 Checksum",
+        "steps": [
+          "On Linux/Mac, run <code>sha256sum filename.iso</code>.",
+          "On Windows PowerShell, run <code>Get-FileHash filename.iso -Algorithm SHA256</code>.",
+          "Compare the output hash against the hash provided on the official download page."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "category": "ai",
+    "title": "Preventing AI from Using Deprecated Libraries",
+    "problem": "The AI keeps generating code using old package versions (like 'requests' instead of 'httpx').",
+    "dateAdded": "2026-08-06",
+    "tags": ["ai", "prompts", "coding", "libraries"],
+    "fixes": [
+      {
+        "title": "Method 1: Version Pinning in Prompt",
+        "steps": [
+          "Explicitly state the library version in the prompt: <code>Write a Python script using httpx (version 0.24+). Do NOT use the 'requests' library.</code>"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "category": "linux",
+    "title": "Killing Processes by Name",
+    "problem": "Need to terminate multiple instances of an unresponsive application quickly.",
+    "dateAdded": "2026-08-06",
+    "tags": ["linux", "processes", "kill", "pkill"],
+    "fixes": [
+      {
+        "title": "Method 1: pkill or killall",
+        "steps": [
+          "Run <code>pkill -f process_name</code> or <code>killall process_name</code>.",
+          "The <code>-f</code> flag in pkill tells it to match against the entire command line argument, not just the process name."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "category": "windows",
+    "title": "Exporting a List of Installed Software",
+    "problem": "Need an audit of all applications installed on a Windows machine for compliance or migration.",
+    "dateAdded": "2026-08-06",
+    "tags": ["windows", "audit", "powershell", "inventory"],
+    "fixes": [
+      {
+        "title": "Method 1: PowerShell WMI Object",
+        "steps": [
+          "Open PowerShell.",
+          "Run <code>Get-WmiObject -Class Win32_Product | Select-Object -Property Name, Version | Sort-Object Name | Export-Csv -Path C:\\InstalledSoftware.csv</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "category": "web",
+    "title": "Simulating Slow Network Speeds for Testing",
+    "problem": "Need to see how a web application behaves for users on 3G or poor connections.",
+    "dateAdded": "2026-08-06",
+    "tags": ["web", "testing", "devtools", "network"],
+    "fixes": [
+      {
+        "title": "Method 1: Browser DevTools Throttling",
+        "steps": [
+          "Open Chrome/Edge Developer Tools (F12).",
+          "Go to the 'Network' tab.",
+          "Click the dropdown that says 'No throttling' and select 'Slow 3G' or 'Fast 3G'. Keep the DevTools open while reloading the page."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "category": "dev",
+    "title": "Force Deleting a Docker Image",
+    "problem": "Cannot delete a Docker image because 'it is being used by a stopped container'.",
+    "dateAdded": "2026-08-06",
+    "tags": ["dev", "docker", "images", "cleanup"],
+    "fixes": [
+      {
+        "title": "Method 1: Remove Container First, Then Image",
+        "steps": [
+          "Find the dependent container: <code>docker ps -a | grep &lt;image_name&gt;</code>.",
+          "Remove the container: <code>docker rm &lt;container_id&gt;</code>.",
+          "Remove the image: <code>docker rmi &lt;image_id&gt;</code>."
+        ]
+      },
+      {
+        "title": "Method 2: Force Flag (Not Recommended)",
+        "steps": [
+          "Run <code>docker rmi -f &lt;image_id&gt;</code> to forcefully remove it, leaving the stopped container orphaned."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "category": "cybersecurity",
+    "title": "Checking for Open S3 Buckets via CLI",
+    "problem": "Need to verify if an AWS S3 bucket is accidentally configured for public anonymous access.",
+    "dateAdded": "2026-08-07",
+    "tags": ["cybersecurity", "aws", "s3", "cloud"],
+    "fixes": [
+      {
+        "title": "Method 1: AWS CLI Anonymous Request",
+        "steps": [
+          "Run <code>aws s3 ls s3://your-bucket-name --no-sign-request</code>.",
+          "If the command returns a list of files, the bucket is public. If it returns 'Access Denied', anonymous access is blocked."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "category": "linux",
+    "title": "Finding Real CPU Core Count vs Hyperthreads",
+    "problem": "Need to determine physical CPU limits for database tuning, avoiding hyperthread inflation.",
+    "dateAdded": "2026-08-07",
+    "tags": ["linux", "hardware", "cpu", "lscpu"],
+    "fixes": [
+      {
+        "title": "Method 1: Use lscpu",
+        "steps": [
+          "Run <code>lscpu</code>.",
+          "Look at 'Core(s) per socket' and 'Socket(s)'. Multiply these two numbers for the true physical core count.",
+          "The 'CPU(s)' field shows the total logical threads (which includes hyperthreading)."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "category": "productivity",
+    "title": "Extracting Audio from a Video File Quickly",
+    "problem": "Need an MP3 audio track from an MP4 video file without using heavy video editing software.",
+    "dateAdded": "2026-08-07",
+    "tags": ["productivity", "ffmpeg", "media", "audio"],
+    "fixes": [
+      {
+        "title": "Method 1: FFmpeg CLI",
+        "steps": [
+          "Install ffmpeg on your system.",
+          "Run <code>ffmpeg -i input_video.mp4 -q:a 0 -map a output_audio.mp3</code>.",
+          "This extracts the audio stream without re-encoding the video, making it almost instantaneous."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "category": "windows",
+    "title": "Bypassing Windows 11 Microsoft Account Requirement",
+    "problem": "Setting up a new Windows 11 machine but want to use a Local Account instead of a Microsoft Account.",
+    "dateAdded": "2026-08-07",
+    "tags": ["windows", "setup", "admin", "local-account"],
+    "fixes": [
+      {
+        "title": "Method 1: OOBE Bypass Command",
+        "steps": [
+          "At the 'Let's connect you to a network' screen during setup, press <code>Shift + F10</code> to open Command Prompt.",
+          "Type <code>OOBE\\BYPASSNRO</code> and press Enter.",
+          "The computer will reboot. When it returns to the network screen, click 'I don't have internet' and proceed with a limited local setup."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "category": "dev",
+    "title": "Stashing Changes in Git Temporarily",
+    "problem": "Need to pull latest changes or switch branches, but have uncommitted half-finished work.",
+    "dateAdded": "2026-08-07",
+    "tags": ["dev", "git", "stash", "workflow"],
+    "fixes": [
+      {
+        "title": "Method 1: Git Stash",
+        "steps": [
+          "Run <code>git stash</code> to save your modified tracked files to a temporary shelf.",
+          "Switch branches or pull updates as needed.",
+          "Run <code>git stash pop</code> to re-apply your changes on top of the current working directory."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "category": "web",
+    "title": "Debugging CSS Specificity Issues",
+    "problem": "A CSS rule is correctly written but is being overridden by something else.",
+    "dateAdded": "2026-08-07",
+    "tags": ["web", "css", "devtools", "frontend"],
+    "fixes": [
+      {
+        "title": "Method 1: DevTools Computed Tab",
+        "steps": [
+          "Right-click the element in the browser and select 'Inspect'.",
+          "Go to the 'Computed' tab in the right pane.",
+          "Find your CSS property (e.g., 'color'). Click the arrow next to it to see exactly which stylesheet and line number is winning the specificity war."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "category": "ai",
+    "title": "Generating Test Data Scaffolding with LLMs",
+    "problem": "Need a realistic, 50-row CSV or JSON file to test a database import script.",
+    "dateAdded": "2026-08-07",
+    "tags": ["ai", "prompts", "data", "testing"],
+    "fixes": [
+      {
+        "title": "Method 1: Schema-Driven Prompts",
+        "steps": [
+          "Provide the exact structure: <code>Generate a 50-row CSV file of realistic fake employee data. Use the headers: id (UUID), first_name, last_name, email (corporate format), department (from a list of 5 options), and hire_date (between 2018-2023).</code>"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "category": "linux",
+    "title": "Viewing the Last Reboot Time",
+    "problem": "Need to know exactly when a Linux server last restarted.",
+    "dateAdded": "2026-08-07",
+    "tags": ["linux", "uptime", "admin", "reboot"],
+    "fixes": [
+      {
+        "title": "Method 1: The 'uptime' or 'who' command",
+        "steps": [
+          "Run <code>uptime -s</code> to output the exact timestamp of the last boot.",
+          "Alternatively, run <code>who -b</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "category": "cybersecurity",
+    "title": "Checking File Hashes in VirusTotal via API",
+    "problem": "Need to check a suspicious file hash automatically without opening a browser.",
+    "dateAdded": "2026-08-08",
+    "tags": ["cybersecurity", "virustotal", "api", "malware"],
+    "fixes": [
+      {
+        "title": "Method 1: cURL the VirusTotal API",
+        "steps": [
+          "Get a free API key from VirusTotal.",
+          "Run: <code>curl --request GET --url '[https://www.virustotal.com/api/v3/files/](https://www.virustotal.com/api/v3/files/){YOUR_FILE_HASH}' --header 'x-apikey: YOUR_API_KEY' | jq .data.attributes.last_analysis_stats</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "category": "productivity",
+    "title": "Finding Your External Public IP Address",
+    "problem": "Need to whitelist your current location's IP address on a remote firewall.",
+    "dateAdded": "2026-08-08",
+    "tags": ["productivity", "networking", "ip", "curl"],
+    "fixes": [
+      {
+        "title": "Method 1: Terminal cURL Services",
+        "steps": [
+          "Run <code>curl ifconfig.me</code> or <code>curl icanhazip.com</code>.",
+          "These services will return only your raw public IP address directly to the terminal output."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "category": "windows",
+    "title": "Restarting Windows Explorer to Fix Frozen Taskbars",
+    "problem": "The Windows Taskbar or Desktop is frozen, but the mouse still moves.",
+    "dateAdded": "2026-08-08",
+    "tags": ["windows", "explorer", "freeze", "ui"],
+    "fixes": [
+      {
+        "title": "Method 1: Task Manager Restart",
+        "steps": [
+          "Press <code>Ctrl + Shift + Esc</code> to open Task Manager.",
+          "Find 'Windows Explorer' in the process list.",
+          "Right-click it and select 'Restart'."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "category": "dev",
+    "title": "Viewing Docker Container Resource Usage in Real-Time",
+    "problem": "Need to see if a specific Docker container is maxing out CPU or RAM.",
+    "dateAdded": "2026-08-08",
+    "tags": ["dev", "docker", "metrics", "stats"],
+    "fixes": [
+      {
+        "title": "Method 1: Docker Stats Command",
+        "steps": [
+          "Run <code>docker stats</code> to view a live, constantly updating table of CPU, Memory, Network I/O, and Block I/O for all running containers."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "category": "web",
+    "title": "Testing Local Web Apps on a Mobile Device",
+    "problem": "Need to view a localhost web server (like React or Node) on a physical phone.",
+    "dateAdded": "2026-08-08",
+    "tags": ["web", "testing", "mobile", "network"],
+    "fixes": [
+      {
+        "title": "Method 1: Access via Local Network IP",
+        "steps": [
+          "Ensure both the computer and phone are on the exact same WiFi network.",
+          "Find your computer's local IP (e.g., run <code>ipconfig</code> on Windows or <code>ifconfig</code> on Mac/Linux, look for IPv4 Address like 192.168.1.x).",
+          "Ensure your dev server binds to <code>0.0.0.0</code> instead of just <code>localhost</code> or <code>127.0.0.1</code>.",
+          "Open your phone's browser and navigate to <code>[http://192.168.1.](http://192.168.1.)x:3000</code> (replace with your IP and port)."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "category": "linux",
+    "title": "Creating a Tarball Archive of a Directory",
+    "problem": "Need to compress a folder for backups or transfer to another server.",
+    "dateAdded": "2026-08-08",
+    "tags": ["linux", "archive", "tar", "backup"],
+    "fixes": [
+      {
+        "title": "Method 1: Use tar with gzip compression",
+        "steps": [
+          "Run <code>tar -czvf archive_name.tar.gz /path/to/directory</code>.",
+          "Flags explained: c=create, z=gzip compress, v=verbose output, f=file output."
+        ]
+      },
+      {
+        "title": "Method 2: Extracting a Tarball",
+        "steps": [
+          "To extract, run <code>tar -xzvf archive_name.tar.gz -C /destination/path/</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "category": "cybersecurity",
+    "title": "Removing SSH Host Key Warnings",
+    "problem": "Server was rebuilt, and SSH throws a terrifying 'REMOTE HOST IDENTIFICATION HAS CHANGED' error.",
+    "dateAdded": "2026-08-08",
+    "tags": ["cybersecurity", "ssh", "keys", "known_hosts"],
+    "fixes": [
+      {
+        "title": "Method 1: SSH Keygen Remove",
+        "steps": [
+          "Run <code>ssh-keygen -R &lt;remote_ip_address&gt;</code>.",
+          "This safely strips the old, invalid key out of your <code>~/.ssh/known_hosts</code> file without forcing you to edit the file manually."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "category": "productivity",
+    "title": "Running a Quick HTTP File Server in Terminal",
+    "problem": "Need to serve static files from a directory immediately over the local network.",
+    "dateAdded": "2026-08-08",
+    "tags": ["productivity", "python", "http", "server"],
+    "fixes": [
+      {
+        "title": "Method 1: Python 3 http.server",
+        "steps": [
+          "Navigate to the directory you want to share in your terminal.",
+          "Run <code>python3 -m http.server 8000</code>.",
+          "The files are now accessible at <code>http://localhost:8000</code>."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "category": "windows",
+    "title": "Checking Disk Drive Health (SMART Status)",
+    "problem": "Computer is slow or freezing, and you suspect the hard drive or SSD is failing.",
+    "dateAdded": "2026-08-08",
+    "tags": ["windows", "hardware", "disk", "wmic"],
+    "fixes": [
+      {
+        "title": "Method 1: WMIC Command",
+        "steps": [
+          "Open Command Prompt.",
+          "Run <code>wmic diskdrive get status</code>.",
+          "If the output says 'OK', the basic SMART checks pass. If it says 'Pred Fail', back up your data immediately."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "category": "dev",
+    "title": "Git: Changing the Last Unpushed Commit Message",
+    "problem": "Made a typo in a commit message, but haven't pushed to the remote repository yet.",
+    "dateAdded": "2026-08-08",
+    "tags": ["dev", "git", "commits", "amend"],
+    "fixes": [
+      {
+        "title": "Method 1: Git Commit Amend",
+        "steps": [
+          "Run <code>git commit --amend -m \"New, corrected commit message\"</code>.",
+          "This replaces the previous commit with a new one. Do not do this if you have already pushed the commit to a shared remote branch."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "category": "linux",
+    "title": "Finding Text Inside Compressed Log Files",
+    "problem": "Need to search rotated system logs (.gz files) without extracting them first.",
+    "dateAdded": "2026-08-08",
+    "tags": ["linux", "logs", "grep", "zgrep"],
+    "fixes": [
+      {
+        "title": "Method 1: Use zgrep",
+        "steps": [
+          "Run <code>zgrep 'search_string' /var/log/syslog.2.gz</code>.",
+          "This works exactly like grep, but decompresses the file in memory on the fly."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "category": "web",
+    "title": "Testing DNS Propagation Locally",
+    "problem": "Changed DNS records, but need to check what IP a specific nameserver resolves the domain to.",
+    "dateAdded": "2026-08-08",
+    "tags": ["web", "dns", "dig", "nslookup"],
+    "fixes": [
+      {
+        "title": "Method 1: Use dig with a Specific Nameserver",
+        "steps": [
+          "Run <code>dig @8.8.8.8 example.com</code> to query Google's public DNS.",
+          "Run <code>dig @1.1.1.1 example.com</code> to query Cloudflare's public DNS.",
+          "Check the 'ANSWER SECTION' to verify if the new IP has propagated to that specific resolver."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "category": "ai",
+    "title": "Using AI for Log Analysis",
+    "problem": "Staring at a massive, complex stack trace and need to find the root cause quickly.",
+    "dateAdded": "2026-08-08",
+    "tags": ["ai", "prompts", "debugging", "logs"],
+    "fixes": [
+      {
+        "title": "Method 1: Structured Log Parsing Prompt",
+        "steps": [
+          "Paste the log, and use this prompt: <code>Analyze this application stack trace. 1. Identify the exact line triggering the fatal error. 2. Explain the root cause in one sentence. 3. Provide the most likely fix. Ignore generic warnings.</code>"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "category": "productivity",
+    "title": "Downloading a File via Terminal",
+    "problem": "Need to grab a script or binary directly from a URL onto a headless server.",
+    "dateAdded": "2026-08-08",
+    "tags": ["productivity", "cli", "wget", "curl"],
+    "fixes": [
+      {
+        "title": "Method 1: Wget",
+        "steps": [
+          "Run <code>wget [https://example.com/file.zip](https://example.com/file.zip)</code>.",
+          "To save it as a specific name, use <code>wget -O custom_name.zip [https://example.com/file.zip](https://example.com/file.zip)</code>."
+        ]
+      },
+      {
+        "title": "Method 2: cURL",
+        "steps": [
+          "Run <code>curl -O [https://example.com/file.zip](https://example.com/file.zip)</code> (the uppercase -O saves the file using its original name)."
         ]
       }
     ]
