@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notes | NoteDesk</title>
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://notedeskapp.com/notes.html" />
+
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +34,24 @@
   <meta name="twitter:title" content="Tech Notes Collection | NoteDesk">
   <meta name="twitter:description" content="Instant access to categorized, real-world tech fixes and step-by-step guides.">
   <meta name="twitter:image" content="https://notedeskapp.com/img/tech-pattern.jpg">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "NoteDesk Tech Topics",
+    "description": "Categories of tech fixes, snippets, and documentation.",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Windows", "url": "https://notedeskapp.com/notes.html?category=windows" },
+      { "@type": "ListItem", "position": 2, "name": "Linux", "url": "https://notedeskapp.com/notes.html?category=linux" },
+      { "@type": "ListItem", "position": 3, "name": "Web Development", "url": "https://notedeskapp.com/notes.html?category=web" },
+      { "@type": "ListItem", "position": 4, "name": "Dev Tools", "url": "https://notedeskapp.com/notes.html?category=dev" },
+      { "@type": "ListItem", "position": 5, "name": "Productivity", "url": "https://notedeskapp.com/notes.html?category=productivity" },
+      { "@type": "ListItem", "position": 6, "name": "Cybersecurity", "url": "https://notedeskapp.com/notes.html?category=cybersecurity" }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="progress-bar" id="progressBar"></div>
