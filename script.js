@@ -396,6 +396,44 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
 
+                    // --- Phase 3: Dynamic JSON-LD structured data injector ---
+                    let ldScript = document.getElementById('dynamic-ld-json');
+                    if (!ldScript) {
+                        ldScript = document.createElement('script');
+                        ldScript.id = 'dynamic-ld-json';
+                        ldScript.type = 'application/ld+json';
+                        document.head.appendChild(ldScript);
+                    }
+                    
+                    let stepCount = 1;
+                    let schemaSteps = [];
+                    if (note.fixes && Array.isArray(note.fixes)) {
+                        note.fixes.forEach(fix => {
+                            if (fix.steps && Array.isArray(fix.steps)) {
+                                fix.steps.forEach(stepText => {
+                                    // Strip HTML like <code> or <kbd> out of the JSON schema text
+                                    const cleanText = stepText.replace(/<[^>]*>?/gm, ''); 
+                                    schemaSteps.push({
+                                        "@type": "HowToStep",
+                                        "position": stepCount++,
+                                        "text": cleanText
+                                    });
+                                });
+                            }
+                        });
+                    }
+
+                    if (schemaSteps.length > 0) {
+                        const howToSchema = {
+                            "@context": "https://schema.org",
+                            "@type": "HowTo",
+                            "name": note.title,
+                            "description": note.problem,
+                            "step": schemaSteps
+                        };
+                        ldScript.textContent = JSON.stringify(howToSchema);
+                    }
+
                     if (modalOverlay) {
                         modalOverlay.classList.add('active');
                         document.body.style.overflow = 'hidden';
@@ -408,6 +446,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         modalOverlay.classList.remove('active');
                         document.body.style.overflow = '';
                         history.pushState("", document.title, window.location.pathname + window.location.search);
+                        
+                        // Phase 3: Clean up dynamic schema when modal closes
+                        const ldScript = document.getElementById('dynamic-ld-json');
+                        if (ldScript) {
+                            ldScript.remove();
+                        }
                     }
                 };
 
