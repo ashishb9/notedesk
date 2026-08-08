@@ -356,14 +356,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                         const stepItem = document.createElement('li');
                                         stepItem.innerHTML = stepText;
 
-                                        const codeTags = stepItem.querySelectorAll('code');
+                              const codeTags = stepItem.querySelectorAll('code');
                                         codeTags.forEach(codeEl => {
                                             const codeWrapper = document.createElement('div');
                                             codeWrapper.className = 'code-snippet-box';
 
-                                            const codeText = document.createElement('span');
-                                            codeText.className = 'code-text-content';
+                                            // Phase 4: Dynamic <pre><code> generation for highlight.js
+                                            const preEl = document.createElement('pre');
+                                            
+                                            const codeText = document.createElement('code');
+                                            codeText.className = 'language-bash'; 
                                             codeText.textContent = codeEl.textContent;
+                                            
+                                            preEl.appendChild(codeText);
 
                                             const copyBtn = document.createElement('button');
                                             copyBtn.className = 'copy-code-btn';
@@ -381,9 +386,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 }, 2000);
                                             });
 
-                                            codeWrapper.appendChild(codeText);
+                                            codeWrapper.appendChild(preEl);
                                             codeWrapper.appendChild(copyBtn);
                                             codeEl.parentNode.replaceChild(codeWrapper, codeEl);
+
+                                            // Trigger Highlight.js formatting immediately upon injection
+                                            if (window.hljs) {
+                                                hljs.highlightElement(codeText);
+                                            }
                                         });
 
                                         stepsList.appendChild(stepItem);
@@ -393,6 +403,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                 modalFixesContainer.appendChild(fixBlock);
                             });
+                        }
+                    }
+
+                    // Phase 4: Copy All Steps Logic
+                    const copyAllBtn = document.getElementById('copyAllStepsBtn');
+                    if (copyAllBtn) {
+                        let allText = `Note: ${note.title}\nProblem: ${note.problem}\n\n`;
+                        if (note.fixes) {
+                            note.fixes.forEach(f => {
+                                allText += `--- ${f.title} ---\n`;
+                                if (f.steps) {
+                                    f.steps.forEach((s, i) => {
+                                        allText += `${i+1}. ${s.replace(/<[^>]*>?/gm, '')}\n`;
+                                    });
+                                }
+                                allText += '\n';
+                            });
+                        }
+                        
+                        // Clean clone to drop any old event listeners
+                        const newCopyAllBtn = copyAllBtn.cloneNode(true);
+                        copyAllBtn.parentNode.replaceChild(newCopyAllBtn, copyAllBtn);
+                        
+                        newCopyAllBtn.addEventListener('click', () => {
+                            navigator.clipboard.writeText(allText.trim());
+                            const origHTML = newCopyAllBtn.innerHTML;
+                            newCopyAllBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                            newCopyAllBtn.classList.add('copied');
+                            setTimeout(() => {
+                                newCopyAllBtn.innerHTML = origHTML;
+                                newCopyAllBtn.classList.remove('copied');
+                            }, 2000);
+                        });
+                    }
+
+                    // Phase 4: Related Notes Generator
+                    const relatedGrid = document.getElementById('relatedNotesGrid');
+                    const relatedContainer = document.getElementById('modalRelatedNotesContainer');
+                    if (relatedGrid && relatedContainer) {
+                        const related = allNotesData
+                            .filter(n => n.category === note.category && n.id !== note.id)
+                            .sort(() => 0.5 - Math.random())
+                            .slice(0, 3);
+                            
+                        relatedGrid.innerHTML = '';
+                        if (related.length > 0) {
+                            related.forEach(rNote => {
+                                const rCard = document.createElement('div');
+                                rCard.className = 'related-card';
+                                rCard.innerHTML = `<h5>${rNote.title}</h5><p>${rNote.problem.length > 50 ? rNote.problem.substring(0,50) + '...' : rNote.problem}</p>`;
+                                
+                                rCard.addEventListener('click', () => {
+                                    openModalForNote(rNote);
+                                    // Scroll modal back to top smoothly
+                                    const modalContent = document.querySelector('.modal-content');
+                                    if(modalContent) modalContent.scrollTo({ top: 0, behavior: 'smooth' });
+                                });
+                                relatedGrid.appendChild(rCard);
+                            });
+                            relatedContainer.style.display = 'block';
+                        } else {
+                            relatedContainer.style.display = 'none';
                         }
                     }
 

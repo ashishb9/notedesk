@@ -13,6 +13,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Phase 4: Highlight.js CSS Theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/night-owl.min.css">
+  
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
 
@@ -154,11 +158,26 @@
         <div class="problem-box">
           <p id="modalProblem"></p>
         </div>
+        
+        <!-- Phase 4: Copy All Steps Header Added Here -->
+        <div class="modal-fixes-header" style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+          <h4 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">Solutions</h4>
+          <button id="copyAllStepsBtn" class="copy-all-btn"><i class="fa-regular fa-copy"></i> Copy All Steps</button>
+        </div>
+        
         <div class="modal-fixes" id="modalFixesContainer"></div>
+        
+        <!-- Phase 4: Related Notes Container -->
+        <div class="modal-related-notes" id="modalRelatedNotesContainer" style="display: none;">
+          <h4 class="related-notes-title">Related Notes</h4>
+          <div class="related-notes-grid" id="relatedNotesGrid"></div>
+        </div>
       </div>
     </div>
   </div>
 
   <script src="script.js"></script>
+  <!-- Phase 4: Highlight.js Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </body>
 </html>
