@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://notedeskapp.com/sitemap.xml
