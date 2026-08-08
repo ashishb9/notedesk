@@ -13,6 +13,7 @@
   --hover-bg: rgba(36, 36, 36, 0.9);
   --primary-color: #008080;
   --text-color: #ffffff;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 [data-theme="light"] {
@@ -20,14 +21,14 @@
   --bg-secondary: #ffffff;
   --text-primary: #2d3748;
   --text-secondary: #4a5568;
-  --accent-color: #2b6cb0;
+  --accent-color: #007373;
   --card-bg: rgba(255, 255, 255, 0.9);
   --border-color: rgba(0, 0, 0, 0.1);
   --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  --scroll-progress-color: #2b6cb0;
+  --scroll-progress-color: #007373;
   --text-muted: #a0a0a0;
   --hover-bg: rgba(220, 220, 220, 0.95);
-  --primary-color: #2b6cb0;
+  --primary-color: #007373;
   --text-color: #2d3748;
 }
 
@@ -68,12 +69,16 @@
 }
 
 .back-to-top:hover {
-  background: #006666;
+  filter: brightness(0.85);
   transform: scale(1.1);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 body {
@@ -110,11 +115,13 @@ body::before {
 
 /* Hero Section */
 .hero {
-  background: radial-gradient(circle at top left, rgba(20, 20, 20, 0.3) 0%, rgba(0, 0, 0, 0.9) 70%);
+  /* Phase 4: Subtle Hero Glow Animation */
+  background: radial-gradient(circle at 0% 0%, rgba(0, 128, 128, 0.25) 0%, rgba(0, 0, 0, 0.85) 50%, rgba(0, 0, 0, 0.95) 100%);
+  background-size: 150% 150%;
   padding: 80px 20px 60px;
   text-align: center;
   color: var(--text-primary);
-  animation: fadeIn 1.5s ease-in;
+  animation: fadeIn 1.5s ease-in, heroGlow 12s ease-in-out infinite alternate;
   border-bottom: 1px solid var(--border-color);
   position: relative;
   z-index: 1;
@@ -122,7 +129,13 @@ body::before {
 }
 
 [data-theme="light"] .hero {
-  background: radial-gradient(circle at top left, rgba(245, 247, 250, 0.3) 0%, rgba(229, 231, 235, 0.9) 70%);
+  background: radial-gradient(circle at 0% 0%, rgba(0, 115, 115, 0.15) 0%, rgba(245, 247, 250, 0.8) 50%, rgba(229, 231, 235, 0.95) 100%);
+  background-size: 150% 150%;
+}
+
+@keyframes heroGlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
 .hero.about-hero, .hero.notes-hero {
@@ -160,37 +173,50 @@ body.scrolled-about .hero.about-hero {
   margin-top: 40px;
 }
 
-.hero-button,
+/* Phase 4: Clear Hero CTA Hierarchy */
+.hero-button {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #ffffff;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 128, 128, 0.4);
+  border: 2px solid var(--accent-color);
+}
+
+.hero-button:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 128, 128, 0.6);
+  color: #ffffff;
+}
+
 .hero-link {
   display: inline-block;
-  padding: 12px 24px;
-  border-radius: 5px;
-  font-size: 1em;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 1.1em;
   font-weight: 600;
   text-decoration: none;
-  background-color: var(--text-primary);
-  color: var(--bg-primary);
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  border: none;
+  transition: all 0.3s ease;
 }
 
-.hero-button:hover,
 .hero-link:hover {
-  background-color: var(--accent-color);
-  color: #fff;
+  border-color: var(--text-secondary);
+  background-color: rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
-}
-
-.hero-link::after {
-  content: '→';
-  font-size: 1.2em;
-  color: var(--accent-color);
-  transition: transform 0.2s ease, color 0.3s ease;
-}
-
-.hero-link:hover::after {
-  transform: translateX(5px);
   color: var(--text-primary);
+}
+
+[data-theme="light"] .hero-link:hover {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 /* Navigation */
@@ -211,8 +237,9 @@ nav {
 }
 
 nav .logo {
+  font-family: var(--font-heading);
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.03em;
   text-decoration: none;
@@ -370,14 +397,16 @@ h2 {
   transform-style: preserve-3d;
 }
 
+/* Phase 4: Dynamic variable on card hover */
 .card:hover {
   transform: translateY(-10px) rotateX(2deg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  background-color: rgba(36, 36, 36, 0.9);
+  background-color: var(--hover-bg); 
+  border-color: var(--accent-color);
 }
 
 [data-theme="light"] .card:hover {
-  background-color: rgba(245, 245, 245, 0.95);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .card h3 .card-number {
@@ -480,6 +509,7 @@ h2 {
   font-weight: 600;
   perspective: 1000px;
   transform-style: preserve-3d;
+  cursor: pointer; /* Added for Phase 1 - makes featured cards clickable */
 }
 
 .note:hover {
@@ -608,6 +638,53 @@ footer {
 
 [data-theme="light"] .about-page-container {
   background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* === 404 Error Page === */
+.error-page-container {
+  max-width: 700px;
+  margin: 80px auto;
+  padding: 60px 40px;
+  text-align: center;
+  background-color: rgba(20, 20, 20, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .error-page-container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.error-code {
+  font-family: var(--font-heading);
+  font-size: 7rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.error-page-container p {
+  max-width: 480px;
+  margin: 0 auto 30px;
+}
+
+.error-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--accent-color);
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.error-home-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.9);
 }
 
 .profile-card {
@@ -789,7 +866,7 @@ footer {
 }
 
 .form-submit-btn:hover {
-  background: #006666;
+  filter: brightness(0.85);
 }
 
 .form-submit-btn:disabled {
@@ -1017,8 +1094,14 @@ footer {
     font-size: 2.2em;
   }
   nav {
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 20px 20px;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+    order: 3;
   }
   .why, .explore, .featured, .news-ticker {
     padding: 80px 20px;
@@ -1393,7 +1476,7 @@ nav ul {
 }
 
 .news-source-btn:hover {
-  background-color: #006666;
+  filter: brightness(0.85);
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 128, 128, 0.45);
 }
@@ -1480,13 +1563,13 @@ nav ul {
     display: block;
   }
   
-  .nav-links {
+.nav-links {
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: #000;
+    background-color: var(--bg-primary);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1600,6 +1683,31 @@ nav.scrolled {
   margin-left: 50px;
   display: inline-block;
   text-decoration: none;
+}
+
+.ticker-skeleton {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.skeleton-bar {
+  display: inline-block;
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--hover-bg) 25%, rgba(0, 179, 179, 0.18) 50%, var(--hover-bg) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-bar:nth-child(1) { width: 180px; }
+.skeleton-bar:nth-child(2) { width: 260px; }
+.skeleton-bar:nth-child(3) { width: 140px; }
+.skeleton-bar:nth-child(4) { width: 220px; }
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 @keyframes continuousTickerScroll {
@@ -1919,4 +2027,95 @@ nav.scrolled {
 
 .category-filters button {
   font-size: 0.9rem !important; /* Restores button text size */
+}
+
+/* === Phase 4: Copy All Steps & Related Notes UI === */
+.copy-all-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.copy-all-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.copy-all-btn.copied {
+  background: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+}
+
+.modal-related-notes {
+  margin-top: 30px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 25px;
+}
+
+.related-notes-title {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin: 0 0 15px 0;
+  font-weight: 700;
+}
+
+.related-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.related-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.related-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.related-card h5 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.related-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Phase 4: Highlight.js Code Snippet Updates */
+.code-snippet-box pre {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  flex-grow: 1;
+  overflow-x: auto;
+}
+
+.code-snippet-box code {
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 0.9rem !important;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }

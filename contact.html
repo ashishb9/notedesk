@@ -4,12 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact NoteDesk</title>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://notedeskapp.com/contact.html" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="img/favicon.png">
   <meta name="msapplication-TileImage" content="img/favicon.png">
   <meta name="description" content="Contact NoteDesk for collaborations and questions">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://notedeskapp.com/contact.html">
+  <meta property="og:title" content="Contact NoteDesk">
+  <meta property="og:description" content="Reach out to Ashish B for collaborations, questions, or just to say hello.">
+  <meta property="og:image" content="https://notedeskapp.com/img/tech-pattern.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://notedeskapp.com/contact.html">
+  <meta name="twitter:title" content="Contact NoteDesk">
+  <meta name="twitter:description" content="Reach out to Ashish B for collaborations, questions, or just to say hello.">
+  <meta name="twitter:image" content="https://notedeskapp.com/img/tech-pattern.jpg">
 </head>
 <body>
   <div class="progress-bar" id="progressBar"></div>
@@ -25,7 +49,7 @@
   <header class="hero about-hero">
     <nav>
       <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
-      <button class="hamburger-menu" aria-label="Toggle Navigation Menu">
+      <button class="hamburger-menu" aria-label="Toggle Navigation Menu" aria-expanded="false">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -37,7 +61,7 @@
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
       <div class="theme-toggle">
-        <i id="theme-icon" class="fas fa-sun"></i>
+        <i id="theme-icon" class="fas fa-moon"></i>
         <div class="toggle-switch">
           <input type="checkbox" id="theme-switch" aria-label="Toggle light and dark theme">
           <label for="theme-switch"></label>
@@ -53,7 +77,7 @@
   <main>
     <div class="about-page-container">
       <aside class="profile-card">
-        <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='img/placeholder.jpg'" />
+        <img src="img/your-profile-pic.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='img/placeholder.svg'" />
         <h2>Ashish B</h2>
         <p>Support Engineer & Tech Enthusiast</p>
         <div class="socials">
@@ -119,15 +143,19 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="notes.html">Notes</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
         <h3>Contact</h3>
         <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/ashishb9" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2025 NoteDesk. All rights reserved.
+      &copy; <span class="copyright-year">2025</span> NoteDesk. All rights reserved.
     </div>
   </footer>
 

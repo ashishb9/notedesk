@@ -3,19 +3,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. THEME SWITCHING
     // ===================================
     const themeSwitch = document.getElementById('theme-switch');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    const updateThemeIcon = (theme) => {
+        if(themeIcon) {
+            themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    };
+
     if (themeSwitch) {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             document.documentElement.setAttribute('data-theme', 'light');
             themeSwitch.checked = true;
+            updateThemeIcon('light');
+        } else {
+            updateThemeIcon('dark');
         }
         themeSwitch.addEventListener('change', function() {
             if (this.checked) {
                 document.documentElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
+                updateThemeIcon('light');
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
+                updateThemeIcon('dark');
             }
         });
     }
@@ -140,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Basic guard: don't let users spam the submit button mid-request
             if (submitBtn) submitBtn.disabled = true;
             if (btnText) btnText.textContent = 'Sending...';
             if (formError) formError.style.display = 'none';
@@ -148,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = new FormData(contactForm);
             const accessKey = formData.get('access_key');
 
-            // Friendly reminder if the site owner forgot to set up their key
             if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
                 console.error('NoteDesk contact form: please set your Web3Forms access_key in contact.html (get one free at https://web3forms.com)');
                 if (formError) {
@@ -194,15 +205,76 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ===================================
+    // FEATURED NOTES LOGIC
+    // ===================================
+    const initFeaturedNotes = () => {
+        const featuredContainer = document.getElementById('featuredNotesContainer');
+        if (!featuredContainer) return;
+
+        fetch('notes.json')
+            .then(res => res.json())
+            .then(data => {
+                if (!data || data.length === 0) return;
+                
+                const shuffled = [...data].sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, 3);
+                
+                featuredContainer.innerHTML = '';
+                selected.forEach(note => {
+                    const card = document.createElement('div');
+                    card.className = 'note';
+                    
+                    const badge = document.createElement('span');
+                    badge.className = `note-badge badge-${note.category}`;
+                    badge.textContent = note.category.toUpperCase();
+                    badge.style.display = 'inline-block';
+                    badge.style.marginBottom = '12px';
+                    
+                    const title = document.createElement('h3');
+                    title.textContent = note.title;
+                    title.style.marginTop = '0';
+                    title.style.fontSize = '1.15em';
+                    
+                    const prob = document.createElement('p');
+                    prob.textContent = note.problem;
+                    prob.style.fontSize = '0.95em';
+                    prob.style.color = 'var(--text-secondary)';
+                    prob.style.margin = '0';
+                    prob.style.lineHeight = '1.5';
+                    
+                    card.appendChild(badge);
+                    card.appendChild(title);
+                    card.appendChild(prob);
+                    
+                    card.addEventListener('click', () => {
+                        window.location.href = `notes.html#note-${note.id}`;
+                    });
+                    
+                    featuredContainer.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error('Error fetching featured notes:', err);
+                featuredContainer.innerHTML = '<p>Unable to load featured notes at this time.</p>';
+            });
+    };
+
+    // ===================================
     // 3. NOTES PAGE LOGIC & MODAL FIXES
     // ===================================
     const initNotesPage = () => {
         const notesGrid = document.getElementById('notesGrid');
         if (!notesGrid) return;
 
+        let currentCategory = 'all';
+        let currentSearchTerm = '';
+        let allNotesData = [];
+
         fetch('notes.json')
             .then(response => response.json())
             .then(notesData => {
+                allNotesData = notesData;
+                
                 const modalOverlay = document.getElementById('noteModalOverlay');
                 const modalTitle = document.getElementById('modalTitle');
                 const modalProblem = document.getElementById('modalProblem');
@@ -237,6 +309,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 };
 
+                const updateNotesDisplay = () => {
+                    const term = currentSearchTerm;
+                    const filteredNotes = allNotesData.filter(note => {
+                        const matchesCategory = currentCategory === 'all' || note.category === currentCategory;
+                        const matchesSearch = !term || 
+                            note.title.toLowerCase().includes(term) ||
+                            note.problem.toLowerCase().includes(term) ||
+                            note.category.toLowerCase().includes(term) ||
+                            (note.fixes && note.fixes.some(fix => fix.title.toLowerCase().includes(term) || (fix.steps && fix.steps.some(step => step.toLowerCase().includes(term)))));
+                        
+                        return matchesCategory && matchesSearch;
+                    });
+                    generateNoteCards(filteredNotes);
+                };
+
                 const openModalForNote = (note) => {
                     if (!note) return;
 
@@ -269,14 +356,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                         const stepItem = document.createElement('li');
                                         stepItem.innerHTML = stepText;
 
-                                        const codeTags = stepItem.querySelectorAll('code');
+                              const codeTags = stepItem.querySelectorAll('code');
                                         codeTags.forEach(codeEl => {
                                             const codeWrapper = document.createElement('div');
                                             codeWrapper.className = 'code-snippet-box';
 
-                                            const codeText = document.createElement('span');
-                                            codeText.className = 'code-text-content';
+                                            // Phase 4: Dynamic <pre><code> generation for highlight.js
+                                            const preEl = document.createElement('pre');
+                                            
+                                            const codeText = document.createElement('code');
+                                            codeText.className = 'language-bash'; 
                                             codeText.textContent = codeEl.textContent;
+                                            
+                                            preEl.appendChild(codeText);
 
                                             const copyBtn = document.createElement('button');
                                             copyBtn.className = 'copy-code-btn';
@@ -294,9 +386,14 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 }, 2000);
                                             });
 
-                                            codeWrapper.appendChild(codeText);
+                                            codeWrapper.appendChild(preEl);
                                             codeWrapper.appendChild(copyBtn);
                                             codeEl.parentNode.replaceChild(codeWrapper, codeEl);
+
+                                            // Trigger Highlight.js formatting immediately upon injection
+                                            if (window.hljs) {
+                                                hljs.highlightElement(codeText);
+                                            }
                                         });
 
                                         stepsList.appendChild(stepItem);
@@ -307,6 +404,106 @@ document.addEventListener("DOMContentLoaded", () => {
                                 modalFixesContainer.appendChild(fixBlock);
                             });
                         }
+                    }
+
+                    // Phase 4: Copy All Steps Logic
+                    const copyAllBtn = document.getElementById('copyAllStepsBtn');
+                    if (copyAllBtn) {
+                        let allText = `Note: ${note.title}\nProblem: ${note.problem}\n\n`;
+                        if (note.fixes) {
+                            note.fixes.forEach(f => {
+                                allText += `--- ${f.title} ---\n`;
+                                if (f.steps) {
+                                    f.steps.forEach((s, i) => {
+                                        allText += `${i+1}. ${s.replace(/<[^>]*>?/gm, '')}\n`;
+                                    });
+                                }
+                                allText += '\n';
+                            });
+                        }
+                        
+                        // Clean clone to drop any old event listeners
+                        const newCopyAllBtn = copyAllBtn.cloneNode(true);
+                        copyAllBtn.parentNode.replaceChild(newCopyAllBtn, copyAllBtn);
+                        
+                        newCopyAllBtn.addEventListener('click', () => {
+                            navigator.clipboard.writeText(allText.trim());
+                            const origHTML = newCopyAllBtn.innerHTML;
+                            newCopyAllBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                            newCopyAllBtn.classList.add('copied');
+                            setTimeout(() => {
+                                newCopyAllBtn.innerHTML = origHTML;
+                                newCopyAllBtn.classList.remove('copied');
+                            }, 2000);
+                        });
+                    }
+
+                    // Phase 4: Related Notes Generator
+                    const relatedGrid = document.getElementById('relatedNotesGrid');
+                    const relatedContainer = document.getElementById('modalRelatedNotesContainer');
+                    if (relatedGrid && relatedContainer) {
+                        const related = allNotesData
+                            .filter(n => n.category === note.category && n.id !== note.id)
+                            .sort(() => 0.5 - Math.random())
+                            .slice(0, 3);
+                            
+                        relatedGrid.innerHTML = '';
+                        if (related.length > 0) {
+                            related.forEach(rNote => {
+                                const rCard = document.createElement('div');
+                                rCard.className = 'related-card';
+                                rCard.innerHTML = `<h5>${rNote.title}</h5><p>${rNote.problem.length > 50 ? rNote.problem.substring(0,50) + '...' : rNote.problem}</p>`;
+                                
+                                rCard.addEventListener('click', () => {
+                                    openModalForNote(rNote);
+                                    // Scroll modal back to top smoothly
+                                    const modalContent = document.querySelector('.modal-content');
+                                    if(modalContent) modalContent.scrollTo({ top: 0, behavior: 'smooth' });
+                                });
+                                relatedGrid.appendChild(rCard);
+                            });
+                            relatedContainer.style.display = 'block';
+                        } else {
+                            relatedContainer.style.display = 'none';
+                        }
+                    }
+
+                    // --- Phase 3: Dynamic JSON-LD structured data injector ---
+                    let ldScript = document.getElementById('dynamic-ld-json');
+                    if (!ldScript) {
+                        ldScript = document.createElement('script');
+                        ldScript.id = 'dynamic-ld-json';
+                        ldScript.type = 'application/ld+json';
+                        document.head.appendChild(ldScript);
+                    }
+                    
+                    let stepCount = 1;
+                    let schemaSteps = [];
+                    if (note.fixes && Array.isArray(note.fixes)) {
+                        note.fixes.forEach(fix => {
+                            if (fix.steps && Array.isArray(fix.steps)) {
+                                fix.steps.forEach(stepText => {
+                                    // Strip HTML like <code> or <kbd> out of the JSON schema text
+                                    const cleanText = stepText.replace(/<[^>]*>?/gm, ''); 
+                                    schemaSteps.push({
+                                        "@type": "HowToStep",
+                                        "position": stepCount++,
+                                        "text": cleanText
+                                    });
+                                });
+                            }
+                        });
+                    }
+
+                    if (schemaSteps.length > 0) {
+                        const howToSchema = {
+                            "@context": "https://schema.org",
+                            "@type": "HowTo",
+                            "name": note.title,
+                            "description": note.problem,
+                            "step": schemaSteps
+                        };
+                        ldScript.textContent = JSON.stringify(howToSchema);
                     }
 
                     if (modalOverlay) {
@@ -321,6 +518,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         modalOverlay.classList.remove('active');
                         document.body.style.overflow = '';
                         history.pushState("", document.title, window.location.pathname + window.location.search);
+                        
+                        // Phase 3: Clean up dynamic schema when modal closes
+                        const ldScript = document.getElementById('dynamic-ld-json');
+                        if (ldScript) {
+                            ldScript.remove();
+                        }
                     }
                 };
 
@@ -349,14 +552,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (searchInput) {
                     searchInput.addEventListener('input', e => {
-                        const term = e.target.value.toLowerCase().trim();
-                        const filteredNotes = notesData.filter(note =>
-                            note.title.toLowerCase().includes(term) ||
-                            note.problem.toLowerCase().includes(term) ||
-                            note.category.toLowerCase().includes(term) ||
-                            (note.fixes && note.fixes.some(fix => fix.title.toLowerCase().includes(term) || (fix.steps && fix.steps.some(step => step.toLowerCase().includes(term)))))
-                        );
-                        generateNoteCards(filteredNotes);
+                        currentSearchTerm = e.target.value.toLowerCase().trim();
+                        updateNotesDisplay();
                     });
                 }
 
@@ -365,9 +562,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         btn.addEventListener('click', () => {
                             categoryButtons.forEach(b => b.classList.remove('active'));
                             btn.classList.add('active');
-                            const category = btn.dataset.category;
-                            const filteredNotes = category === 'all' ? notesData : notesData.filter(note => note.category === category);
-                            generateNoteCards(filteredNotes);
+                            currentCategory = btn.dataset.category;
+                            updateNotesDisplay();
                         });
                     });
                 }
@@ -376,13 +572,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 const urlCategory = urlParams.get('category');
 
                 if (urlCategory) {
+                    currentCategory = urlCategory;
+                    categoryButtons.forEach(b => b.classList.remove('active'));
                     const categoryButton = document.querySelector(`.category-filters button[data-category="${urlCategory}"]`);
-                    if (categoryButton) categoryButton.click();
-                    else document.querySelector('.category-filters button[data-category="all"]').click();
+                    if (categoryButton) categoryButton.classList.add('active');
+                    else {
+                        document.querySelector('.category-filters button[data-category="all"]').classList.add('active');
+                        currentCategory = 'all';
+                    }
                 } else {
+                    categoryButtons.forEach(b => b.classList.remove('active'));
                     const allButton = document.querySelector('.category-filters button[data-category="all"]');
-                    if (allButton) allButton.click();
+                    if (allButton) allButton.classList.add('active');
                 }
+
+                updateNotesDisplay();
 
                 const hash = window.location.hash;
                 if (hash && hash.startsWith('#note-')) {
@@ -405,8 +609,27 @@ document.addEventListener("DOMContentLoaded", () => {
             hamburger.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
                 document.body.classList.toggle('menu-open');
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+            });
+
+            // Close menu when a link is clicked
+            const links = navLinks.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
             });
         }
+    };
+
+    // Auto-updating copyright year
+    const initCopyrightYear = () => {
+        document.querySelectorAll('.copyright-year').forEach(el => {
+            el.textContent = new Date().getFullYear();
+        });
     };
 
     // ===================================
@@ -416,9 +639,11 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollAnimations();
     aboutHeroShrink();
     handleContactForm();
+    initFeaturedNotes();
     initNotesPage();
     initParallax();
     initScrollProgressBar();
     initBackToTopBtn();
     initHamburger();
+    initCopyrightYear();
 });
