@@ -1836,6 +1836,12 @@ nav.scrolled {
   border: 1px solid rgba(45, 212, 191, 0.3);
 }
 
+.badge-ai {
+  background-color: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  border: 1px solid rgba(129, 140, 248, 0.3);
+}
+
 .note-card-title {
   margin: 0 0 12px 0;
   font-size: 1.25rem;

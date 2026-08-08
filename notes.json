@@ -1,3 +1,7 @@
+---
+
+### `notes.json` (Fully Replaced)
+```json
 [
   {
     "id": 1,
@@ -807,6 +811,47 @@
         "steps": [
           "If issues are found, run <code>DISM /Online /Cleanup-Image /RestoreHealth</code>.",
           "This command uses Windows Update to repair the local system image. After it completes, run <code>sfc /scannow</code> again."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "category": "ai",
+    "title": "Writing Effective AI Prompts for Code",
+    "problem": "Getting generic, buggy, or incomplete code from AI assistants.",
+    "fixes": [
+      {
+        "title": "Method 1: Provide Constraints and Context",
+        "steps": [
+          "Specify the exact language, framework, and edge cases in your initial prompt.",
+          "Example: <code>Write a React component using TypeScript. Do not use class components.</code>"
+        ]
+      },
+      {
+        "title": "Method 2: Ask for Explanations",
+        "steps": [
+          "Append <code>Explain your reasoning step-by-step</code> to force the AI to validate its own logic before generating the final code block."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "category": "ai",
+    "title": "Bypassing AI Hallucinations in Terminal Commands",
+    "problem": "AI suggests terminal commands that contain deprecated flags or hallucinated packages.",
+    "fixes": [
+      {
+        "title": "Method 1: Request Official Documentation Links",
+        "steps": [
+          "Ask the AI to <code>Include the link to the official man page or documentation for this command</code> to verify its authenticity before running it."
+        ]
+      },
+      {
+        "title": "Method 2: Use Dry-Run Flags",
+        "steps": [
+          "Always append <code>--dry-run</code> or <code>--simulate</code> to commands suggested by AI to see what they will do before actually executing them."
         ]
       }
     ]
