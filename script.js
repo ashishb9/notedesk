@@ -400,13 +400,20 @@ document.addEventListener("DOMContentLoaded", () => {
                         newModalBookmarkBtn.addEventListener('click', () => toggleBookmark(note.id));
                     }
 
-                 // Phase 9: Helpful Voting Setup
+                // Phase 9: Helpful Voting Setup
                     const helpfulYesBtn = document.getElementById('helpfulYesBtn');
                     const helpfulNoBtn = document.getElementById('helpfulNoBtn');
 
                     if (helpfulYesBtn && helpfulNoBtn) {
-                        const helpfulYesCount = helpfulYesBtn.querySelector('.yes-count');
-                        const helpfulNoCount = helpfulNoBtn.querySelector('.no-count');
+                        // Clone and replace first to clear out any old event listeners cleanly
+                        const newYesBtn = helpfulYesBtn.cloneNode(true);
+                        const newNoBtn = helpfulNoBtn.cloneNode(true);
+                        helpfulYesBtn.parentNode.replaceChild(newYesBtn, helpfulYesBtn);
+                        helpfulNoBtn.parentNode.replaceChild(newNoBtn, helpfulNoBtn);
+
+                        // Query child counts from the newly inserted DOM nodes
+                        const helpfulYesCount = newYesBtn.querySelector('.yes-count');
+                        const helpfulNoCount = newNoBtn.querySelector('.no-count');
                         
                         const votesStorageKey = `notedesk_votes_${note.id}`;
                         let votesData = { yes: 0, no: 0, userVote: null };
@@ -418,8 +425,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (helpfulYesCount) helpfulYesCount.textContent = votesData.yes;
                         if (helpfulNoCount) helpfulNoCount.textContent = votesData.no;
 
-                        helpfulYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
-                        helpfulNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
+                        newYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
+                        newNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
 
                         const handleVote = (voteType) => {
                             if (votesData.userVote === voteType) return;
@@ -433,14 +440,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             if (helpfulYesCount) helpfulYesCount.textContent = votesData.yes;
                             if (helpfulNoCount) helpfulNoCount.textContent = votesData.no;
-                            helpfulYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
-                            helpfulNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
+                            newYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
+                            newNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
                         };
-
-                        const newYesBtn = helpfulYesBtn.cloneNode(true);
-                        const newNoBtn = helpfulNoBtn.cloneNode(true);
-                        helpfulYesBtn.parentNode.replaceChild(newYesBtn, helpfulYesBtn);
-                        helpfulNoBtn.parentNode.replaceChild(newNoBtn, helpfulNoBtn);
 
                         newYesBtn.addEventListener('click', () => handleVote('yes'));
                         newNoBtn.addEventListener('click', () => handleVote('no'));
