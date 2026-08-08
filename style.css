@@ -2181,3 +2181,35 @@ nav.scrolled {
     color: #333 !important;
   }
 }
+
+/* === Phase 9: Bookmarks & Helpful Feedback Styles === */
+.card-bookmark-btn, .modal-bookmark-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.2s, transform 0.2s;
+  padding: 4px;
+}
+
+.card-bookmark-btn:hover, .modal-bookmark-btn:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.card-bookmark-btn.bookmarked i, .modal-bookmark-btn.bookmarked i {
+  font-weight: 900;
+  color: #f59e0b;
+}
+
+.helpful-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color) !important;
+}
+
+.helpful-btn.voted {
+  background: rgba(0, 128, 128, 0.15) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
+}

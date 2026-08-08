@@ -112,6 +112,7 @@
           <button class="category-btn" data-category="productivity">Productivity</button>
           <button class="category-btn" data-category="cybersecurity">Cybersecurity</button>
           <button class="category-btn" data-category="ai">AI & Prompts</button>
+          <button class="category-btn" data-category="saved"><i class="fa-solid fa-bookmark"></i> Bookmarks</button>
         </div>
       </div>
       <div class="notes-grid" id="notesGrid"></div>
@@ -150,9 +151,10 @@
   <div class="modal-overlay" id="noteModalOverlay">
     <div class="modal-content note-modal-card" id="noteModalContent">
       <div class="modal-header">
-        <div class="modal-title-group">
+        <div class="modal-title-group" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
           <span class="note-badge" id="modalCategoryBadge">Category</span>
-          <h3 id="modalTitle">Note Title</h3>
+          <button id="modalBookmarkBtn" class="modal-bookmark-btn" title="Bookmark note" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem;"><i class="fa-regular fa-bookmark"></i></button>
+          <h3 id="modalTitle" style="width: 100%; margin: 5px 0 0 0;">Note Title</h3>
         </div>
         <button class="close-modal-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
       </div>
@@ -161,7 +163,7 @@
           <p id="modalProblem"></p>
         </div>
         
-        <!-- Phase 8: Action Buttons (Copy Link, Print, Copy All Steps) -->
+        <!-- Action Buttons (Copy Link, Print, Copy All Steps) -->
         <div class="modal-fixes-header" style="display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; flex-wrap: wrap; gap: 10px;">
           <h4 style="margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">Solutions</h4>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -172,6 +174,15 @@
         </div>
         
         <div class="modal-fixes" id="modalFixesContainer"></div>
+
+        <!-- Phase 9: Was this helpful? Section -->
+        <div class="modal-helpful-section" style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;">
+          <span style="font-size: 1rem; font-weight: 600; color: var(--text-primary);">Was this helpful?</span>
+          <div style="display: flex; gap: 10px;">
+            <button id="helpfulYesBtn" class="helpful-btn" style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.9rem; transition: all 0.2s;"><i class="fa-regular fa-thumbs-up"></i> Yes (<span id="helpfulYesCount">0</span>)</button>
+            <button id="helpfulNoBtn" class="helpful-btn" style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.9rem; transition: all 0.2s;"><i class="fa-regular fa-thumbs-down"></i> No (<span id="helpfulNoCount">0</span>)</button>
+          </div>
+        </div>
         
         <!-- Related Notes Container -->
         <div class="modal-related-notes" id="modalRelatedNotesContainer" style="display: none;">

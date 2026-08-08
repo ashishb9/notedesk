@@ -284,35 +284,86 @@ document.addEventListener("DOMContentLoaded", () => {
                 const categoryButtons = document.querySelectorAll('.category-filters button');
                 const modalFixesContainer = document.getElementById('modalFixesContainer');
 
+               const getBookmarks = () => {
+                    try {
+                        return JSON.parse(localStorage.getItem('notedesk_bookmarks')) || [];
+                    } catch(e) {
+                        return [];
+                    }
+                };
+
+                const toggleBookmark = (noteId, e) => {
+                    if (e) e.stopPropagation();
+                    let bookmarks = getBookmarks();
+                    const index = bookmarks.indexOf(noteId);
+                    if (index > -1) {
+                        bookmarks.splice(index, 1);
+                    } else {
+                        bookmarks.push(noteId);
+                    }
+                    localStorage.setItem('notedesk_bookmarks', JSON.stringify(bookmarks));
+                    updateNotesDisplay();
+                    
+                    // If modal is open for this note, update modal bookmark button too
+                    const modalBookmarkBtn = document.getElementById('modalBookmarkBtn');
+                    if (modalBookmarkBtn && modalBookmarkBtn.dataset.id == noteId) {
+                        const isBookmarked = bookmarks.includes(noteId);
+                        modalBookmarkBtn.className = isBookmarked ? 'modal-bookmark-btn bookmarked' : 'modal-bookmark-btn';
+                        modalBookmarkBtn.innerHTML = isBookmarked ? '<i class="fa-solid fa-bookmark"></i>' : '<i class="fa-regular fa-bookmark"></i>';
+                    }
+                };
+
                 const generateNoteCards = (data) => {
                     notesGrid.innerHTML = '';
-                    if (!data || data.length === 0) {
-                        notesGrid.innerHTML = '<p class="no-results" style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No matching notes found. Try searching for another topic!</p>';
+                    const bookmarks = getBookmarks();
+
+                    let displayData = data;
+                    if (currentCategory === 'saved') {
+                        displayData = data.filter(note => bookmarks.includes(note.id));
+                    }
+
+                    if (!displayData || displayData.length === 0) {
+                        const emptyMsg = currentCategory === 'saved' ? 'No bookmarks saved yet. Click the bookmark icon on any note to save it here!' : 'No matching notes found. Try searching for another topic!';
+                        notesGrid.innerHTML = `<p class="no-results" style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">${emptyMsg}</p>`;
                         return;
                     }
-                    data.forEach(note => {
+
+                    displayData.forEach(note => {
                         const card = document.createElement('div');
                         card.className = 'note-card';
                         card.dataset.id = note.id;
                         card.dataset.category = note.category;
 
                         const categoryName = note.category.toUpperCase();
+                        const isBookmarked = bookmarks.includes(note.id);
 
                         card.innerHTML = `
-                            <div class="note-card-header">
+                            <div class="note-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                <button class="card-bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" title="${isBookmarked ? 'Remove bookmark' : 'Bookmark note'}">
+                                    <i class="${isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'}"></i>
+                                </button>
                                 <span class="note-badge badge-${note.category}">${categoryName}</span>
                             </div>
                             <h3 class="note-card-title">${note.title}</h3>
                             <p class="card-problem">${note.problem}</p>
                         `;
+
+                        const bookmarkBtn = card.querySelector('.card-bookmark-btn');
+                        bookmarkBtn.addEventListener('click', (e) => toggleBookmark(note.id, e));
+
                         notesGrid.appendChild(card);
                     });
                 };
 
-                const updateNotesDisplay = () => {
+            const updateNotesDisplay = () => {
                     const term = currentSearchTerm;
+                    const bookmarks = getBookmarks();
+
                     const filteredNotes = allNotesData.filter(note => {
-                        const matchesCategory = currentCategory === 'all' || note.category === currentCategory;
+                        const matchesCategory = currentCategory === 'all' || 
+                            (currentCategory === 'saved' && bookmarks.includes(note.id)) || 
+                            note.category === currentCategory;
+
                         const matchesSearch = !term || 
                             note.title.toLowerCase().includes(term) ||
                             note.problem.toLowerCase().includes(term) ||
@@ -324,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     generateNoteCards(filteredNotes);
                 };
 
-                const openModalForNote = (note) => {
+               const openModalForNote = (note) => {
                     if (!note) return;
 
                     if (modalTitle) modalTitle.textContent = note.title;
@@ -333,6 +384,65 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (modalCategoryBadge) {
                         modalCategoryBadge.textContent = note.category.toUpperCase();
                         modalCategoryBadge.className = `note-badge badge-${note.category}`;
+                    }
+
+                    // Phase 9: Modal Bookmark Button Setup
+                    const modalBookmarkBtn = document.getElementById('modalBookmarkBtn');
+                    if (modalBookmarkBtn) {
+                        modalBookmarkBtn.dataset.id = note.id;
+                        const bookmarks = getBookmarks();
+                        const isBookmarked = bookmarks.includes(note.id);
+                        modalBookmarkBtn.className = isBookmarked ? 'modal-bookmark-btn bookmarked' : 'modal-bookmark-btn';
+                        modalBookmarkBtn.innerHTML = isBookmarked ? '<i class="fa-solid fa-bookmark"></i>' : '<i class="fa-regular fa-bookmark"></i>';
+
+                        const newModalBookmarkBtn = modalBookmarkBtn.cloneNode(true);
+                        modalBookmarkBtn.parentNode.replaceChild(newModalBookmarkBtn, modalBookmarkBtn);
+                        newModalBookmarkBtn.addEventListener('click', () => toggleBookmark(note.id));
+                    }
+
+                    // Phase 9: Helpful Voting Setup
+                    const helpfulYesBtn = document.getElementById('helpfulYesBtn');
+                    const helpfulNoBtn = document.getElementById('helpfulNoBtn');
+                    const helpfulYesCount = document.getElementById('helpfulYesCount');
+                    const helpfulNoCount = document.getElementById('helpfulNoCount');
+
+                    if (helpfulYesBtn && helpfulNoBtn && helpfulYesCount && helpfulNoCount) {
+                        const votesStorageKey = `notedesk_votes_${note.id}`;
+                        let votesData = { yes: 0, no: 0, userVote: null };
+                        try {
+                            const savedVotes = localStorage.getItem(votesStorageKey);
+                            if (savedVotes) votesData = JSON.parse(savedVotes);
+                        } catch(e) {}
+
+                        helpfulYesCount.textContent = votesData.yes;
+                        helpfulNoCount.textContent = votesData.no;
+
+                        helpfulYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
+                        helpfulNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
+
+                        const handleVote = (voteType) => {
+                            if (votesData.userVote === voteType) return; // already voted this
+                            if (votesData.userVote === 'yes') votesData.yes--;
+                            if (votesData.userVote === 'no') votesData.no--;
+
+                            votesData[voteType]++;
+                            votesData.userVote = voteType;
+
+                            localStorage.setItem(votesStorageKey, JSON.stringify(votesData));
+
+                            helpfulYesCount.textContent = votesData.yes;
+                            helpfulNoCount.textContent = votesData.no;
+                            helpfulYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
+                            helpfulNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
+                        };
+
+                        const newYesBtn = helpfulYesBtn.cloneNode(true);
+                        const newNoBtn = helpfulNoBtn.cloneNode(true);
+                        helpfulYesBtn.parentNode.replaceChild(newYesBtn, helpfulYesBtn);
+                        helpfulNoBtn.parentNode.replaceChild(newNoBtn, helpfulNoBtn);
+
+                        newYesBtn.addEventListener('click', () => handleVote('yes'));
+                        newNoBtn.addEventListener('click', () => handleVote('no'));
                     }
 
                     if (modalFixesContainer) {
