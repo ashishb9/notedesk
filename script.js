@@ -117,8 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const docHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            progressBar.style.width = `${scrollPercent}%`;
+const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+progressBar.style.width = `${scrollPercent}%`;
         });
     };
 

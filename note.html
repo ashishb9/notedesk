@@ -6,20 +6,20 @@
   <title id="pageTitle">Note Details | NoteDesk</title>
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="[https://notedeskapp.com/note.html](https://notedeskapp.com/note.html)" />
+  <link rel="canonical" href="https://notedeskapp.com/note.html" />
 <link rel="manifest" href="manifest.json">
 
   <!-- Fonts & Icons -->
-  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-  <link href="[https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap)" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   
   <!-- Highlight.js CSS Theme -->
-  <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/night-owl.min.css](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/night-owl.min.css)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/night-owl.min.css">
   
-  <link rel="preload" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css)" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css)"></noscript>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
 
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="img/favicon.png">
@@ -96,6 +96,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="notes.html">Notes</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -104,7 +105,7 @@
         <h3>Contact</h3>
         <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
         <div class="socials">
-          <a href="[https://www.linkedin.com/in/ashishb9](https://www.linkedin.com/in/ashishb9)" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.linkedin.com/in/ashishb9" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
     </div>
@@ -114,7 +115,7 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="[https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js](https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js)"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -222,7 +223,7 @@
           const schemaScript = document.createElement('script');
           schemaScript.type = 'application/ld+json';
           schemaScript.textContent = JSON.stringify({
-            "@context": "[https://schema.org](https://schema.org)",
+            "@context": "https://schema.org",
             "@type": "HowTo",
             "name": note.title,
             "description": note.problem,
