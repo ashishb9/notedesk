@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog | NoteDesk</title>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="[https://notedeskapp.com/changelog.html](https://notedeskapp.com/changelog.html)" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+  <link href="[https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap)" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css)" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css)"></noscript>
+
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <meta name="msapplication-TileImage" content="img/favicon.png">
+  <meta name="description" content="Changelog of recently added technical notes and fixes on NoteDesk.">
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+  <button class="back-to-top" id="backToTop" title="Back to Top" aria-label="Back to Top">↑</button>
+
+  <div class="page-loader">
+    <div class="loader-logo">
+      <i class="fa-solid fa-laptop"></i> NoteDesk
+    </div>
+  </div>
+
+  <header class="hero notes-hero">
+    <nav>
+      <a href="index.html" class="logo"><i class="fa-solid fa-laptop"></i> NoteDesk</a>
+      <button class="hamburger-menu" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="theme-toggle">
+        <i id="theme-icon" class="fas fa-moon"></i>
+        <div class="toggle-switch">
+          <input type="checkbox" id="theme-switch" aria-label="Toggle light and dark theme">
+          <label for="theme-switch"></label>
+        </div>
+      </div>
+    </nav>
+    <div class="hero-content">
+      <h1>Changelog & Updates</h1>
+      <p>Tracking recently added technical notes and knowledge base updates</p>
+    </div>
+  </header>
+  
+  <main>
+    <section class="notes-container js-scroll" style="max-width: 800px; margin: 40px auto; padding: 20px;">
+      <div id="changelogTimeline" style="position: relative; border-left: 2px solid var(--accent-color); padding-left: 30px; margin-left: 20px;">
+        <p style="color: var(--text-muted);">Loading changelog updates...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3>About NoteDesk</h3>
+        <p>A personal space to share hands-on tech learnings, fixes, and tools.<br />
+        No fluff. Just useful, real-world notes.</p>
+      </div>
+      <div>
+        <h3>Useful Pages</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="notes.html">Notes</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p><i class="fas fa-envelope"></i> b9.ashish@gmail.com</p>
+        <div class="socials">
+          <a href="[https://www.linkedin.com/in/ashishb9](https://www.linkedin.com/in/ashishb9)" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span class="copyright-year">2025</span> NoteDesk. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const timelineContainer = document.getElementById('changelogTimeline');
+      if (!timelineContainer) return;
+
+      fetch('notes.json')
+        .then(res => res.json())
+        .then(notes => {
+          // Sort notes by dateAdded descending (newest first)
+          const sortedNotes = notes.sort((a, b) => new Date(b.dateAdded || '2026-01-01') - new Date(a.dateAdded || '2026-01-01'));
+          
+          timelineContainer.innerHTML = '';
+          sortedNotes.forEach(note => {
+            const item = document.createElement('div');
+            item.style.cssText = "position: relative; margin-bottom: 35px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px;";
+            
+            const formattedDate = note.dateAdded ? new Date(note.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent Update';
+
+            item.innerHTML = `
+              <div style="position: absolute; left: -41px; top: 20px; width: 20px; height: 20px; background: var(--accent-color); border-radius: 50%; border: 3px solid var(--bg-primary);"></div>
+              <span style="font-size: 0.82rem; font-weight: 600; color: var(--accent-color); text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-regular fa-calendar"></i> ${formattedDate}</span>
+              <h3 style="margin: 8px 0 10px 0; font-size: 1.25rem;"><a href="note.html?id=${note.id}" style="color: var(--text-primary); text-decoration: none; transition: color 0.2s;">${note.title}</a></h3>
+              <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 12px;">${note.problem}</p>
+              <a href="note.html?id=${note.id}" class="copy-all-btn" style="font-size: 0.8rem; padding: 6px 12px;">View Note <i class="fa-solid fa-arrow-right"></i></a>
+            `;
+            timelineContainer.appendChild(item);
+          });
+        })
+        .catch(err => {
+          console.error("Error loading changelog:", err);
+          timelineContainer.innerHTML = '<p style="color: var(--text-muted);">Unable to load changelog at this time.</p>';
+        });
+    });
+  </script>
+</body>
+</html>

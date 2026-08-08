@@ -4,6 +4,7 @@
     "category": "windows",
     "title": "Task Manager Not Opening",
     "problem": "Clicking Task Manager shows nothing or crashes.",
+    "dateAdded": "2026-01-10",
     "tags": ["windows", "task-manager", "crash", "ui"],
     "fixes": [
       {
@@ -28,6 +29,7 @@
     "category": "windows",
     "title": "WiFi Connected but No Internet",
     "problem": "WiFi shows connected but websites don't load.",
+    "dateAdded": "2026-01-12",
     "tags": ["windows", "wifi", "network", "dns"],
     "fixes": [
       {
@@ -53,6 +55,7 @@
     "category": "linux",
     "title": "Permission Denied Error",
     "problem": "Cannot write or execute files even as root.",
+    "dateAdded": "2026-01-15",
     "tags": ["linux", "permissions", "chmod", "chown"],
     "fixes": [
       {
@@ -76,6 +79,7 @@
     "category": "web",
     "title": "CORS Policy Blocked",
     "problem": "API calls fail with 'Access-Control-Allow-Origin' error.",
+    "dateAdded": "2026-01-18",
     "tags": ["web", "cors", "api", "security"],
     "fixes": [
       {
@@ -101,6 +105,7 @@
     "category": "productivity",
     "title": "Slow Startup Time",
     "problem": "Computer takes too long to boot up.",
+    "dateAdded": "2026-01-20",
     "tags": ["productivity", "startup", "performance", "windows"],
     "fixes": [
       {
@@ -125,6 +130,7 @@
     "category": "windows",
     "title": "Blue Screen of Death (BSOD)",
     "problem": "System crashes unexpectedly with a blue screen.",
+    "dateAdded": "2026-01-22",
     "tags": ["windows", "bsod", "crash", "hardware"],
     "fixes": [
       {
@@ -149,6 +155,7 @@
     "category": "linux",
     "title": "Apt-Get Not Working",
     "problem": "Cannot install or update packages using apt-get.",
+    "dateAdded": "2026-01-25",
     "tags": ["linux", "apt", "packages", "network"],
     "fixes": [
       {
@@ -172,6 +179,7 @@
     "category": "web",
     "title": "Layout Breaks in Mobile",
     "problem": "Website looks fine on desktop but is broken on mobile.",
+    "dateAdded": "2026-01-28",
     "tags": ["web", "responsive", "css", "mobile"],
     "fixes": [
       {
@@ -195,6 +203,7 @@
     "category": "productivity",
     "title": "Keyboard Shortcuts Not Working",
     "problem": "Common keyboard shortcuts like Ctrl+C fail.",
+    "dateAdded": "2026-02-01",
     "tags": ["productivity", "shortcuts", "clipboard"],
     "fixes": [
       {
@@ -218,6 +227,7 @@
     "category": "windows",
     "title": "Printer Not Responding",
     "problem": "Printer is online but will not print documents.",
+    "dateAdded": "2026-02-03",
     "tags": ["windows", "printer", "hardware"],
     "fixes": [
       {
@@ -240,6 +250,7 @@
     "category": "windows",
     "title": "Windows Update Stuck on 'Checking for Updates'",
     "problem": "Windows Update seems to hang indefinitely without finding updates.",
+    "dateAdded": "2026-02-05",
     "tags": ["windows", "update", "troubleshoot"],
     "fixes": [
       {
@@ -276,6 +287,7 @@
     "category": "linux",
     "title": "Troubleshooting a Failed Systemd Service",
     "problem": "A crucial service failed to start or is not running correctly.",
+    "dateAdded": "2026-02-08",
     "tags": ["linux", "systemd", "services", "logs"],
     "fixes": [
       {
@@ -299,6 +311,7 @@
     "category": "web",
     "title": "Implementing a Service Worker",
     "problem": "How to make a web app work offline and be a Progressive Web App (PWA).",
+    "dateAdded": "2026-02-10",
     "tags": ["web", "pwa", "service-worker", "offline"],
     "fixes": [
       {
@@ -324,6 +337,7 @@
     "category": "dev",
     "title": "Setting up a Docker Development Environment",
     "problem": "How to create a consistent and isolated development environment using Docker.",
+    "dateAdded": "2026-02-12",
     "tags": ["dev", "docker", "containers", "setup"],
     "fixes": [
       {
@@ -349,6 +363,7 @@
     "category": "cybersecurity",
     "title": "Understanding Public Key Encryption",
     "problem": "How to use public/private key pairs for secure communication.",
+    "dateAdded": "2026-02-15",
     "tags": ["cybersecurity", "encryption", "ssh", "keys"],
     "fixes": [
       {
@@ -372,6 +387,7 @@
     "category": "productivity",
     "title": "Automating Repetitive Tasks with Scripts",
     "problem": "I have to do the same task every day; how can I automate it?",
+    "dateAdded": "2026-02-18",
     "tags": ["productivity", "automation", "bash", "python"],
     "fixes": [
       {
@@ -396,6 +412,7 @@
     "category": "windows",
     "title": "Fixing Corrupted User Profiles",
     "problem": "Cannot log in or user profile is a temporary profile.",
+    "dateAdded": "2026-02-20",
     "tags": ["windows", "profile", "registry", "login"],
     "fixes": [
       {
@@ -422,6 +439,7 @@
     "category": "linux",
     "title": "Building and Installing from Source",
     "problem": "Software is not available in official repositories; how do I install it?",
+    "dateAdded": "2026-02-22",
     "tags": ["linux", "source", "compile", "make"],
     "fixes": [
       {
@@ -447,6 +465,7 @@
     "category": "web",
     "title": "Troubleshooting Webpack Configuration",
     "problem": "Webpack build fails or bundles are not being created correctly.",
+    "dateAdded": "2026-02-24",
     "tags": ["web", "webpack", "bundler", "debug"],
     "fixes": [
       {
@@ -471,6 +490,7 @@
     "category": "dev",
     "title": "Setting up SSH with VS Code Remote Development",
     "problem": "How to connect VS Code to a remote Linux server for coding.",
+    "dateAdded": "2026-02-26",
     "tags": ["dev", "ssh", "vscode", "remote"],
     "fixes": [
       {
@@ -495,6 +515,7 @@
     "category": "cybersecurity",
     "title": "Using Wireshark for Network Analysis",
     "problem": "How to capture and analyze network traffic to debug issues or find vulnerabilities.",
+    "dateAdded": "2026-02-28",
     "tags": ["cybersecurity", "wireshark", "packets", "network"],
     "fixes": [
       {
@@ -520,6 +541,7 @@
     "category": "productivity",
     "title": "Advanced Git Rebase Workflow",
     "problem": "How to clean up your commit history before merging a branch.",
+    "dateAdded": "2026-03-02",
     "tags": ["productivity", "git", "rebase", "history"],
     "fixes": [
       {
@@ -544,6 +566,7 @@
     "category": "windows",
     "title": "Using the Windows Subsystem for Linux (WSL)",
     "problem": "How to run Linux command-line tools on a Windows machine.",
+    "dateAdded": "2026-03-04",
     "tags": ["windows", "wsl", "linux", "terminal"],
     "fixes": [
       {
@@ -568,6 +591,7 @@
     "category": "linux",
     "title": "Managing Disk Space with `du` and `df`",
     "problem": "My disk is full, and I need to find out what is taking up space.",
+    "dateAdded": "2026-03-06",
     "tags": ["linux", "disk", "storage", "du", "df"],
     "fixes": [
       {
@@ -591,6 +615,7 @@
     "category": "web",
     "title": "Debugging a 500 Internal Server Error",
     "problem": "The server returns an unspecified error, making it hard to debug.",
+    "dateAdded": "2026-03-08",
     "tags": ["web", "server", "error", "debug"],
     "fixes": [
       {
@@ -615,6 +640,7 @@
     "category": "dev",
     "title": "Using `nvm` for Node.js Version Management",
     "problem": "Need to switch between different Node.js versions for various projects.",
+    "dateAdded": "2026-03-10",
     "tags": ["dev", "nvm", "node", "versions"],
     "fixes": [
       {
@@ -640,6 +666,7 @@
     "category": "cybersecurity",
     "title": "Setting Up a Secure VPN with WireGuard",
     "problem": "How to create a fast and secure personal VPN on your own server.",
+    "dateAdded": "2026-03-12",
     "tags": ["cybersecurity", "vpn", "wireguard", "security"],
     "fixes": [
       {
@@ -665,6 +692,7 @@
     "category": "productivity",
     "title": "Advanced Markdown for Technical Documentation",
     "problem": "How to use Markdown to create clean, readable technical documents.",
+    "dateAdded": "2026-03-15",
     "tags": ["productivity", "markdown", "docs"],
     "fixes": [
       {
@@ -688,6 +716,7 @@
     "category": "windows",
     "title": "Using PowerShell for System Administration",
     "problem": "How to automate tasks and manage your system with PowerShell.",
+    "dateAdded": "2026-03-18",
     "tags": ["windows", "powershell", "admin", "automation"],
     "fixes": [
       {
@@ -711,6 +740,7 @@
     "category": "linux",
     "title": "Troubleshooting SSH Connection Issues",
     "problem": "Cannot connect to a remote server via SSH.",
+    "dateAdded": "2026-03-20",
     "tags": ["linux", "ssh", "network", "debug"],
     "fixes": [
       {
@@ -734,6 +764,7 @@
     "category": "web",
     "title": "Optimizing Website Performance",
     "problem": "My website is slow, and I want to improve its loading speed.",
+    "dateAdded": "2026-03-22",
     "tags": ["web", "performance", "optimization", "speed"],
     "fixes": [
       {
@@ -758,6 +789,7 @@
     "category": "dev",
     "title": "Using Git Hooks for Automated Tasks",
     "problem": "How to run scripts automatically before a commit or after a push.",
+    "dateAdded": "2026-03-25",
     "tags": ["dev", "git", "hooks", "automation"],
     "fixes": [
       {
@@ -782,6 +814,7 @@
     "category": "cybersecurity",
     "title": "Scanning for Vulnerabilities with Nmap",
     "problem": "How to use Nmap to discover open ports and services on a network.",
+    "dateAdded": "2026-03-28",
     "tags": ["cybersecurity", "nmap", "scan", "network"],
     "fixes": [
       {
@@ -805,6 +838,7 @@
     "category": "productivity",
     "title": "Mastering the Command Line with Aliases",
     "problem": "How to create shortcuts for long or frequently used commands.",
+    "dateAdded": "2026-03-30",
     "tags": ["productivity", "cli", "aliases", "bash"],
     "fixes": [
       {
@@ -828,6 +862,7 @@
     "category": "windows",
     "title": "Using DISM to Repair Windows Image",
     "problem": "System File Checker (sfc /scannow) fails to fix corrupted files.",
+    "dateAdded": "2026-04-02",
     "tags": ["windows", "dism", "repair", "system"],
     "fixes": [
       {
@@ -851,6 +886,7 @@
     "category": "ai",
     "title": "Writing Effective AI Prompts for Code",
     "problem": "Getting generic, buggy, or incomplete code from AI assistants.",
+    "dateAdded": "2026-04-05",
     "tags": ["ai", "prompts", "coding", "llm"],
     "fixes": [
       {
@@ -873,10 +909,11 @@
     "category": "ai",
     "title": "Bypassing AI Hallucinations in Terminal Commands",
     "problem": "AI suggests terminal commands that contain deprecated flags or hallucinated packages.",
+    "dateAdded": "2026-04-08",
     "tags": ["ai", "hallucinations", "terminal", "safety"],
     "fixes": [
       {
-        "title": "Method 1: Request Official Documentation Links",
+        "title": "Method 1: Request Official Documentation Limits",
         "steps": [
           "Ask the AI to <code>Include the link to the official man page or documentation for this command</code> to verify its authenticity before running it."
         ]
