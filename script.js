@@ -400,13 +400,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         newModalBookmarkBtn.addEventListener('click', () => toggleBookmark(note.id));
                     }
 
-                    // Phase 9: Helpful Voting Setup
+                 // Phase 9: Helpful Voting Setup
                     const helpfulYesBtn = document.getElementById('helpfulYesBtn');
                     const helpfulNoBtn = document.getElementById('helpfulNoBtn');
-                    const helpfulYesCount = document.getElementById('helpfulYesCount');
-                    const helpfulNoCount = document.getElementById('helpfulNoCount');
 
-                    if (helpfulYesBtn && helpfulNoBtn && helpfulYesCount && helpfulNoCount) {
+                    if (helpfulYesBtn && helpfulNoBtn) {
+                        const helpfulYesCount = helpfulYesBtn.querySelector('.yes-count');
+                        const helpfulNoCount = helpfulNoBtn.querySelector('.no-count');
+                        
                         const votesStorageKey = `notedesk_votes_${note.id}`;
                         let votesData = { yes: 0, no: 0, userVote: null };
                         try {
@@ -414,14 +415,14 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (savedVotes) votesData = JSON.parse(savedVotes);
                         } catch(e) {}
 
-                        helpfulYesCount.textContent = votesData.yes;
-                        helpfulNoCount.textContent = votesData.no;
+                        if (helpfulYesCount) helpfulYesCount.textContent = votesData.yes;
+                        if (helpfulNoCount) helpfulNoCount.textContent = votesData.no;
 
                         helpfulYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
                         helpfulNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
 
                         const handleVote = (voteType) => {
-                            if (votesData.userVote === voteType) return; // already voted this
+                            if (votesData.userVote === voteType) return;
                             if (votesData.userVote === 'yes') votesData.yes--;
                             if (votesData.userVote === 'no') votesData.no--;
 
@@ -430,8 +431,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             localStorage.setItem(votesStorageKey, JSON.stringify(votesData));
 
-                            helpfulYesCount.textContent = votesData.yes;
-                            helpfulNoCount.textContent = votesData.no;
+                            if (helpfulYesCount) helpfulYesCount.textContent = votesData.yes;
+                            if (helpfulNoCount) helpfulNoCount.textContent = votesData.no;
                             helpfulYesBtn.className = votesData.userVote === 'yes' ? 'helpful-btn voted' : 'helpful-btn';
                             helpfulNoBtn.className = votesData.userVote === 'no' ? 'helpful-btn voted' : 'helpful-btn';
                         };
