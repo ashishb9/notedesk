@@ -640,7 +640,7 @@
   },
   {
     "id": 22,
-    "category": "productivity",
+    "category": "dev",
     "title": "Advanced Git Rebase Workflow",
     "problem": "How to clean up your commit history before merging a branch.",
     "dateAdded": "2026-03-02",
@@ -997,7 +997,7 @@
   },
   {
     "id": 34,
-    "category": "productivity",
+    "category": "dev",
     "title": "Mastering the Command Line with Aliases",
     "problem": "How to create shortcuts for long or frequently used commands.",
     "dateAdded": "2026-03-30",
@@ -1056,27 +1056,35 @@
   {
     "id": 36,
     "category": "ai",
-    "title": "Writing Effective AI Prompts for Code",
-    "problem": "Getting generic, buggy, or incomplete code from AI assistants.",
-    "dateAdded": "2026-04-05",
+    "title": "ChatGPT Giving Short, Lazy, or Vague Answers",
+    "problem": "ChatGPT responses have gotten noticeably shorter, hedgier, and less detailed than before \u2014 often defaulting to 'it depends' instead of a direct answer, even for straightforward questions.",
+    "dateAdded": "2026-08-09",
     "tags": [
       "ai",
-      "prompts",
-      "coding",
-      "llm"
+      "chatgpt",
+      "prompting",
+      "troubleshooting"
     ],
     "fixes": [
       {
-        "title": "Method 1: Provide Constraints and Context",
+        "title": "Method 1: Explicitly Counter the Hedging Behavior",
         "steps": [
-          "Specify the exact language, framework, and edge cases in your initial prompt.",
-          "Example: <code>Write a React component using TypeScript. Do not use class components.</code>"
+          "Add this to your prompt or a saved custom instruction: 'Give a direct, complete answer. Do not hedge with phrases like \"it depends\" or \"results may vary.\" Do not end with a teaser or offer to continue \u2014 just answer fully now.'",
+          "This directly counters the shorter, cost-optimized response pattern that's been widely reported since late 2025."
         ]
       },
       {
-        "title": "Method 2: Ask for Explanations",
+        "title": "Method 2: Ask for a Specific Length or Format",
         "steps": [
-          "Append <code>Explain your reasoning step-by-step</code> to force the AI to validate its own logic before generating the final code block."
+          "Instead of a general question, specify: 'Answer in at least 300 words with specific examples.'",
+          "For code, explicitly say: 'Write the complete, working code with no placeholders or TODO comments.'"
+        ]
+      },
+      {
+        "title": "Method 3: Try a Different Model Variant",
+        "steps": [
+          "If you're on ChatGPT Plus, switch models via the model picker (top of the chat) \u2014 some variants are tuned for longer, more thorough reasoning than the default.",
+          "For coding specifically, consider trying Claude or GitHub Copilot for multi-file work, which tend to handle longer, more complete code generation more reliably."
         ]
       }
     ]
@@ -1084,26 +1092,36 @@
   {
     "id": 37,
     "category": "ai",
-    "title": "Bypassing AI Hallucinations in Terminal Commands",
-    "problem": "AI suggests terminal commands that contain deprecated flags or hallucinated packages.",
-    "dateAdded": "2026-04-08",
+    "title": "ChatGPT Login Stuck in a Redirect Loop",
+    "problem": "Trying to log into ChatGPT (especially via Google/Microsoft SSO) results in an endless redirect loop back to the login page, never actually signing you in.",
+    "dateAdded": "2026-08-09",
     "tags": [
       "ai",
-      "hallucinations",
-      "terminal",
-      "safety"
+      "chatgpt",
+      "login",
+      "sso",
+      "troubleshooting"
     ],
     "fixes": [
       {
-        "title": "Method 1: Request Official Documentation Links",
+        "title": "Method 1: Clear Cookies for the Site",
         "steps": [
-          "Ask the AI to <code>Include the link to the official man page or documentation for this command</code> to verify its authenticity before running it."
+          "Open your browser settings and clear cookies specifically for <code>chat.openai.com</code> and <code>auth.openai.com</code> (don't need to clear your entire browser history).",
+          "Close all browser tabs with ChatGPT open, then try logging in again."
         ]
       },
       {
-        "title": "Method 2: Use Dry-Run Flags",
+        "title": "Method 2: Use an Incognito/Private Window",
         "steps": [
-          "Always append <code>--dry-run</code> or <code>--simulate</code> to commands suggested by AI to see what they will do before actually executing them."
+          "Open a new Incognito (Chrome) or InPrivate (Edge) window.",
+          "Navigate to chatgpt.com and log in there \u2014 this bypasses any corrupted session cookies without needing to clear your main browser profile."
+        ]
+      },
+      {
+        "title": "Method 3: Disable Conflicting Browser Extensions",
+        "steps": [
+          "Ad blockers or privacy extensions that block third-party cookies can break the SSO redirect flow.",
+          "Temporarily disable extensions, then retry the login."
         ]
       }
     ]
@@ -1207,7 +1225,7 @@
   },
   {
     "id": 42,
-    "category": "productivity",
+    "category": "linux",
     "title": "Keeping Terminal Sessions Alive on Disconnect",
     "problem": "Long-running scripts die if the SSH connection drops.",
     "dateAdded": "2026-04-20",
@@ -1382,7 +1400,7 @@
   },
   {
     "id": 49,
-    "category": "productivity",
+    "category": "dev",
     "title": "Python: Reading and Parsing a JSON File",
     "problem": "Need a quick script to load configuration or data from a JSON file.",
     "dateAdded": "2026-05-15",
@@ -1520,27 +1538,42 @@
   {
     "id": 55,
     "category": "ai",
-    "title": "Extracting JSON Data Confiably Using AI Prompts",
-    "problem": "LLMs output conversational filler around JSON responses, breaking programmatic parsing.",
-    "dateAdded": "2026-06-07",
+    "title": "Microsoft Copilot Not Showing Up in Word, Excel, or Outlook",
+    "problem": "The Copilot icon or sidebar is missing from Microsoft 365 apps even though you expect it to be available on your license.",
+    "dateAdded": "2026-08-09",
     "tags": [
       "ai",
-      "prompts",
-      "json",
-      "automation"
+      "copilot",
+      "microsoft365",
+      "troubleshooting"
     ],
     "fixes": [
       {
-        "title": "Method 1: Strict Output Constraints",
+        "title": "Method 1: Confirm Your License Actually Includes Copilot",
         "steps": [
-          "End your prompt with: <code>Output ONLY valid JSON. Do not include markdown formatting, backticks, or conversational text. Start directly with { and end with }</code>."
+          "Go to <code>portal.office.com</code>, sign in, and check 'My Account > Subscriptions' to confirm Copilot is included \u2014 it's a separate add-on for most non-enterprise plans, not bundled by default.",
+          "If you're on a work/school account, ask your admin whether Copilot has been assigned to your specific user license."
+        ]
+      },
+      {
+        "title": "Method 2: Update the Office App",
+        "steps": [
+          "Copilot integration ships through regular Office updates. Go to <code>File > Account > Update Options > Update Now</code> in any Office app.",
+          "Restart the app completely after updating."
+        ]
+      },
+      {
+        "title": "Method 3: Check Regional Availability",
+        "steps": [
+          "Copilot features roll out by region and language in phases. If your Microsoft account's region/language is set somewhere Copilot hasn't launched yet, the icon won't appear.",
+          "Check <code>Settings > Time & Language</code> on Windows, or your Microsoft account region under account.microsoft.com."
         ]
       }
     ]
   },
   {
     "id": 56,
-    "category": "productivity",
+    "category": "linux",
     "title": "Executing Commands on Multiple Linux Servers",
     "problem": "Need to run the same update or check script across a fleet of 10+ servers.",
     "dateAdded": "2026-06-11",
@@ -1812,7 +1845,7 @@
   },
   {
     "id": 67,
-    "category": "productivity",
+    "category": "linux",
     "title": "Syncing Files Securely Across Servers",
     "problem": "Need to securely copy a large directory from a local machine to a remote server, resuming if interrupted.",
     "dateAdded": "2026-08-01",
@@ -1924,7 +1957,7 @@
   },
   {
     "id": 72,
-    "category": "productivity",
+    "category": "dev",
     "title": "Generating a Directory Tree Structure in Text",
     "problem": "Need to share a project's folder structure in documentation or a README file.",
     "dateAdded": "2026-08-05",
@@ -1970,20 +2003,35 @@
   {
     "id": 74,
     "category": "ai",
-    "title": "Preventing AI from Using Deprecated Libraries",
-    "problem": "The AI keeps generating code using old package versions (like 'requests' instead of 'httpx').",
-    "dateAdded": "2026-08-06",
+    "title": "AI Chatbot Forgetting Earlier Parts of the Conversation",
+    "problem": "ChatGPT, Claude, or Copilot suddenly seems to 'forget' details you mentioned earlier in a long conversation and starts giving inconsistent or contradictory answers.",
+    "dateAdded": "2026-08-09",
     "tags": [
       "ai",
-      "prompts",
-      "coding",
-      "libraries"
+      "chatgpt",
+      "claude",
+      "context-window"
     ],
     "fixes": [
       {
-        "title": "Method 1: Version Pinning in Prompt",
+        "title": "Method 1: Understand Why This Happens",
         "steps": [
-          "Explicitly state the library version in the prompt: <code>Write a Python script using httpx (version 0.24+). Do NOT use the 'requests' library.</code>"
+          "Every AI chat has a 'context window' \u2014 a maximum amount of text it can actively consider at once.",
+          "In long conversations, once you exceed that limit, the earliest messages get dropped from what the model can actually see, even though they're still visible on your screen."
+        ]
+      },
+      {
+        "title": "Method 2: Summarize and Start a Fresh Chat",
+        "steps": [
+          "Ask the AI: 'Summarize everything important from this conversation so far in a few bullet points.'",
+          "Copy that summary, start a new chat, and paste it in as your opening message \u2014 this resets the context window with only the essential information intact."
+        ]
+      },
+      {
+        "title": "Method 3: Keep Critical Details Repeated",
+        "steps": [
+          "For long working sessions (like debugging code together), restate key constraints or facts periodically rather than assuming they're still 'remembered.'",
+          "If your tool supports it (like Projects or Custom Instructions), store persistent facts there instead of relying on chat memory alone."
         ]
       }
     ]
@@ -2224,20 +2272,35 @@
   {
     "id": 85,
     "category": "ai",
-    "title": "Generating Test Data Scaffolding with LLMs",
-    "problem": "Need a realistic, 50-row CSV or JSON file to test a database import script.",
-    "dateAdded": "2026-08-07",
+    "title": "How to Tell if an Email or Message Was Written by AI (Scam Detection)",
+    "problem": "AI-generated phishing and scam messages have become dramatically more convincing, making the old advice ('look for bad grammar') useless.",
+    "dateAdded": "2026-08-09",
     "tags": [
       "ai",
-      "prompts",
-      "data",
-      "testing"
+      "cybersecurity",
+      "phishing",
+      "scam"
     ],
     "fixes": [
       {
-        "title": "Method 1: Schema-Driven Prompts",
+        "title": "Method 1: Ignore Grammar, Check Urgency and Pressure Tactics",
         "steps": [
-          "Provide the exact structure: <code>Generate a 50-row CSV file of realistic fake employee data. Use the headers: id (UUID), first_name, last_name, email (corporate format), department (from a list of 5 options), and hire_date (between 2018-2023).</code>"
+          "AI-written scams are grammatically perfect now, so grammar mistakes are no longer a reliable signal.",
+          "Instead watch for: artificial urgency ('act within 24 hours'), requests to move to a different app (WhatsApp, Telegram), or any request for payment via gift cards or crypto."
+        ]
+      },
+      {
+        "title": "Method 2: Verify the Sender Independently",
+        "steps": [
+          "Never click a link or call a number from the suspicious message itself.",
+          "Go directly to the company's official website or app, or call the number printed on your bank card, to verify the request separately."
+        ]
+      },
+      {
+        "title": "Method 3: Use an AI Tool to Analyze Suspicious Text",
+        "steps": [
+          "Paste the suspicious message into ChatGPT or Claude and ask: 'Does this message show common signs of a phishing or scam attempt? Explain what specifically looks suspicious.'",
+          "This won't be 100% accurate, but it catches manipulation patterns (urgency, impersonation, unusual requests) that are easy to miss when you're the target."
         ]
       }
     ]
@@ -2428,7 +2491,7 @@
   },
   {
     "id": 94,
-    "category": "productivity",
+    "category": "dev",
     "title": "Running a Quick HTTP File Server in Terminal",
     "problem": "Need to serve static files from a directory immediately over the local network.",
     "dateAdded": "2026-08-08",
@@ -2542,27 +2605,41 @@
   {
     "id": 99,
     "category": "ai",
-    "title": "Using AI for Log Analysis",
-    "problem": "Staring at a massive, complex stack trace and need to find the root cause quickly.",
-    "dateAdded": "2026-08-08",
+    "title": "AI Response Gets Cut Off Mid-Sentence",
+    "problem": "ChatGPT, Claude, or Copilot stops generating partway through a long response, leaving code or an explanation incomplete.",
+    "dateAdded": "2026-08-09",
     "tags": [
       "ai",
-      "prompts",
-      "debugging",
-      "logs"
+      "chatgpt",
+      "claude",
+      "troubleshooting"
     ],
     "fixes": [
       {
-        "title": "Method 1: Structured Log Parsing Prompt",
+        "title": "Method 1: Just Ask It to Continue",
         "steps": [
-          "Paste the log, and use this prompt: <code>Analyze this application stack trace. 1. Identify the exact line triggering the fatal error. 2. Explain the root cause in one sentence. 3. Provide the most likely fix. Ignore generic warnings.</code>"
+          "Simply reply with: 'Continue exactly where you left off.'",
+          "Most AI tools will pick back up seamlessly since the cut-off is a length limit per response, not a loss of what it already generated."
+        ]
+      },
+      {
+        "title": "Method 2: Ask for the Response in Smaller Pieces Upfront",
+        "steps": [
+          "For long code files, ask: 'Give me this in 2-3 parts. Start with part 1 and wait for me to confirm before continuing.'",
+          "This avoids hitting the cutoff mid-function, which can produce broken/unusable code if you don't notice it was cut off."
+        ]
+      },
+      {
+        "title": "Method 3: Check for a Response Length Setting",
+        "steps": [
+          "Some tools (like Claude and ChatGPT) have a 'concise vs. detailed' style toggle in settings \u2014 switching this can reduce how often long answers get truncated."
         ]
       }
     ]
   },
   {
     "id": 100,
-    "category": "productivity",
+    "category": "linux",
     "title": "Downloading a File via Terminal",
     "problem": "Need to grab a script or binary directly from a URL onto a headless server.",
     "dateAdded": "2026-08-08",
@@ -2741,6 +2818,215 @@
         "steps": [
           "Some PCs affected by the same update wave also experience sleep mode failing to work correctly.",
           "Installing the same corrective update (Method 2) resolves this in most cases. If it persists, run <code>powercfg /energy</code> in an elevated Command Prompt to generate a power diagnostics report and identify the specific driver at fault."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "category": "productivity",
+    "title": "Too Many Browser Tabs Slowing Down Your Computer",
+    "problem": "Having dozens of browser tabs open makes your whole PC sluggish, but closing them means losing track of what you were doing.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "browser",
+      "performance"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Use Native Tab Grouping",
+        "steps": [
+          "In Chrome/Edge, right-click a tab and select 'Add tab to new group' to visually organize related tabs and collapse them out of the way.",
+          "Grouped tabs stay open but take up far less visual and mental space."
+        ]
+      },
+      {
+        "title": "Method 2: Suspend Inactive Tabs to Free RAM",
+        "steps": [
+          "Install a tab-suspending extension (e.g., built-in 'Memory Saver' in Chrome, found under <code>Settings > Performance</code>) that automatically unloads inactive tabs from RAM while keeping them visible in your tab bar.",
+          "This is far better than closing tabs entirely \u2014 they reload instantly when you click back on them."
+        ]
+      },
+      {
+        "title": "Method 3: Save Tab Sessions Instead of Leaving Them Open",
+        "steps": [
+          "Use a session manager extension (like OneTab or the browser's built-in 'Save all tabs') to convert 30 open tabs into a single saved list you can restore later.",
+          "This is the single biggest RAM-saver if you tend to keep research tabs open 'just in case.'"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "category": "productivity",
+    "title": "Speeding Up a Slow Laptop Without Buying New Hardware",
+    "problem": "Your laptop feels sluggish for everyday tasks, but a new machine isn't in the budget right now.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "performance",
+      "windows"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Disable Unnecessary Startup Programs",
+        "steps": [
+          "Open Task Manager (<code>Ctrl+Shift+Esc</code>) and go to the 'Startup apps' tab.",
+          "Disable anything you don't need running the moment you log in (chat apps, cloud sync clients, updater tools) \u2014 right-click and select Disable."
+        ]
+      },
+      {
+        "title": "Method 2: Check What's Actually Using Resources Right Now",
+        "steps": [
+          "In Task Manager, sort the Processes tab by CPU or Memory to see what's actually slowing you down in real time.",
+          "If it's consistently a specific app (browser, antivirus scan, sync client), that tells you exactly where to focus rather than guessing."
+        ]
+      },
+      {
+        "title": "Method 3: Free Up Disk Space",
+        "steps": [
+          "Go to <code>Settings > System > Storage</code> and use 'Storage Sense' to automatically clean temporary files.",
+          "A drive that's over 90% full noticeably slows down the whole system, especially on machines without an SSD."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "category": "productivity",
+    "title": "Using Clipboard History in Windows (Win+V)",
+    "problem": "You keep needing to copy multiple things but Windows only remembers the last thing you copied, forcing constant re-copying.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "windows",
+      "shortcuts"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Enable and Use Clipboard History",
+        "steps": [
+          "Press <code>Win + V</code> once to turn on Clipboard History if it's not already enabled.",
+          "From then on, every time you copy something (<code>Ctrl+C</code>), it's added to a history list \u2014 press <code>Win + V</code> anytime to pick from your last 25 copied items, not just the most recent one."
+        ]
+      },
+      {
+        "title": "Method 2: Pin Frequently Used Snippets",
+        "steps": [
+          "In the Clipboard History panel, click the pin icon on any item (like your email signature or a common phrase) to keep it permanently available even after restarting your PC."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "category": "productivity",
+    "title": "Batch Renaming Multiple Files at Once (No Extra Software)",
+    "problem": "You have dozens of files (photos, documents) that need a consistent naming pattern, and renaming them one by one is painfully slow.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "windows",
+      "files"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Use File Explorer's Built-In Batch Rename",
+        "steps": [
+          "Select all the files you want to rename (<code>Ctrl+A</code> or click-and-drag).",
+          "Press <code>F2</code>, type the new base name, and press Enter \u2014 Windows automatically renames them all with sequential numbers, e.g. 'Vacation (1).jpg', 'Vacation (2).jpg'."
+        ]
+      },
+      {
+        "title": "Method 2: Use PowerShell for More Control",
+        "steps": [
+          "Open PowerShell in the folder (Shift + Right-click > 'Open PowerShell window here').",
+          "Run a command like: <code>Get-ChildItem *.jpg | Rename-Item -NewName { 'Photo_' + $_.Name }</code> to add a custom prefix to every matching file at once."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "category": "productivity",
+    "title": "Setting Up Automatic File Backups the Easy Way",
+    "problem": "You've lost important files before due to a drive failure or accidental deletion, and want a backup system that just runs on its own.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "backup",
+      "windows"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Use Windows File History (Free, Built-In)",
+        "steps": [
+          "Connect an external drive, go to <code>Settings > Update & Security > Backup > Add a drive</code>, and select it.",
+          "Windows will automatically back up your key folders (Documents, Pictures, Desktop) on a schedule you set \u2014 no extra software needed."
+        ]
+      },
+      {
+        "title": "Method 2: Use Cloud Sync for Automatic Off-Site Backup",
+        "steps": [
+          "Set up OneDrive, Google Drive, or Dropbox to sync your important folders automatically \u2014 this protects you even if your entire physical machine is lost or damaged.",
+          "For OneDrive specifically: <code>Settings > Backup > Manage backup</code> lets you choose exactly which folders sync automatically."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "category": "productivity",
+    "title": "Organizing a Messy Desktop and Downloads Folder Automatically",
+    "problem": "Your Desktop and Downloads folder are cluttered with hundreds of files and you can never find anything, but manually sorting them feels overwhelming.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "windows",
+      "files"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Sort by File Type First",
+        "steps": [
+          "In File Explorer, open the messy folder, right-click empty space, and choose <code>Sort by > Type</code>.",
+          "This groups all your PDFs, images, and documents together visually, making it much faster to select and move batches at once."
+        ]
+      },
+      {
+        "title": "Method 2: Automate It Going Forward",
+        "steps": [
+          "Use a simple PowerShell script that runs on login to move files by extension into subfolders automatically, e.g. moving all .pdf files into a 'PDFs' folder.",
+          "Save this as a .ps1 script and add it to Task Scheduler to run daily so clutter never builds back up."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "category": "productivity",
+    "title": "Using Snap Layouts for Better Multitasking on Windows 11",
+    "problem": "You're constantly manually resizing and dragging windows side-by-side to work with two or more apps at once.",
+    "dateAdded": "2026-08-09",
+    "tags": [
+      "productivity",
+      "windows11",
+      "multitasking"
+    ],
+    "fixes": [
+      {
+        "title": "Method 1: Trigger Snap Layouts Instantly",
+        "steps": [
+          "Hover over the maximize button (square icon) at the top-right of any window to see layout options, or press <code>Win + Z</code>.",
+          "Click a layout zone to snap that window there, then pick another open window to fill the remaining space automatically."
+        ]
+      },
+      {
+        "title": "Method 2: Save Layouts for Repeated Use",
+        "steps": [
+          "Once you've snapped a group of apps into a layout, they appear grouped in the taskbar \u2014 hover the taskbar icon to relaunch that exact same arrangement later.",
+          "Great for recurring setups, like email + calendar + notes for daily planning."
         ]
       }
     ]
